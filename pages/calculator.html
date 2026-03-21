@@ -1,168 +1,281 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>الآلة الحاسبة المالية - المحاسبة المالية</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>الحاسبة المحاسبية</title>
   <link rel="stylesheet" href="../css/style.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    .calc-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
+    .calc-tab{padding:.6rem 1.4rem;border-radius:30px;border:2px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;font-family:inherit;font-size:.95rem;font-weight:600;transition:var(--transition)}
+    .calc-tab.active,.calc-tab:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .calc-section{display:none;background:var(--card-bg);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+    .calc-section.active{display:block}
+    .calc-group{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:1.5rem}
+    @media(max-width:600px){.calc-group{grid-template-columns:1fr}}
+    .calc-field label{display:block;font-weight:600;margin-bottom:.4rem;font-size:.9rem;color:var(--text2)}
+    .calc-field input{width:100%;padding:.7rem 1rem;border:2px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text);font-size:1rem;font-family:inherit;transition:var(--transition)}
+    .calc-field input:focus{outline:none;border-color:var(--primary)}
+    .calc-result{background:linear-gradient(135deg,var(--primary),#0d47a1);border-radius:12px;padding:1.5rem;color:#fff;margin-top:1rem}
+    .calc-result h3{margin-bottom:1rem;font-size:1.1rem;opacity:.9}
+    .result-row{display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.2);font-size:1rem}
+    .result-row:last-child{border:none;font-size:1.2rem;font-weight:800;margin-top:.5rem}
+    .result-row .val{font-weight:700}
+    .dep-table{width:100%;border-collapse:collapse;margin-top:1.2rem;font-size:.9rem}
+    .dep-table th{background:rgba(255,255,255,.2);padding:.6rem;text-align:center}
+    .dep-table td{padding:.5rem;text-align:center;border-bottom:1px solid rgba(255,255,255,.15)}
+    .ratio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin-top:1.2rem}
+    .ratio-card{background:rgba(255,255,255,.15);border-radius:10px;padding:1rem;text-align:center}
+    .ratio-card .ratio-val{font-size:1.8rem;font-weight:800;display:block;margin-bottom:.3rem}
+    .ratio-card .ratio-name{font-size:.8rem;opacity:.85}
+    .ratio-card .ratio-status{font-size:.78rem;margin-top:.3rem;padding:.2rem .6rem;border-radius:20px;display:inline-block}
+    .good{background:rgba(52,168,83,.4)} .warn{background:rgba(244,180,0,.4)} .bad{background:rgba(234,67,53,.4)}
+  </style>
 </head>
 <body>
 <nav class="navbar">
   <div class="nav-logo"><i class="fas fa-calculator"></i><span>المحاسبة المالية</span></div>
   <ul class="nav-links">
     <li><a href="../index.html">الرئيسية</a></li>
-    <li><a href="../pages/lessons.html">الدروس</a></li>
-    <li><a href="../pages/quiz.html">الاختبارات</a></li>
-    <li><a href="../pages/exercises.html">التمارين</a></li>
-    <li><a href="../pages/calculator.html">الحاسبة</a></li>
-    <li><a href="../pages/glossary.html">المصطلحات</a></li>
-    <li><a href="../pages/formulas.html">المعادلات</a></li>
-    <li><a href="../pages/cheatsheet.html">ورقة المراجعة</a></li>
+    <li><a href="lessons.html">الدروس</a></li>
+    <li><a href="quiz.html">الاختبارات</a></li>
+    <li><a href="glossary.html">المصطلحات</a></li>
+    <li><a href="calculator.html" class="active">الحاسبة</a></li>
+    <li><a href="exercises.html">تمارين</a></li>
   </ul>
-  <div class="nav-actions">
-    <button id="darkToggle" class="dark-btn"><i class="fas fa-moon"></i></button>
-    <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
-  </div>
-</nav>
-<nav class="mobile-nav" id="mobileNav">
-  <a href="../index.html" >الرئيسية</a><a href="../pages/lessons.html" >الدروس</a>
-  <a href="../pages/quiz.html" >الاختبارات</a><a href="../pages/exercises.html" >التمارين</a>
-  <a href="../pages/calculator.html" class="active">الحاسبة</a><a href="../pages/glossary.html" >المصطلحات</a>
-  <a href="../pages/formulas.html" >المعادلات</a><a href="../pages/cheatsheet.html" >ورقة المراجعة</a>
+  <button id="darkToggle" class="dark-btn"><i class="fas fa-moon"></i></button>
 </nav>
 
 <div class="page-hero">
-  <h1><i class="fas fa-calculator"></i> الآلة الحاسبة المالية</h1>
-  <p>احسب النسب المالية ومعادلات الإهلاك تلقائياً — أدخل القيم واحصل على النتيجة فوراً</p>
+  <h1><i class="fas fa-calculator"></i> الحاسبة المحاسبية التفاعلية</h1>
+  <p>احسب الإهلاك، النسب المالية، المعادلة المحاسبية — فورياً وبدقة</p>
 </div>
-<div class="calc-container">
-  <div class="calc-grid">
 
-    <div class="calc-card">
-      <h3><i class="fas fa-equals"></i> المعادلة المحاسبية</h3>
-      <div class="calc-inputs">
-        <div><label>الأصول (ريال)</label><input id="ceA" type="number" placeholder="مثال: 500000" oninput="calcEq()"/></div>
-        <div><label>الخصوم (ريال)</label><input id="ceL" type="number" placeholder="مثال: 200000" oninput="calcEq()"/></div>
+<div style="max-width:900px;margin:3rem auto;padding:0 2rem">
+  <div class="calc-tabs">
+    <button class="calc-tab active" onclick="showCalc('depreciation',this)"><i class="fas fa-tools"></i> الإهلاك</button>
+    <button class="calc-tab" onclick="showCalc('ratios',this)"><i class="fas fa-chart-pie"></i> النسب المالية</button>
+    <button class="calc-tab" onclick="showCalc('equation',this)"><i class="fas fa-equals"></i> المعادلة المحاسبية</button>
+    <button class="calc-tab" onclick="showCalc('inventory',this)"><i class="fas fa-warehouse"></i> تكلفة المخزون</button>
+    <button class="calc-tab" onclick="showCalc('breakeven',this)"><i class="fas fa-crosshairs"></i> نقطة التعادل</button>
+  </div>
+
+  <!-- إهلاك -->
+  <div class="calc-section active" id="calc-depreciation">
+    <h2 style="margin-bottom:1.5rem;color:var(--primary)"><i class="fas fa-tools"></i> حاسبة الإهلاك</h2>
+    <div class="calc-group">
+      <div class="calc-field"><label>تكلفة الأصل (ريال)</label><input type="number" id="dep_cost" placeholder="مثال: 100000" oninput="calcDep()"/></div>
+      <div class="calc-field"><label>القيمة التخريدية (ريال)</label><input type="number" id="dep_salvage" placeholder="مثال: 10000" oninput="calcDep()"/></div>
+      <div class="calc-field"><label>العمر الإنتاجي (سنوات)</label><input type="number" id="dep_life" placeholder="مثال: 5" oninput="calcDep()"/></div>
+      <div class="calc-field">
+        <label>طريقة الإهلاك</label>
+        <select id="dep_method" onchange="calcDep()" style="width:100%;padding:.7rem 1rem;border:2px solid var(--border);border-radius:10px;background:var(--bg);color:var(--text);font-size:1rem;font-family:inherit">
+          <option value="sl">القسط الثابت (Straight Line)</option>
+          <option value="ddb">القسط المتناقص (Double Declining)</option>
+        </select>
       </div>
-      <button class="btn btn-primary btn-sm" onclick="calcEq()">احسب حقوق الملكية</button>
-      <div class="calc-result" id="ceR">أدخل القيم أعلاه</div>
     </div>
-
-    <div class="calc-card">
-      <h3><i class="fas fa-chart-line"></i> صافي الربح</h3>
-      <div class="calc-inputs">
-        <div><label>إجمالي الإيرادات (ريال)</label><input id="niR" type="number" placeholder="مثال: 300000" oninput="calcNI()"/></div>
-        <div><label>إجمالي المصروفات (ريال)</label><input id="niE" type="number" placeholder="مثال: 220000" oninput="calcNI()"/></div>
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="calcNI()">احسب صافي الربح</button>
-      <div class="calc-result" id="niR2">أدخل القيم أعلاه</div>
+    <div class="calc-result" id="dep-result" style="display:none">
+      <h3><i class="fas fa-table"></i> جدول الإهلاك السنوي</h3>
+      <table class="dep-table" id="dep-table"></table>
     </div>
+  </div>
 
-    <div class="calc-card">
-      <h3><i class="fas fa-industry"></i> الإهلاك - القسط الثابت</h3>
-      <div class="calc-inputs">
-        <div><label>التكلفة الأصلية (ريال)</label><input id="dC" type="number" placeholder="مثال: 120000" oninput="calcDep()"/></div>
-        <div><label>القيمة التخريدية (ريال)</label><input id="dS" type="number" placeholder="مثال: 12000" oninput="calcDep()"/></div>
-        <div><label>العمر الإنتاجي (سنوات)</label><input id="dL" type="number" placeholder="مثال: 6" oninput="calcDep()"/></div>
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="calcDep()">احسب قسط الإهلاك</button>
-      <div class="calc-result" id="dR">أدخل القيم أعلاه</div>
+  <!-- النسب المالية -->
+  <div class="calc-section" id="calc-ratios">
+    <h2 style="margin-bottom:1.5rem;color:var(--primary)"><i class="fas fa-chart-pie"></i> حاسبة النسب المالية</h2>
+    <div class="calc-group">
+      <div class="calc-field"><label>الأصول المتداولة</label><input type="number" id="r_ca" placeholder="مثال: 200000" oninput="calcRatios()"/></div>
+      <div class="calc-field"><label>الخصوم المتداولة</label><input type="number" id="r_cl" placeholder="مثال: 100000" oninput="calcRatios()"/></div>
+      <div class="calc-field"><label>المخزون</label><input type="number" id="r_inv" placeholder="مثال: 50000" oninput="calcRatios()"/></div>
+      <div class="calc-field"><label>صافي الربح</label><input type="number" id="r_ni" placeholder="مثال: 40000" oninput="calcRatios()"/></div>
+      <div class="calc-field"><label>صافي المبيعات</label><input type="number" id="r_sales" placeholder="مثال: 500000" oninput="calcRatios()"/></div>
+      <div class="calc-field"><label>إجمالي الأصول</label><input type="number" id="r_ta" placeholder="مثال: 800000" oninput="calcRatios()"/></div>
+      <div class="calc-field"><label>إجمالي الخصوم</label><input type="number" id="r_tl" placeholder="مثال: 300000" oninput="calcRatios()"/></div>
+      <div class="calc-field"><label>حقوق الملكية</label><input type="number" id="r_eq" placeholder="مثال: 500000" oninput="calcRatios()"/></div>
     </div>
-
-    <div class="calc-card">
-      <h3><i class="fas fa-tint"></i> نسبة التداول</h3>
-      <div class="calc-inputs">
-        <div><label>الأصول المتداولة (ريال)</label><input id="crCA" type="number" placeholder="مثال: 250000" oninput="calcCR()"/></div>
-        <div><label>الخصوم المتداولة (ريال)</label><input id="crCL" type="number" placeholder="مثال: 100000" oninput="calcCR()"/></div>
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="calcCR()">احسب نسبة التداول</button>
-      <div class="calc-result" id="crR">أدخل القيم أعلاه</div>
+    <div class="calc-result" id="ratios-result" style="display:none">
+      <h3><i class="fas fa-chart-bar"></i> نتائج النسب المالية</h3>
+      <div class="ratio-grid" id="ratio-grid"></div>
     </div>
+  </div>
 
-    <div class="calc-card">
-      <h3><i class="fas fa-bolt"></i> نسبة السيولة السريعة</h3>
-      <div class="calc-inputs">
-        <div><label>الأصول المتداولة (ريال)</label><input id="qrCA" type="number" placeholder="مثال: 250000" oninput="calcQR()"/></div>
-        <div><label>المخزون (ريال)</label><input id="qrInv" type="number" placeholder="مثال: 60000" oninput="calcQR()"/></div>
-        <div><label>الخصوم المتداولة (ريال)</label><input id="qrCL" type="number" placeholder="مثال: 100000" oninput="calcQR()"/></div>
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="calcQR()">احسب النسبة السريعة</button>
-      <div class="calc-result" id="qrR">أدخل القيم أعلاه</div>
+  <!-- المعادلة المحاسبية -->
+  <div class="calc-section" id="calc-equation">
+    <h2 style="margin-bottom:1.5rem;color:var(--primary)"><i class="fas fa-equals"></i> التحقق من المعادلة المحاسبية</h2>
+    <div class="calc-group">
+      <div class="calc-field"><label>إجمالي الأصول</label><input type="number" id="eq_assets" placeholder="مثال: 500000" oninput="calcEquation()"/></div>
+      <div class="calc-field"><label>إجمالي الخصوم</label><input type="number" id="eq_liab" placeholder="مثال: 200000" oninput="calcEquation()"/></div>
+      <div class="calc-field"><label>حقوق الملكية</label><input type="number" id="eq_equity" placeholder="مثال: 300000" oninput="calcEquation()"/></div>
     </div>
-
-    <div class="calc-card">
-      <h3><i class="fas fa-percent"></i> هامش الربح</h3>
-      <div class="calc-inputs">
-        <div><label>صافي الربح (ريال)</label><input id="pmNI" type="number" placeholder="مثال: 50000" oninput="calcPM()"/></div>
-        <div><label>صافي المبيعات (ريال)</label><input id="pmSales" type="number" placeholder="مثال: 500000" oninput="calcPM()"/></div>
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="calcPM()">احسب هامش الربح</button>
-      <div class="calc-result" id="pmR">أدخل القيم أعلاه</div>
+    <div class="calc-result" id="eq-result" style="display:none">
+      <div id="eq-output"></div>
     </div>
+  </div>
 
-    <div class="calc-card">
-      <h3><i class="fas fa-trophy"></i> العائد على حقوق الملكية (ROE)</h3>
-      <div class="calc-inputs">
-        <div><label>صافي الربح (ريال)</label><input id="roeNI" type="number" placeholder="مثال: 50000" oninput="calcROE()"/></div>
-        <div><label>حقوق الملكية (ريال)</label><input id="roeEq" type="number" placeholder="مثال: 300000" oninput="calcROE()"/></div>
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="calcROE()">احسب ROE</button>
-      <div class="calc-result" id="roeR">أدخل القيم أعلاه</div>
+  <!-- تكلفة المخزون -->
+  <div class="calc-section" id="calc-inventory">
+    <h2 style="margin-bottom:1.5rem;color:var(--primary)"><i class="fas fa-warehouse"></i> حاسبة المتوسط المرجح للمخزون</h2>
+    <div id="inv-rows"></div>
+    <button class="btn btn-outline" onclick="addInvRow()" style="margin-bottom:1.5rem"><i class="fas fa-plus"></i> إضافة دفعة</button>
+    <div class="calc-field" style="margin-bottom:1.5rem"><label>الكمية المباعة (وحدات)</label><input type="number" id="inv_sold" placeholder="مثال: 15" oninput="calcInventory()"/></div>
+    <div class="calc-result" id="inv-result" style="display:none">
+      <div id="inv-output"></div>
     </div>
+  </div>
 
-    <div class="calc-card">
-      <h3><i class="fas fa-star"></i> العائد على الأصول (ROA)</h3>
-      <div class="calc-inputs">
-        <div><label>صافي الربح (ريال)</label><input id="roaNI" type="number" placeholder="مثال: 50000" oninput="calcROA()"/></div>
-        <div><label>إجمالي الأصول (ريال)</label><input id="roaA" type="number" placeholder="مثال: 800000" oninput="calcROA()"/></div>
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="calcROA()">احسب ROA</button>
-      <div class="calc-result" id="roaR">أدخل القيم أعلاه</div>
+  <!-- نقطة التعادل -->
+  <div class="calc-section" id="calc-breakeven">
+    <h2 style="margin-bottom:1.5rem;color:var(--primary)"><i class="fas fa-crosshairs"></i> حاسبة نقطة التعادل</h2>
+    <div class="calc-group">
+      <div class="calc-field"><label>سعر بيع الوحدة (ريال)</label><input type="number" id="be_price" placeholder="مثال: 50" oninput="calcBreakeven()"/></div>
+      <div class="calc-field"><label>التكلفة المتغيرة للوحدة (ريال)</label><input type="number" id="be_vc" placeholder="مثال: 30" oninput="calcBreakeven()"/></div>
+      <div class="calc-field"><label>التكاليف الثابتة الإجمالية (ريال)</label><input type="number" id="be_fc" placeholder="مثال: 100000" oninput="calcBreakeven()"/></div>
     </div>
-
-    <div class="calc-card">
-      <h3><i class="fas fa-balance-scale"></i> نسبة الدين إلى الملكية</h3>
-      <div class="calc-inputs">
-        <div><label>إجمالي الخصوم (ريال)</label><input id="dtL" type="number" placeholder="مثال: 400000" oninput="calcDTE()"/></div>
-        <div><label>حقوق الملكية (ريال)</label><input id="dtE" type="number" placeholder="مثال: 300000" oninput="calcDTE()"/></div>
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="calcDTE()">احسب نسبة الدين</button>
-      <div class="calc-result" id="dteR">أدخل القيم أعلاه</div>
+    <div class="calc-result" id="be-result" style="display:none">
+      <div id="be-output"></div>
     </div>
-
-    <div class="calc-card">
-      <h3><i class="fas fa-warehouse"></i> معدل دوران المخزون</h3>
-      <div class="calc-inputs">
-        <div><label>تكلفة البضائع المباعة (ريال)</label><input id="itoCOGS" type="number" placeholder="مثال: 360000" oninput="calcITO()"/></div>
-        <div><label>متوسط المخزون (ريال)</label><input id="itoAvg" type="number" placeholder="مثال: 60000" oninput="calcITO()"/></div>
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="calcITO()">احسب معدل الدوران</button>
-      <div class="calc-result" id="itoR">أدخل القيم أعلاه</div>
-    </div>
-
   </div>
 </div>
-<script>
-function fmt(n){return n.toLocaleString('ar-SA',{maximumFractionDigits:2})}
-function setR(id,v){document.getElementById(id).textContent=v}
-function calcEq(){const a=+document.getElementById('ceA').value||0,l=+document.getElementById('ceL').value||0;if(!a&&!l)return;setR('ceR','حقوق الملكية = '+fmt(a-l)+' ريال');}
-function calcNI(){const r=+document.getElementById('niR').value||0,e=+document.getElementById('niE').value||0;if(!r&&!e)return;const n=r-e;setR('niR2',(n>=0?'✅ صافي الربح = ':'❌ صافي الخسارة = ')+fmt(Math.abs(n))+' ريال');}
-function calcDep(){const c=+document.getElementById('dC').value||0,s=+document.getElementById('dS').value||0,l=+document.getElementById('dL').value||0;if(!c||!l)return;const d=(c-s)/l;setR('dR','القسط السنوي = '+fmt(d)+' ريال | إجمالي الإهلاك = '+fmt(c-s)+' ريال');}
-function calcCR(){const ca=+document.getElementById('crCA').value||0,cl=+document.getElementById('crCL').value||0;if(!ca||!cl)return;const r=ca/cl;const stat=r>=2?'✅ ممتاز':r>=1?'⚠️ مقبول':'❌ ضعيف';setR('crR','نسبة التداول = '+r.toFixed(2)+' '+stat);}
-function calcQR(){const ca=+document.getElementById('qrCA').value||0,inv=+document.getElementById('qrInv').value||0,cl=+document.getElementById('qrCL').value||0;if(!ca||!cl)return;const r=(ca-inv)/cl;const stat=r>=1?'✅ جيد':'⚠️ يحتاج مراجعة';setR('qrR','نسبة السريعة = '+r.toFixed(2)+' '+stat);}
-function calcPM(){const ni=+document.getElementById('pmNI').value||0,s=+document.getElementById('pmSales').value||0;if(!ni||!s)return;setR('pmR','هامش الربح = '+(ni/s*100).toFixed(2)+'%');}
-function calcROE(){const ni=+document.getElementById('roeNI').value||0,eq=+document.getElementById('roeEq').value||0;if(!ni||!eq)return;setR('roeR','ROE = '+(ni/eq*100).toFixed(2)+'%');}
-function calcROA(){const ni=+document.getElementById('roaNI').value||0,a=+document.getElementById('roaA').value||0;if(!ni||!a)return;setR('roaR','ROA = '+(ni/a*100).toFixed(2)+'%');}
-function calcDTE(){const l=+document.getElementById('dtL').value||0,e=+document.getElementById('dtE').value||0;if(!l||!e)return;const r=l/e;const stat=r<=1?'✅ جيد':r<=1.5?'⚠️ مقبول':'❌ مرتفع';setR('dteR','نسبة الدين = '+r.toFixed(2)+' '+stat);}
-function calcITO(){const c=+document.getElementById('itoCOGS').value||0,a=+document.getElementById('itoAvg').value||0;if(!c||!a)return;const r=c/a;setR('itoR','معدل الدوران = '+r.toFixed(1)+' مرة | أيام الدوران = '+Math.round(365/r)+' يوم');}
-</script>
 
-<footer class="footer"><div class="footer-content">
-  <p>© 2026 موقع تعلم المحاسبة المالية | صُمِّم للطلاب والمهتمين</p>
-  <div class="footer-links">
-    <a href="../index.html">الرئيسية</a><a href="../pages/lessons.html">الدروس</a><a href="../pages/quiz.html">الاختبارات</a>
-    <a href="../pages/exercises.html">التمارين</a><a href="../pages/calculator.html">الحاسبة</a>
-    <a href="../pages/glossary.html">المصطلحات</a><a href="../pages/formulas.html">المعادلات</a><a href="../pages/cheatsheet.html">ورقة المراجعة</a>
-  </div>
-</div></footer>
+<footer class="footer"><p>© 2026 موقع تعلم المحاسبة المالية</p></footer>
 <script src="../js/main.js"></script>
+<script>
+function showCalc(id, btn){
+  document.querySelectorAll('.calc-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.calc-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('calc-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ─── الإهلاك ───
+function calcDep(){
+  const cost=+document.getElementById('dep_cost').value;
+  const salvage=+document.getElementById('dep_salvage').value;
+  const life=+document.getElementById('dep_life').value;
+  const method=document.getElementById('dep_method').value;
+  if(!cost||!life||cost<=salvage&&method==='sl') return;
+  document.getElementById('dep-result').style.display='block';
+  let rows='<tr><th>السنة</th><th>قسط الإهلاك</th><th>مجمّع الإهلاك</th><th>القيمة الدفترية</th></tr>';
+  let bv=cost, accDep=0;
+  const rate=2/life;
+  for(let y=1;y<=life;y++){
+    let dep;
+    if(method==='sl') dep=(cost-salvage)/life;
+    else { dep=bv*rate; if(bv-dep<salvage) dep=bv-salvage; }
+    if(dep<0) dep=0;
+    accDep+=dep; bv-=dep;
+    rows+=`<tr><td>${y}</td><td>${dep.toFixed(2)}</td><td>${accDep.toFixed(2)}</td><td>${bv.toFixed(2)}</td></tr>`;
+  }
+  document.getElementById('dep-table').innerHTML=rows;
+}
+
+// ─── النسب ───
+function calcRatios(){
+  const ca=+document.getElementById('r_ca').value;
+  const cl=+document.getElementById('r_cl').value;
+  const inv=+document.getElementById('r_inv').value;
+  const ni=+document.getElementById('r_ni').value;
+  const sales=+document.getElementById('r_sales').value;
+  const ta=+document.getElementById('r_ta').value;
+  const tl=+document.getElementById('r_tl').value;
+  const eq=+document.getElementById('r_eq').value;
+  if(!ca||!cl) return;
+  document.getElementById('ratios-result').style.display='block';
+  const ratios=[
+    {name:'نسبة التداول',val:cl?(ca/cl).toFixed(2):'-',unit:'',good:v=>v>=2,warn:v=>v>=1&&v<2},
+    {name:'نسبة السيولة السريعة',val:cl?((ca-inv)/cl).toFixed(2):'-',unit:'',good:v=>v>=1,warn:v=>v>=0.5&&v<1},
+    {name:'هامش الربح الصافي',val:sales?(ni/sales*100).toFixed(1)+' %':'-',unit:'',good:v=>v>=10,warn:v=>v>=5&&v<10},
+    {name:'العائد على الأصول ROA',val:ta?(ni/ta*100).toFixed(1)+' %':'-',unit:'',good:v=>v>=5,warn:v=>v>=2&&v<5},
+    {name:'العائد على حقوق الملكية ROE',val:eq?(ni/eq*100).toFixed(1)+' %':'-',unit:'',good:v=>v>=15,warn:v=>v>=8&&v<15},
+    {name:'نسبة الدين إلى الملكية',val:eq?(tl/eq).toFixed(2):'-',unit:'',good:v=>v<=1,warn:v=>v>1&&v<=2},
+  ];
+  let html='';
+  ratios.forEach(r=>{
+    const v=parseFloat(r.val);
+    let cls=r.good&&r.good(v)?'good':r.warn&&r.warn(v)?'warn':'bad';
+    let label=cls==='good'?'✅ جيد':cls==='warn'?'⚠️ مقبول':'❌ ضعيف';
+    html+=`<div class="ratio-card"><span class="ratio-val">${r.val}</span><div class="ratio-name">${r.name}</div><span class="ratio-status ${cls}">${label}</span></div>`;
+  });
+  document.getElementById('ratio-grid').innerHTML=html;
+}
+
+// ─── المعادلة المحاسبية ───
+function calcEquation(){
+  const a=+document.getElementById('eq_assets').value;
+  const l=+document.getElementById('eq_liab').value;
+  const e=+document.getElementById('eq_equity').value;
+  if(!a) return;
+  document.getElementById('eq-result').style.display='block';
+  const rhs=l+e;
+  const diff=Math.abs(a-rhs);
+  const balanced=diff<0.01;
+  document.getElementById('eq-output').innerHTML=`
+    <div class="result-row"><span>الأصول</span><span class="val">${a.toLocaleString()} ريال</span></div>
+    <div class="result-row"><span>الخصوم</span><span class="val">${l.toLocaleString()} ريال</span></div>
+    <div class="result-row"><span>حقوق الملكية</span><span class="val">${e.toLocaleString()} ريال</span></div>
+    <div class="result-row"><span>الخصوم + حقوق الملكية</span><span class="val">${rhs.toLocaleString()} ريال</span></div>
+    <div class="result-row"><span>${balanced?'✅ المعادلة متوازنة':'❌ المعادلة غير متوازنة — الفرق: '+diff.toLocaleString()+' ريال'}</span></div>
+  `;
+}
+
+// ─── المخزون ───
+let invCount=2;
+function addInvRow(){
+  invCount++;
+  const div=document.createElement('div');
+  div.className='calc-group';
+  div.id='inv-row-'+invCount;
+  div.innerHTML=`<div class="calc-field"><label>الكمية (دفعة ${invCount})</label><input type="number" placeholder="وحدات" oninput="calcInventory()"/></div><div class="calc-field"><label>التكلفة للوحدة</label><input type="number" placeholder="ريال" oninput="calcInventory()"/></div>`;
+  document.getElementById('inv-rows').appendChild(div);
+}
+document.getElementById('inv-rows').innerHTML=`
+  <div class="calc-group"><div class="calc-field"><label>الكمية (دفعة 1)</label><input type="number" placeholder="وحدات" oninput="calcInventory()"/></div><div class="calc-field"><label>التكلفة للوحدة</label><input type="number" placeholder="ريال" oninput="calcInventory()"/></div></div>
+  <div class="calc-group"><div class="calc-field"><label>الكمية (دفعة 2)</label><input type="number" placeholder="وحدات" oninput="calcInventory()"/></div><div class="calc-field"><label>التكلفة للوحدة</label><input type="number" placeholder="ريال" oninput="calcInventory()"/></div></div>
+`;
+function calcInventory(){
+  const rows=document.querySelectorAll('#inv-rows .calc-group');
+  let totalUnits=0,totalCost=0;
+  rows.forEach(row=>{
+    const inputs=row.querySelectorAll('input');
+    const qty=+inputs[0].value||0;
+    const cost=+inputs[1].value||0;
+    totalUnits+=qty; totalCost+=qty*cost;
+  });
+  if(!totalUnits) return;
+  const sold=+document.getElementById('inv_sold').value||0;
+  const avg=totalCost/totalUnits;
+  const cogsSold=avg*sold;
+  const endingInv=avg*(totalUnits-sold);
+  document.getElementById('inv-result').style.display='block';
+  document.getElementById('inv-output').innerHTML=`
+    <div class="result-row"><span>إجمالي الوحدات المشتراة</span><span class="val">${totalUnits} وحدة</span></div>
+    <div class="result-row"><span>إجمالي التكلفة</span><span class="val">${totalCost.toFixed(2)} ريال</span></div>
+    <div class="result-row"><span>التكلفة المتوسطة للوحدة</span><span class="val">${avg.toFixed(2)} ريال</span></div>
+    <div class="result-row"><span>تكلفة البضاعة المباعة (${sold} وحدة)</span><span class="val">${cogsSold.toFixed(2)} ريال</span></div>
+    <div class="result-row"><span>قيمة المخزون النهائي</span><span class="val">${endingInv.toFixed(2)} ريال</span></div>
+  `;
+}
+
+// ─── نقطة التعادل ───
+function calcBreakeven(){
+  const p=+document.getElementById('be_price').value;
+  const vc=+document.getElementById('be_vc').value;
+  const fc=+document.getElementById('be_fc').value;
+  if(!p||!vc||!fc||p<=vc) return;
+  document.getElementById('be-result').style.display='block';
+  const cm=p-vc;
+  const beUnits=fc/cm;
+  const beSales=beUnits*p;
+  const cmRatio=(cm/p*100);
+  document.getElementById('be-output').innerHTML=`
+    <div class="result-row"><span>هامش المساهمة للوحدة</span><span class="val">${cm.toFixed(2)} ريال</span></div>
+    <div class="result-row"><span>نسبة هامش المساهمة</span><span class="val">${cmRatio.toFixed(1)} %</span></div>
+    <div class="result-row"><span>نقطة التعادل (وحدات)</span><span class="val">${Math.ceil(beUnits).toLocaleString()} وحدة</span></div>
+    <div class="result-row"><span>نقطة التعادل (ريال)</span><span class="val">${beSales.toFixed(2)} ريال</span></div>
+  `;
+}
+</script>
+</body>
+</html>
