@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>الاختبارات - المحاسبة المالية</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-logo"><i class="fas fa-calculator"></i><span>المحاسبة المالية</span></div>
+  <ul class="nav-links">
+    <li><a href="../index.html">الرئيسية</a></li>
+    <li><a href="lessons.html">الدروس</a></li>
+    <li><a href="quiz.html" class="active">الاختبارات</a></li>
+    <li><a href="glossary.html">المصطلحات</a></li>
+    <li><a href="formulas.html">المعادلات</a></li>
+  </ul>
+  <button id="darkToggle" class="dark-btn"><i class="fas fa-moon"></i></button>
+</nav>
+
+<div class="page-hero">
+  <h1><i class="fas fa-pencil-alt"></i> الاختبار التفاعلي</h1>
+  <p>اختبر معلوماتك في المحاسبة المالية — 10 أسئلة متنوعة</p>
+</div>
+
+<div class="quiz-container">
+  <div class="quiz-card" id="quizCard">
+    <div id="quizMain">
+      <div class="question-counter" id="questionCounter">السؤال 1 من 10</div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:10%"></div></div>
+      <div class="question-text" id="questionText"></div>
+      <div class="options" id="optionsContainer"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="quiz-nav">
+        <span id="scoreDisplay" style="font-weight:700;color:var(--primary)">النقاط: 0</span>
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>التالي <i class="fas fa-arrow-left"></i></button>
+      </div>
+    </div>
+    <div class="score-screen" id="scoreScreen" style="display:none">
+      <div class="score-circle" id="scoreCircle"></div>
+      <h2 id="scoreMsg"></h2>
+      <p id="scoreDetail" style="color:var(--text2);margin:1rem 0"></p>
+      <button class="btn btn-primary" onclick="restartQuiz()"><i class="fas fa-redo"></i> إعادة الاختبار</button>
+      <a href="lessons.html" class="btn btn-outline" style="margin-right:1rem"><i class="fas fa-book-open"></i> راجع الدروس</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer"><p>© 2026 موقع تعلم المحاسبة المالية</p></footer>
+<script src="../js/main.js"></script>
+<script>
+const questions = [
+  {q:"ما هي المعادلة المحاسبية الأساسية؟",o:["الأصول = الخصوم + حقوق الملكية","الأصول = الإيرادات - المصروفات","الخصوم = الأصول + حقوق الملكية","الإيرادات = المصروفات + الربح"],a:0,ex:"المعادلة الأساسية: الأصول = الخصوم + حقوق الملكية"},
+  {q:"عند شراء معدات نقداً، أي الحسابات يُقيَّد مديناً؟",o:["النقدية","المعدات","الخصوم","حقوق الملكية"],a:1,ex:"الأصول (المعدات) تزيد بالجانب المدين"},
+  {q:"ما الهدف من ميزان المراجعة؟",o:["إعداد قائمة الدخل","التحقق من توازن مجموع المدين مع مجموع الدائن","حساب الضرائب","تسجيل العمليات اليومية"],a:1,ex:"ميزان المراجعة يتحقق من أن ∑مدين = ∑دائن"},
+  {q:"أيٌّ مما يلي يُعدّ من الأصول المتداولة؟",o:["الأراضي","المعدات","المخزون","الشهرة التجارية"],a:2,ex:"المخزون أصل متداول لأنه سيُحوَّل لنقد خلال سنة"},
+  {q:"صافي الربح = ؟",o:["الأصول - الخصوم","الإيرادات - المصروفات","رأس المال + القروض","المدين - الدائن"],a:1,ex:"صافي الربح = الإيرادات - المصروفات"},
+  {q:"ما المقصود بمبدأ الاستحقاق؟",o:["تسجيل العمليات عند الدفع النقدي فقط","تسجيل الإيرادات والمصروفات عند تحققها بغض النظر عن الدفع","تسوية الحسابات سنوياً","إقفال الحسابات المؤقتة"],a:1,ex:"مبدأ الاستحقاق يسجّل العمليات عند حدوثها لا عند الدفع"},
+  {q:"حسابات الإيرادات والمصروفات تُسمى حسابات ____",o:["دائمة","مؤقتة","اسمية","مختلطة"],a:1,ex:"تُسمى مؤقتة لأنها تُقفَل في نهاية كل فترة محاسبية"},
+  {q:"قائمة المركز المالي تُظهر وضع المنشأة في؟",o:["خلال فترة زمنية","لحظة زمنية محددة","خلال السنة المالية","عند التأسيس فقط"],a:1,ex:"الميزانية تُعبّر عن لحظة زمنية (كنهاية العام)"},
+  {q:"أي مما يلي يزيد بالجانب الدائن؟",o:["المصروفات","الأصول","الإيرادات","المسحوبات"],a:2,ex:"الإيرادات تزيد بالجانب الدائن"},
+  {q:"الإهلاك السنوي = ؟",o:["التكلفة ÷ العمر الإنتاجي","التكلفة × العمر الإنتاجي","(التكلفة - القيمة التخريدية) ÷ العمر الإنتاجي","القيمة الدفترية × 20%"],a:2,ex:"القسط الثابت = (التكلفة - القيمة التخريدية) ÷ العمر الإنتاجي"}
+];
+
+let current = 0, score = 0, answered = false;
+
+function loadQuestion() {
+  const q = questions[current];
+  document.getElementById('questionCounter').textContent = `السؤال ${current+1} من ${questions.length}`;
+  document.getElementById('progressFill').style.width = `${((current+1)/questions.length)*100}%`;
+  document.getElementById('questionText').textContent = q.q;
+  const opts = document.getElementById('optionsContainer');
+  opts.innerHTML = '';
+  q.o.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(i);
+    opts.appendChild(btn);
+  });
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').textContent = '';
+  document.getElementById('nextBtn').disabled = true;
+  answered = false;
+}
+
+function selectAnswer(idx) {
+  if (answered) return;
+  answered = true;
+  const q = questions[current];
+  const btns = document.querySelectorAll('.option-btn');
+  btns[idx].classList.add(idx === q.a ? 'correct' : 'wrong');
+  if (idx !== q.a) btns[q.a].classList.add('correct');
+  const fb = document.getElementById('feedback');
+  if (idx === q.a) { score++; fb.className='feedback correct show'; fb.textContent='✅ إجابة صحيحة! '+q.ex; }
+  else { fb.className='feedback wrong show'; fb.textContent='❌ إجابة خاطئة. '+q.ex; }
+  document.getElementById('scoreDisplay').textContent = `النقاط: ${score}`;
+  document.getElementById('nextBtn').disabled = false;
+  if (current === questions.length - 1) document.getElementById('nextBtn').textContent = 'إنهاء الاختبار ✔';
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= questions.length) { showScore(); return; }
+  loadQuestion();
+}
+
+function showScore() {
+  document.getElementById('quizMain').style.display = 'none';
+  const ss = document.getElementById('scoreScreen');
+  ss.style.display = 'block';
+  const pct = Math.round((score/questions.length)*100);
+  document.getElementById('scoreCircle').textContent = `${pct}%`;
+  let msg = pct >= 80 ? '🏆 ممتاز! أداء رائع' : pct >= 60 ? '👍 جيد! يمكنك التحسين' : '📚 راجع الدروس مجدداً';
+  document.getElementById('scoreMsg').textContent = msg;
+  document.getElementById('scoreDetail').textContent = `أجبت بشكل صحيح على ${score} من ${questions.length} أسئلة`;
+}
+
+function restartQuiz() {
+  current = 0; score = 0;
+  document.getElementById('quizMain').style.display = 'block';
+  document.getElementById('scoreScreen').style.display = 'none';
+  document.getElementById('scoreDisplay').textContent = 'النقاط: 0';
+  loadQuestion();
+}
+
+loadQuestion();
+</script>
+</body>
+</html>
