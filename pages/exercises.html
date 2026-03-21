@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>التمارين - المحاسبة المالية</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-logo"><i class="fas fa-calculator"></i><span>المحاسبة المالية</span></div>
+  <ul class="nav-links">
+    <li><a href="../index.html">الرئيسية</a></li>
+    <li><a href="lessons.html" id="nl-lessons">الدروس</a></li>
+    <li><a href="exercises.html" id="nl-exercises">التمارين</a></li>
+    <li><a href="quiz.html" id="nl-quiz">الاختبارات</a></li>
+    <li><a href="calculator.html" id="nl-calc">الحاسبة</a></li>
+    <li><a href="cases.html" id="nl-cases">دراسات حالة</a></li>
+    <li><a href="glossary.html" id="nl-glossary">المصطلحات</a></li>
+    <li><a href="formulas.html" id="nl-formulas">المعادلات</a></li>
+  </ul>
+  <button id="darkToggle" class="dark-btn"><i class="fas fa-moon"></i></button>
+</nav>
+<div class="page-hero">
+  <h1><i class="fas fa-pencil-ruler"></i> التمارين التطبيقية</h1>
+  <p>15 تمريناً بمستويات متدرّجة مع حلول مفصّلة خطوة بخطوة</p>
+</div>
+<div class="exercises-container">
+
+  <!-- EX 1 -->
+  <div class="ex-card">
+    <h3><span class="ex-level level-easy">سهل</span> تمرين 1 — تحديد عناصر المعادلة المحاسبية</h3>
+    <div class="ex-body">
+      <p>صنّف كل بند مما يلي إلى أصل أو خصم أو حقوق ملكية:</p>
+      <table class="ex-table">
+        <tr><th>#</th><th>البند</th><th>التصنيف</th></tr>
+        <tr><td>1</td><td>نقدية في الخزينة</td><td>?</td></tr>
+        <tr><td>2</td><td>قرض بنكي طويل الأجل</td><td>?</td></tr>
+        <tr><td>3</td><td>رأس مال المالك</td><td>?</td></tr>
+        <tr><td>4</td><td>معدات المكتب</td><td>?</td></tr>
+        <tr><td>5</td><td>ذمم دائنة (موردون)</td><td>?</td></tr>
+        <tr><td>6</td><td>أرباح محتجزة</td><td>?</td></tr>
+      </table>
+    </div>
+    <button class="solution-btn" onclick="toggleSolution(this)"><i class="fas fa-eye"></i> عرض الحل</button>
+    <div class="solution-box">
+      <h4>✅ الحل:</h4>
+      <p>1. نقدية في الخزينة → <strong>أصل متداول</strong></p>
+      <p>2. قرض بنكي طويل الأجل → <strong>خصوم طويلة الأجل</strong></p>
+      <p>3. رأس مال المالك → <strong>حقوق الملكية</strong></p>
+      <p>4. معدات المكتب → <strong>أصل ثابت</strong></p>
+      <p>5. ذمم دائنة → <strong>خصوم متداولة</strong></p>
+      <p>6. أرباح محتجزة → <strong>حقوق الملكية</strong></p>
+    </div>
+  </div>
+
+  <!-- EX 2 -->
+  <div class="ex-card">
+    <h3><span class="ex-level level-easy">سهل</span> تمرين 2 — إيجاد المجهول في المعادلة</h3>
+    <div class="ex-body">
+      <p>أوجد القيمة المجهولة في كل حالة باستخدام المعادلة المحاسبية:</p>
+      <table class="ex-table">
+        <tr><th>الأصول</th><th>الخصوم</th><th>حقوق الملكية</th></tr>
+        <tr><td>150,000</td><td>60,000</td><td>؟</td></tr>
+        <tr><td>؟</td><td>80,000</td><td>120,000</td></tr>
+        <tr><td>300,000</td><td>؟</td><td>175,000</td></tr>
+      </table>
+    </div>
+    <button class="solution-btn" onclick="toggleSolution(this)"><i class="fas fa-eye"></i> عرض الحل</button>
+    <div class="solution-box">
+      <h4>✅ الحل:</h4>
+      <p>الصف 1: حقوق الملكية = 150,000 − 60,000 = <strong>90,000 ريال</strong></p>
+      <p>الصف 2: الأصول = 80,000 + 120,000 = <strong>200,000 ريال</strong></p>
+      <p>الصف 3: الخصوم = 300,000 − 175,000 = <strong>125,000 ريال</strong></p>
+    </div>
+  </div>
+
+  <!-- EX 3 -->
+  <div class="ex-card">
+    <h3><span class="ex-level level-medium">متوسط</span> تمرين 3 — إعداد قيود اليومية</h3>
+    <div class="ex-body">
+      <p>سجّل قيود اليومية للعمليات التالية لشركة النور التجارية خلال يناير 2026:</p>
+      <ul style="padding-right:1.5rem;list-style:disc;line-height:2">
+        <li>1 يناير: أسّس المالك الشركة بإيداع 200,000 ريال نقداً</li>
+        <li>5 يناير: اشترت الشركة أثاث مكتبي بـ 15,000 ريال نقداً</li>
+        <li>10 يناير: قدّمت خدمات للعملاء بـ 30,000 ريال، قُبضت نقداً</li>
+        <li>20 يناير: دفعت إيجار المكتب 5,000 ريال نقداً</li>
+        <li>28 يناير: اشترت بضاعة بالآجل من المورد بـ 40,000 ريال</li>
+      </ul>
+    </div>
+    <button class="solution-btn" onclick="toggleSolution(this)"><i class="fas fa-eye"></i> عرض الحل</button>
+    <div class="solution-box">
+      <h4>✅ الحل:</h4>
+      <table class="ex-table">
+        <tr><th>التاريخ</th><th>البيان</th><th>مدين</th><th>دائن</th></tr>
+        <tr><td>1/1</td><td class="debit">من حـ/ النقدية</td><td>200,000</td><td>-</td></tr>
+        <tr><td></td><td class="credit">إلى حـ/ رأس المال</td><td>-</td><td>200,000</td></tr>
+        <tr><td>5/1</td><td class="debit">من حـ/ الأثاث</td><td>15,000</td><td>-</td></tr>
+        <tr><td></td><td class="credit">إلى حـ/ النقدية</td><td>-</td><td>15,000</td></tr>
+        <tr><td>10/1</td><td class="debit">من حـ/ النقدية</td><td>30,000</td><td>-</td></tr>
+        <tr><td></td><td class="credit">إلى حـ/ إيرادات الخدمات</td><td>-</td><td>30,000</td></tr>
+        <tr><td>20/1</td><td class="debit">من حـ/ مصروف الإيجار</td><td>5,000</td><td>-</td></tr>
+        <tr><td></td><td class="credit">إلى حـ/ النقدية</td><td>-</td><td>5,000</td></tr>
+        <tr><td>28/1</td><td class="debit">من حـ/ المشتريات</td><td>40,000</td><td>-</td></tr>
+        <tr><td></td><td class="credit">إلى حـ/ الذمم الدائنة</td><td>-</td><td>40,000</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- EX 4 -->
+  <div class="ex-card">
+    <h3><span class="ex-level level-medium">متوسط</span> تمرين 4 — إعداد حساب T للنقدية</h3>
+    <div class="ex-body">
+      <p>باستخدام قيود التمرين 3، أعِدّ حساب T للنقدية وأوجد الرصيد النهائي.</p>
+    </div>
+    <button class="solution-btn" onclick="toggleSolution(this)"><i class="fas fa-eye"></i> عرض الحل</button>
+    <div class="solution-box">
+      <h4>✅ الحل:</h4>
+      <div class="t-account">
+        <div class="t-header">حساب النقدية</div>
+        <div class="t-side">
+          <h4>مدين</h4>
+          <p>رأس المال: 200,000</p>
+          <p>إيرادات: 30,000</p>
+          <p style="border-top:1px solid var(--border);margin-top:.5rem;font-weight:700">المجموع: 230,000</p>
+        </div>
+        <div class="t-side t-right">
+          <h4>دائن</h4>
+          <p>أثاث: 15,000</p>
+          <p>إيجار: 5,000</p>
+          <p style="border-top:1px solid var(--border);margin-top:.5rem;font-weight:700">المجموع: 20,000</p>
+        </div>
+      </div>
+      <div class="success-box">💡 الرصيد المدين النهائي = 230,000 − 20,000 = <strong>210,000 ريال</strong></div>
+    </div>
+  </div>
+
+  <!-- EX 5 -->
+  <div class="ex-card">
+    <h3><span class="ex-level level-medium">متوسط</span> تمرين 5 — ميزان المراجعة</h3>
+    <div class="ex-body">
+      <p>من البيانات التالية أعِدّ ميزان المراجعة بالأرصدة لشركة الأمل بتاريخ 31 ديسمبر 2025:</p>
+      <table class="ex-table">
+        <tr><th>الحساب</th><th>رصيد مدين</th><th>رصيد دائن</th></tr>
+        <tr><td>النقدية</td><td>85,000</td><td>-</td></tr>
+        <tr><td>الذمم المدينة</td><td>42,000</td><td>-</td></tr>
+        <tr><td>المخزون</td><td>60,000</td><td>-</td></tr>
+        <tr><td>المعدات</td><td>120,000</td><td>-</td></tr>
+        <tr><td>الذمم الدائنة</td><td>-</td><td>35,000</td></tr>
+        <tr><td>القرض البنكي</td><td>-</td><td>80,000</td></tr>
+        <tr><td>رأس المال</td><td>-</td><td>150,000</td></tr>
+        <tr><td>الإيرادات</td><td>-</td><td>90,000</td></tr>
+        <tr><td>مصروف الرواتب</td><td>28,000</td><td>-</td></tr>
+        <tr><td>مصروف الإيجار</td><td>20,000</td><td>-</td></tr>
+      </table>
+    </div>
+    <button class="solution-btn" onclick="toggleSolution(this)"><i class="fas fa-eye"></i> عرض الحل</button>
+    <div class="solution-box">
+      <h4>✅ الحل:</h4>
+      <p>مجموع المدين = 85,000 + 42,000 + 60,000 + 120,000 + 28,000 + 20,000 = <strong>355,000</strong></p>
+      <p>مجموع الدائن = 35,000 + 80,000 + 150,000 + 90,000 = <strong>355,000</strong></p>
+      <div class="success-box">✅ الميزان متوازن — مجموع المدين = مجموع الدائن = 355,000 ريال</div>
+    </div>
+  </div>
+
+  <!-- EX 6 -->
+  <div class="ex-card">
+    <h3><span class="ex-level level-hard">صعب</span> تمرين 6 — إعداد قائمة الدخل</h3>
+    <div class="ex-body">
+      <p>من بيانات تمرين 5، أعِدّ قائمة الدخل لشركة الأمل للسنة المنتهية في 31 ديسمبر 2025.</p>
+    </div>
+    <button class="solution-btn" onclick="toggleSolution(this)"><i class="fas fa-eye"></i> عرض الحل</button>
+    <div class="solution-box">
+      <h4>✅ قائمة الدخل — شركة الأمل</h4>
+      <table class="ex-table">
+        <tr><th colspan="2">قائمة الدخل للسنة المنتهية في 31/12/2025</th></tr>
+        <tr><td>إيرادات المبيعات</td><td>90,000</td></tr>
+        <tr style="background:var(--bg)"><td colspan="2"><strong>المصروفات:</strong></td></tr>
+        <tr><td>مصروف الرواتب</td><td>(28,000)</td></tr>
+        <tr><td>مصروف الإيجار</td><td>(20,000)</td></tr>
+        <tr style="font-weight:700;background:#e8f5e9"><td>صافي الربح</td><td>42,000</td></tr>
+      </table>
+      <div class="success-box">💡 صافي الربح = 90,000 − 28,000 − 20,000 = <strong>42,000 ريال</strong></div>
+    </div>
+  </div>
+
+  <!-- EX 7 -->
+  <div class="ex-card">
+    <h3><span class="ex-level level-hard">صعب</span> تمرين 7 — حساب الإهلاك</h3>
+    <div class="ex-body">
+      <p>اشترت شركة البناء سيارة توصيل بتكلفة 120,000 ريال، وتقدّر قيمتها التخريدية بـ 20,000 ريال، وعمرها الإنتاجي 5 سنوات.</p>
+      <p>المطلوب: احسب قسط الإهلاك السنوي وأعِدّ جدول الإهلاك للسنوات الخمس.</p>
+    </div>
+    <button class="solution-btn" onclick="toggleSolution(this)"><i class="fas fa-eye"></i> عرض الحل</button>
+    <div class="solution-box">
+      <h4>✅ الحل:</h4>
+      <p>قسط الإهلاك السنوي = (120,000 − 20,000) ÷ 5 = <strong>20,000 ريال/سنة</strong></p>
+      <table class="ex-table">
+        <tr><th>السنة</th><th>قسط الإهلاك</th><th>مجمّع الإهلاك</th><th>القيمة الدفترية</th></tr>
+        <tr><td>1</td><td>20,000</td><td>20,000</td><td>100,000</td></tr>
+        <tr><td>2</td><td>20,000</td><td>40,000</td><td>80,000</td></tr>
+        <tr><td>3</td><td>20,000</td><td>60,000</td><td>60,000</td></tr>
+        <tr><td>4</td><td>20,000</td><td>80,000</td><td>40,000</td></tr>
+        <tr><td>5</td><td>20,000</td><td>100,000</td><td>20,000 (تخريدية)</td></tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+<footer class="footer"><p>© 2026 موقع تعلم المحاسبة المالية</p></footer>
+<script src="../js/main.js"></script>
+<script>
+function toggleSolution(btn) {
+  const box = btn.nextElementSibling;
+  box.classList.toggle('open');
+  btn.innerHTML = box.classList.contains('open')
+    ? '<i class="fas fa-eye-slash"></i> إخفاء الحل'
+    : '<i class="fas fa-eye"></i> عرض الحل';
+}
+</script>
+</body>
+</html>
