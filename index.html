@@ -4,196 +4,113 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>تعلم المحاسبة المالية</title>
-  <meta name="description" content="منصة تعليمية شاملة لتعلم المحاسبة المالية من الصفر حتى الاحتراف"/>
   <link rel="stylesheet" href="css/style.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar" id="navbar">
-  <div class="container nav-container">
-    <div class="logo">
-      <i class="fas fa-calculator"></i>
-      <span>المحاسبة المالية</span>
-    </div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#home">الرئيسية</a></li>
-      <li><a href="#topics">المواضيع</a></li>
-      <li><a href="#lessons">الدروس</a></li>
-      <li><a href="#quiz">اختبر نفسك</a></li>
-      <li><a href="#glossary">المصطلحات</a></li>
-    </ul>
-    <div class="nav-actions">
-      <button class="btn-dark-toggle" id="darkToggle" title="الوضع الليلي">
-        <i class="fas fa-moon"></i>
-      </button>
-      <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
-    </div>
+<!-- NAV -->
+<nav class="navbar">
+  <div class="nav-logo">
+    <i class="fas fa-calculator"></i>
+    <span>المحاسبة المالية</span>
   </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">الرئيسية</a></li>
+    <li><a href="pages/lessons.html">الدروس</a></li>
+    <li><a href="pages/quiz.html">الاختبارات</a></li>
+    <li><a href="pages/glossary.html">المصطلحات</a></li>
+    <li><a href="pages/formulas.html">المعادلات</a></li>
+  </ul>
+  <button id="darkToggle" class="dark-btn" title="تبديل الوضع الليلي">
+    <i class="fas fa-moon"></i>
+  </button>
 </nav>
 
-<!-- Hero -->
-<section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="container hero-content">
-    <div class="hero-badge"><i class="fas fa-graduation-cap"></i> منصة تعليمية مجانية</div>
-    <h1>تعلم <span class="highlight">المحاسبة المالية</span><br/>من الصفر إلى الاحتراف</h1>
-    <p>دروس شاملة ومبسطة في المحاسبة المالية، مع تمارين تفاعلية ومصطلحات محاسبية معتمدة</p>
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-content">
+    <h1>تعلم <span class="accent">المحاسبة المالية</span> بطريقة مبسّطة</h1>
+    <p>دروس تفاعلية، معادلات محاسبية، واختبارات ذاتية لطلاب الجامعات والمهتمين بالمحاسبة</p>
     <div class="hero-btns">
-      <a href="#topics" class="btn btn-primary"><i class="fas fa-play"></i> ابدأ التعلم</a>
-      <a href="#quiz" class="btn btn-outline"><i class="fas fa-tasks"></i> اختبر نفسك</a>
+      <a href="pages/lessons.html" class="btn btn-primary"><i class="fas fa-play-circle"></i> ابدأ التعلم</a>
+      <a href="pages/quiz.html" class="btn btn-outline"><i class="fas fa-pencil-alt"></i> جرّب اختباراً</a>
     </div>
-    <div class="hero-stats">
-      <div class="stat"><span>٢٠+</span><small>درساً</small></div>
-      <div class="stat"><span>٨</span><small>وحدات</small></div>
-      <div class="stat"><span>١٠٠+</span><small>مصطلح</small></div>
-    </div>
+  </div>
+  <div class="hero-img">
+    <div class="floating-card card1"><i class="fas fa-file-invoice-dollar"></i><span>القوائم المالية</span></div>
+    <div class="floating-card card2"><i class="fas fa-balance-scale"></i><span>الميزانية</span></div>
+    <div class="floating-card card3"><i class="fas fa-chart-line"></i><span>الأرباح والخسائر</span></div>
+  </div>
+</header>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stat"><h2>10+</h2><p>دروس تفاعلية</p></div>
+  <div class="stat"><h2>50+</h2><p>سؤال اختبار</p></div>
+  <div class="stat"><h2>100+</h2><p>مصطلح محاسبي</p></div>
+  <div class="stat"><h2>20+</h2><p>معادلة محاسبية</p></div>
+</section>
+
+<!-- CHAPTERS PREVIEW -->
+<section class="section chapters">
+  <h2 class="section-title">المحاور الرئيسية</h2>
+  <div class="cards-grid">
+    <a href="pages/lessons.html#ch1" class="card">
+      <div class="card-icon bg1"><i class="fas fa-book-open"></i></div>
+      <h3>مقدمة في المحاسبة</h3>
+      <p>مفهوم المحاسبة، أهميتها، وأنواعها</p>
+      <span class="badge">مبتدئ</span>
+    </a>
+    <a href="pages/lessons.html#ch2" class="card">
+      <div class="card-icon bg2"><i class="fas fa-equals"></i></div>
+      <h3>المعادلة المحاسبية</h3>
+      <p>الأصول = الخصوم + حقوق الملكية</p>
+      <span class="badge">مبتدئ</span>
+    </a>
+    <a href="pages/lessons.html#ch3" class="card">
+      <div class="card-icon bg3"><i class="fas fa-pen-nib"></i></div>
+      <h3>قيود اليومية</h3>
+      <p>تسجيل العمليات المالية بالقيد المزدوج</p>
+      <span class="badge">متوسط</span>
+    </a>
+    <a href="pages/lessons.html#ch4" class="card">
+      <div class="card-icon bg4"><i class="fas fa-table"></i></div>
+      <h3>دفتر الأستاذ</h3>
+      <p>ترحيل القيود وحسابات T-Account</p>
+      <span class="badge">متوسط</span>
+    </a>
+    <a href="pages/lessons.html#ch5" class="card">
+      <div class="card-icon bg5"><i class="fas fa-list-ol"></i></div>
+      <h3>ميزان المراجعة</h3>
+      <p>التحقق من توازن الحسابات</p>
+      <span class="badge">متوسط</span>
+    </a>
+    <a href="pages/lessons.html#ch6" class="card">
+      <div class="card-icon bg6"><i class="fas fa-file-alt"></i></div>
+      <h3>القوائم المالية</h3>
+      <p>قائمة الدخل، الميزانية، التدفقات النقدية</p>
+      <span class="badge">متقدم</span>
+    </a>
   </div>
 </section>
 
-<!-- Topics -->
-<section class="topics section" id="topics">
-  <div class="container">
-    <div class="section-header">
-      <h2>وحدات المنهج</h2>
-      <p>تغطية شاملة لأساسيات المحاسبة المالية</p>
-    </div>
-    <div class="cards-grid" id="topicsGrid"></div>
+<!-- WHY US -->
+<section class="section why">
+  <h2 class="section-title">لماذا هذا الموقع؟</h2>
+  <div class="why-grid">
+    <div class="why-item"><i class="fas fa-language"></i><h4>بالعربية بالكامل</h4><p>محتوى متكامل باللغة العربية مع المصطلحات الإنجليزية</p></div>
+    <div class="why-item"><i class="fas fa-mobile-alt"></i><h4>متوافق مع الجوال</h4><p>تصميم متجاوب يعمل على جميع الأجهزة</p></div>
+    <div class="why-item"><i class="fas fa-check-circle"></i><h4>اختبارات تفاعلية</h4><p>قيّم فهمك فوراً مع اختبارات بعد كل درس</p></div>
+    <div class="why-item"><i class="fas fa-moon"></i><h4>وضع ليلي</h4><p>راحة للعينين أثناء الدراسة في أي وقت</p></div>
   </div>
 </section>
 
-<!-- Lessons -->
-<section class="lessons section" id="lessons">
-  <div class="container">
-    <div class="section-header">
-      <h2>الدروس التفاعلية</h2>
-      <p>اختر درساً وابدأ رحلتك في المحاسبة</p>
-    </div>
-    <div class="lesson-tabs">
-      <button class="tab-btn active" data-tab="basics">الأساسيات</button>
-      <button class="tab-btn" data-tab="journal">القيود اليومية</button>
-      <button class="tab-btn" data-tab="ledger">دفتر الأستاذ</button>
-      <button class="tab-btn" data-tab="statements">القوائم المالية</button>
-    </div>
-    <div class="lesson-content" id="lessonContent"></div>
-  </div>
-</section>
-
-<!-- Journal Entry Calculator -->
-<section class="journal-section section" id="journal-calc">
-  <div class="container">
-    <div class="section-header">
-      <h2><i class="fas fa-pen-nib"></i> محرر القيد المحاسبي</h2>
-      <p>أدخل بيانات القيد واحسب تلقائياً</p>
-    </div>
-    <div class="journal-editor">
-      <div class="journal-table-wrap">
-        <table class="journal-table">
-          <thead>
-            <tr>
-              <th>البيان</th>
-              <th>اسم الحساب</th>
-              <th>مدين</th>
-              <th>دائن</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="journalBody">
-            <tr>
-              <td><input type="text" placeholder="وصف القيد" class="j-input"/></td>
-              <td><input type="text" placeholder="اسم الحساب" class="j-input"/></td>
-              <td><input type="number" placeholder="0.00" class="j-input debit" oninput="updateTotals()"/></td>
-              <td><input type="number" placeholder="0.00" class="j-input credit" oninput="updateTotals()"/></td>
-              <td><button class="btn-remove" onclick="removeRow(this)"><i class="fas fa-trash"></i></button></td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr class="totals-row">
-              <td colspan="2"><strong>الإجمالي</strong></td>
-              <td><strong id="totalDebit">0.00</strong></td>
-              <td><strong id="totalCredit">0.00</strong></td>
-              <td></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-      <div class="journal-actions">
-        <button class="btn btn-primary" onclick="addRow()"><i class="fas fa-plus"></i> إضافة سطر</button>
-        <button class="btn btn-outline" onclick="checkBalance()"><i class="fas fa-check-circle"></i> تحقق من التوازن</button>
-        <button class="btn btn-danger" onclick="clearJournal()"><i class="fas fa-eraser"></i> مسح</button>
-      </div>
-      <div class="balance-result" id="balanceResult"></div>
-    </div>
-  </div>
-</section>
-
-<!-- Quiz -->
-<section class="quiz-section section" id="quiz">
-  <div class="container">
-    <div class="section-header">
-      <h2><i class="fas fa-brain"></i> اختبر معلوماتك</h2>
-      <p>أسئلة متعددة الخيارات في المحاسبة المالية</p>
-    </div>
-    <div class="quiz-box" id="quizBox">
-      <div class="quiz-progress">
-        <span id="qProgress">السؤال 1 / 10</span>
-        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-        <span id="qScore">النقاط: 0</span>
-      </div>
-      <div class="question-card" id="questionCard"></div>
-      <div class="quiz-nav">
-        <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" style="display:none">التالي <i class="fas fa-arrow-left"></i></button>
-      </div>
-    </div>
-    <div class="quiz-result" id="quizResult" style="display:none"></div>
-  </div>
-</section>
-
-<!-- Glossary -->
-<section class="glossary section" id="glossary">
-  <div class="container">
-    <div class="section-header">
-      <h2><i class="fas fa-book-open"></i> المصطلحات المحاسبية</h2>
-      <p>قاموس شامل للمصطلحات المحاسبية بالعربية والإنجليزية</p>
-    </div>
-    <div class="glossary-search">
-      <input type="text" id="glossarySearch" placeholder="ابحث عن مصطلح..." oninput="filterGlossary()"/>
-      <i class="fas fa-search"></i>
-    </div>
-    <div class="glossary-grid" id="glossaryGrid"></div>
-  </div>
-</section>
-
-<!-- Footer -->
+<!-- FOOTER -->
 <footer class="footer">
-  <div class="container">
-    <div class="footer-content">
-      <div class="footer-brand">
-        <i class="fas fa-calculator"></i>
-        <span>تعلم المحاسبة المالية</span>
-        <p>منصة تعليمية مجانية لطلاب المحاسبة</p>
-      </div>
-      <div class="footer-links">
-        <h4>روابط سريعة</h4>
-        <a href="#topics">الوحدات</a>
-        <a href="#lessons">الدروس</a>
-        <a href="#quiz">الاختبارات</a>
-        <a href="#glossary">المصطلحات</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 تعلم المحاسبة المالية — جميع الحقوق محفوظة</p>
-    </div>
-  </div>
+  <p>© 2026 موقع تعلم المحاسبة المالية | تم بناؤه بـ <i class="fas fa-heart" style="color:#e74c3c"></i> للطلاب</p>
 </footer>
 
-<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <i class="fas fa-arrow-up"></i>
-</button>
-
-<script src="js/data.js"></script>
-<script src="js/script.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
