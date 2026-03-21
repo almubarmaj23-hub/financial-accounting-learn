@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>دروس فيديو - المحاسبة المالية</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    .vid-filter{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem;padding:0 0 1rem;border-bottom:2px solid var(--border)}
+    .vid-filter button{padding:.5rem 1.2rem;border-radius:30px;border:2px solid var(--border);background:var(--bg2);color:var(--text2);cursor:pointer;font-family:inherit;font-size:.9rem;font-weight:600;transition:var(--transition)}
+    .vid-filter button.active,.vid-filter button:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .vid-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+    .vid-card{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--border);cursor:pointer;transition:var(--transition);position:relative}
+    .vid-card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(26,115,232,.18);border-color:var(--primary)}
+    .vid-thumb{position:relative;padding-top:56.25%;overflow:hidden;background:#000}
+    .vid-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+    .vid-card:hover .vid-thumb img{transform:scale(1.06)}
+    .play-btn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);transition:var(--transition)}
+    .play-btn i{font-size:3rem;color:#fff;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5));transition:transform .3s}
+    .vid-card:hover .play-btn{background:rgba(26,115,232,.4)}
+    .vid-card:hover .play-btn i{transform:scale(1.15)}
+    .vid-info{padding:1rem 1.2rem 1.2rem}
+    .vid-info h3{font-size:1rem;font-weight:700;margin-bottom:.4rem;line-height:1.45;color:var(--text)}
+    .vid-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.4rem}
+    .vid-cat{font-size:.78rem;padding:.2rem .7rem;border-radius:20px;background:#e8f0fe;color:var(--primary);font-weight:600}
+    .vid-dur{font-size:.82rem;color:var(--text2);display:flex;align-items:center;gap:.3rem}
+    .watched-badge{position:absolute;top:.6rem;right:.6rem;background:#34a853;color:#fff;border-radius:20px;padding:.2rem .7rem;font-size:.75rem;font-weight:700;display:none}
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center;padding:1rem}
+    .modal-overlay.show{display:flex}
+    .modal-box{background:var(--card-bg);border-radius:var(--radius);width:100%;max-width:880px;overflow:hidden;position:relative}
+    .modal-close{position:absolute;top:1rem;left:1rem;background:rgba(0,0,0,.5);border:none;color:#fff;width:38px;height:38px;border-radius:50%;cursor:pointer;font-size:1.1rem;z-index:10;transition:var(--transition)}
+    .modal-close:hover{background:var(--primary)}
+    .modal-iframe{position:relative;padding-top:56.25%}
+    .modal-iframe iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+    .modal-info{padding:1.2rem 1.5rem}
+    .modal-info h2{font-size:1.2rem;margin-bottom:.4rem}
+    .modal-info p{color:var(--text2);font-size:.9rem}
+    .stats-bar{display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;margin-bottom:2rem;background:var(--card-bg);border-radius:var(--radius);padding:1.2rem 1.5rem;box-shadow:var(--shadow);border:1px solid var(--border)}
+    .stats-bar .stat{text-align:center;flex:1;min-width:100px}
+    .stats-bar .stat h3{font-size:1.6rem;font-weight:800;color:var(--primary)}
+    .stats-bar .stat p{font-size:.82rem;color:var(--text2)}
+    .vid-search{display:flex;margin-bottom:1.5rem}
+    .vid-search input{flex:1;padding:.75rem 1.2rem;border:2px solid var(--border);border-radius:10px 0 0 10px;background:var(--bg2);color:var(--text);font-size:1rem;font-family:inherit}
+    .vid-search input:focus{outline:none;border-color:var(--primary)}
+    .vid-search button{padding:.75rem 1.2rem;background:var(--primary);color:#fff;border:none;border-radius:0 10px 10px 0;cursor:pointer;font-size:1rem}
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-logo"><i class="fas fa-calculator"></i><span>المحاسبة المالية</span></div>
+  <ul class="nav-links">
+    <li><a href="../index.html">الرئيسية</a></li>
+    <li><a href="lessons.html">الدروس</a></li>
+    <li><a href="videos.html" class="active">فيديوهات</a></li>
+    <li><a href="quiz.html">الاختبارات</a></li>
+    <li><a href="exercises.html">تمارين</a></li>
+    <li><a href="calculator.html">الحاسبة</a></li>
+    <li><a href="glossary.html">المصطلحات</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:.8rem">
+    <button id="darkToggle" class="dark-btn"><i class="fas fa-moon"></i></button>
+    <button class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <h1><i class="fas fa-play-circle"></i> مكتبة دروس الفيديو</h1>
+  <p>أكثر من 15 فيديو تعليمي منتقى من أفضل القنوات المحاسبية العربية على يوتيوب</p>
+</div>
+
+<div style="max-width:1100px;margin:0 auto;padding:2.5rem 2rem">
+
+  <div class="stats-bar">
+    <div class="stat"><h3 id="totalVids">15</h3><p>فيديو تعليمي</p></div>
+    <div class="stat"><h3 id="watchedCount">0</h3><p>فيديو تمت مشاهدته</p></div>
+    <div class="stat"><h3>5</h3><p>تصنيفات</p></div>
+    <div class="stat" style="flex:3;text-align:right">
+      <p style="font-size:.85rem;color:var(--text2);margin-bottom:.4rem">تقدم المشاهدة</p>
+      <div style="height:8px;background:var(--border);border-radius:4px">
+        <div id="watchedBar" style="height:100%;background:linear-gradient(90deg,var(--primary),#34a853);border-radius:4px;width:0%;transition:width .5s"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="vid-search">
+    <input type="text" id="vidSearch" placeholder="ابحث في الفيديوهات..." oninput="filterVids()"/>
+    <button><i class="fas fa-search"></i></button>
+  </div>
+
+  <div class="vid-filter">
+    <button class="active" onclick="filterCat('all',this)"><i class="fas fa-th"></i> الكل</button>
+    <button onclick="filterCat('intro',this)"><i class="fas fa-book-open"></i> مقدمة ومبادئ</button>
+    <button onclick="filterCat('journal',this)"><i class="fas fa-pen-nib"></i> قيود اليومية</button>
+    <button onclick="filterCat('ledger',this)"><i class="fas fa-table"></i> دفتر الأستاذ والميزان</button>
+    <button onclick="filterCat('statements',this)"><i class="fas fa-file-alt"></i> القوائم المالية</button>
+    <button onclick="filterCat('full',this)"><i class="fas fa-layer-group"></i> كورسات كاملة</button>
+  </div>
+
+  <div class="vid-grid" id="vidGrid"></div>
+</div>
+
+<!-- مشغّل الفيديو -->
+<div class="modal-overlay" id="vidModal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeVideo()"><i class="fas fa-times"></i></button>
+    <div class="modal-iframe">
+      <iframe id="vidFrame" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    </div>
+    <div class="modal-info">
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+    </div>
+  </div>
+</div>
+
+<footer class="footer"><p>© 2026 موقع تعلم المحاسبة المالية — الفيديوهات من YouTube</p></footer>
+<script src="../js/main.js"></script>
+<script>
+const videos = [
+  // مقدمة ومبادئ
+  {id:'S1fo5VLRMHM',cat:'intro',title:'تبسيط المحاسبة المالية في 60 دقيقة',desc:'شرح مبسط شامل للمبتدئين — المعادلة المحاسبية، القيود، القوائم المالية',dur:'60 د'},
+  {id:'XepUM_lZeJE',cat:'intro',title:'المحاسبة المالية — ليه؟ (الحلقة الأولى)',desc:'مقدمة رائعة لفهم سبب دراسة المحاسبة وأهميتها في الحياة العملية',dur:'20 د'},
+  {id:'eGGcA042sZ4',cat:'intro',title:'تعلم المحاسبة المالية بسهولة للمبتدئين',desc:'مفاهيم أساسية وأمثلة عملية لطلاب السنة الأولى كلية التجارة',dur:'35 د'},
+  {id:'d5uLLXiSHy8',cat:'intro',title:'أهم المبادئ المحاسبية (الحلقة الثانية)',desc:'شرح الفروض والمبادئ المحاسبية الأساسية التي تقوم عليها المحاسبة',dur:'22 د'},
+  // قيود اليومية
+  {id:'hRK0Umsl0l8',cat:'journal',title:'شرح قيود اليومية ودفتر قيود اليومية',desc:'شرح مفصل لتسجيل المعاملات المالية في دفتر اليومية العامة خطوة بخطوة',dur:'28 د'},
+  {id:'lyj0jbakC8E',cat:'journal',title:'أسهل طريقة لتسجيل قيود اليومية',desc:'تعلم الفرق بين المدين والدائن وكيفية تسجيل أي قيد محاسبي ببساطة',dur:'18 د'},
+  {id:'ZXZCAUQ97GE',cat:'journal',title:'دفتر اليومية — الحلقة السادسة',desc:'شرح دفتر اليومية العامة والتطبيق العملي على عمليات متعددة',dur:'25 د'},
+  {id:'qb5hdtMcQhs',cat:'journal',title:'القيود اليومية في المحاسبة',desc:'فيديو قصير ومركّز يشرح كيفية تسجيل القيود في دفتر اليومية مع مثال',dur:'3 د'},
+  // دفتر الأستاذ والميزان
+  {id:'92NiMF-Q3JY',cat:'ledger',title:'دفتر الأستاذ — الحلقة السابعة',desc:'شرح ترحيل القيود من دفتر اليومية إلى دفتر الأستاذ وحسابات T',dur:'24 د'},
+  {id:'kCiYby2BIMk',cat:'ledger',title:'ميزان المراجعة — الحلقة الثامنة',desc:'كيفية إعداد ميزان المراجعة والتحقق من توازن الأرصدة المدينة والدائنة',dur:'22 د'},
+  {id:'dPS_X4OULV8',cat:'ledger',title:'من قيود اليومية حتى ميزان المراجعة',desc:'تطبيق عملي متكامل من تسجيل القيود وصولاً لإعداد ميزان المراجعة',dur:'45 د'},
+  // القوائم المالية
+  {id:'tP-395BLp9g',cat:'statements',title:'إعداد القوائم المالية — الحلقة التاسعة',desc:'شرح إعداد قائمة الدخل والميزانية العمومية والتدفقات النقدية',dur:'30 د'},
+  {id:'FPj3WB1xSdI',cat:'statements',title:'إعداد القوائم المالية من البداية',desc:'شرح شامل لمن هو المسؤول عن إعداد القوائم وكيفية ترتيبها',dur:'32 د'},
+  {id:'WtmaGhP3_vs',cat:'statements',title:'شكل القوائم المالية (الحلقة الثالثة)',desc:'تعرّف على الشكل الصحيح لقائمة الدخل والميزانية العمومية',dur:'20 د'},
+  // كورسات كاملة
+  {id:'IQyRSzI0Bvs',cat:'full',title:'كورس مبادئ المحاسبة المالية كامل في ساعتين',desc:'تجميع كامل لمبادئ المحاسبة المالية من الصفر — مثالي للمراجعة',dur:'2 ساعة'},
+  {id:'mdmNx1wDdSE',cat:'full',title:'كورس محاسبة مالية كامل في 4 ساعات',desc:'كورس شامل من القيود حتى القوائم المالية وفق معايير المحاسبة الدولية',dur:'4 ساعات'},
+  {id:'K2ELU0gfkYI',cat:'full',title:'كورس المحاسبة المالية من الصفر — 4 ساعات',desc:'كورس مجاني كامل يشمل ميزان المراجعة وقائمة الدخل والمركز المالي',dur:'4 ساعات'},
+];
+
+let watched = JSON.parse(localStorage.getItem('watchedVids') || '[]');
+let currentCat = 'all';
+
+function renderVids(list) {
+  const grid = document.getElementById('vidGrid');
+  grid.innerHTML = '';
+  if (!list.length) { grid.innerHTML = '<p style="color:var(--text2);grid-column:1/-1;text-align:center;padding:3rem">لا توجد نتائج</p>'; return; }
+  list.forEach(v => {
+    const isWatched = watched.includes(v.id);
+    grid.innerHTML += `
+      <div class="vid-card" data-cat="${v.cat}" onclick="playVideo('${v.id}','${v.title.replace(/'/g,"\'")}','${v.desc.replace(/'/g,"\'")}')">
+        <div class="vid-thumb">
+          <img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg" alt="${v.title}" loading="lazy"/>
+          <div class="play-btn"><i class="fas fa-play-circle"></i></div>
+        </div>
+        <div class="watched-badge" id="wb-${v.id}" style="display:${isWatched?'block':'none'}"><i class="fas fa-check"></i> شاهدته</div>
+        <div class="vid-info">
+          <h3>${v.title}</h3>
+          <div class="vid-meta">
+            <span class="vid-cat">${getCatName(v.cat)}</span>
+            <span class="vid-dur"><i class="fas fa-clock"></i> ${v.dur}</span>
+          </div>
+        </div>
+      </div>`;
+  });
+}
+
+function getCatName(cat) {
+  const names = {intro:'مقدمة ومبادئ',journal:'قيود اليومية',ledger:'دفتر الأستاذ',statements:'القوائم المالية',full:'كورس كامل'};
+  return names[cat] || cat;
+}
+
+function filterCat(cat, btn) {
+  currentCat = cat;
+  document.querySelectorAll('.vid-filter button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('vidSearch').value = '';
+  renderVids(cat === 'all' ? videos : videos.filter(v => v.cat === cat));
+}
+
+function filterVids() {
+  const q = document.getElementById('vidSearch').value.toLowerCase();
+  const pool = currentCat === 'all' ? videos : videos.filter(v => v.cat === currentCat);
+  if (!q) { renderVids(pool); return; }
+  renderVids(pool.filter(v => v.title.includes(q) || v.desc.includes(q)));
+}
+
+function playVideo(id, title, desc) {
+  document.getElementById('vidFrame').src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalDesc').textContent = desc;
+  document.getElementById('vidModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+  if (!watched.includes(id)) {
+    watched.push(id);
+    localStorage.setItem('watchedVids', JSON.stringify(watched));
+    const wb = document.getElementById('wb-' + id);
+    if (wb) wb.style.display = 'block';
+    updateStats();
+  }
+}
+
+function closeVideo() {
+  document.getElementById('vidFrame').src = '';
+  document.getElementById('vidModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('vidModal')) closeVideo();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideo(); });
+
+function updateStats() {
+  document.getElementById('watchedCount').textContent = watched.length;
+  const pct = (watched.length / videos.length * 100).toFixed(0);
+  document.getElementById('watchedBar').style.width = pct + '%';
+}
+
+renderVids(videos);
+updateStats();
+</script>
+</body>
+</html>
