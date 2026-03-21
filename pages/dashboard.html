@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>لوحة التقدم - المحاسبة المالية</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    .dash{max-width:1000px;margin:0 auto;padding:2.5rem 2rem}
+    .dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.2rem;margin-bottom:2.5rem}
+    .dash-card{background:var(--card-bg);border-radius:var(--radius);padding:1.5rem;box-shadow:var(--shadow);border:1px solid var(--border);text-align:center}
+    .dash-card .icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .8rem;font-size:1.5rem;color:#fff}
+    .dash-card h3{font-size:2rem;font-weight:800;margin-bottom:.2rem;color:var(--primary)}
+    .dash-card p{color:var(--text2);font-size:.9rem}
+    .dash-card .mini-bar{height:6px;background:var(--border);border-radius:3px;margin-top:.8rem;overflow:hidden}
+    .dash-card .mini-fill{height:100%;border-radius:3px;transition:width .7s}
+    .section-title{font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem}
+    .section-title i{color:var(--primary)}
+    .act-list{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);overflow:hidden;margin-bottom:2.5rem}
+    .act-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.5rem;border-bottom:1px solid var(--border);transition:var(--transition)}
+    .act-item:last-child{border:none}
+    .act-item:hover{background:var(--bg)}
+    .act-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#fff;flex-shrink:0}
+    .act-text{flex:1}
+    .act-text h4{font-size:.95rem;font-weight:600;margin-bottom:.15rem}
+    .act-text p{font-size:.82rem;color:var(--text2)}
+    .act-badge{padding:.2rem .7rem;border-radius:20px;font-size:.78rem;font-weight:600}
+    .badge-done{background:#e8f5e9;color:#1b5e20}
+    .badge-go{background:#e8f0fe;color:var(--primary)}
+    .ring-wrap{display:flex;justify-content:center;margin-bottom:2.5rem}
+    .ring-container{position:relative;width:180px;height:180px}
+    .ring-svg{transform:rotate(-90deg)}
+    .ring-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+    .ring-text h2{font-size:2.5rem;font-weight:800;color:var(--primary)}
+    .ring-text p{font-size:.85rem;color:var(--text2)}
+    .reset-btn{background:none;border:2px solid #e74c3c;color:#e74c3c;border-radius:8px;padding:.5rem 1.2rem;cursor:pointer;font-family:inherit;font-size:.9rem;font-weight:600;transition:var(--transition)}
+    .reset-btn:hover{background:#e74c3c;color:#fff}
+  </style>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-logo"><i class="fas fa-calculator"></i><span>المحاسبة المالية</span></div>
+  <ul class="nav-links">
+    <li><a href="../index.html">الرئيسية</a></li>
+    <li><a href="lessons.html">الدروس</a></li>
+    <li><a href="videos.html">فيديوهات</a></li>
+    <li><a href="quiz.html">الاختبارات</a></li>
+    <li><a href="exercises.html">تمارين</a></li>
+    <li><a href="dashboard.html" class="active">تقدمي</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:.8rem">
+    <button id="darkToggle" class="dark-btn"><i class="fas fa-moon"></i></button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <h1><i class="fas fa-tachometer-alt"></i> لوحة تقدمي الشخصية</h1>
+  <p>تتبّع تقدمك في التعلم — الدروس، الفيديوهات، التمارين، الاختبارات</p>
+</div>
+
+<div class="dash">
+
+  <!-- حلقة التقدم الكلي -->
+  <div class="ring-wrap">
+    <div>
+      <div class="ring-container">
+        <svg class="ring-svg" width="180" height="180" viewBox="0 0 180 180">
+          <circle cx="90" cy="90" r="75" fill="none" stroke="var(--border)" stroke-width="14"/>
+          <circle id="ringCircle" cx="90" cy="90" r="75" fill="none" stroke="var(--primary)" stroke-width="14"
+            stroke-dasharray="471" stroke-dashoffset="471" stroke-linecap="round" style="transition:stroke-dashoffset 1s ease"/>
+        </svg>
+        <div class="ring-text">
+          <h2 id="totalPct">0%</h2>
+          <p>التقدم الكلي</p>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:.8rem;color:var(--text2);font-size:.9rem">بناءً على جميع الأنشطة المكتملة</p>
+    </div>
+  </div>
+
+  <!-- بطاقات الإحصائيات -->
+  <div class="dash-grid">
+    <div class="dash-card">
+      <div class="icon" style="background:#1a73e8"><i class="fas fa-book-open"></i></div>
+      <h3 id="lessonsRead">0</h3>
+      <p>فصلاً تمت قراءته من 10</p>
+      <div class="mini-bar"><div class="mini-fill" id="lessonBar" style="background:#1a73e8;width:0%"></div></div>
+    </div>
+    <div class="dash-card">
+      <div class="icon" style="background:#e74c3c"><i class="fas fa-play-circle"></i></div>
+      <h3 id="vidsWatched">0</h3>
+      <p>فيديو تمت مشاهدته من 17</p>
+      <div class="mini-bar"><div class="mini-fill" id="vidBar" style="background:#e74c3c;width:0%"></div></div>
+    </div>
+    <div class="dash-card">
+      <div class="icon" style="background:#34a853"><i class="fas fa-pencil-ruler"></i></div>
+      <h3 id="exSolved">0</h3>
+      <p>تمارين مكتملة من 6</p>
+      <div class="mini-bar"><div class="mini-fill" id="exBar" style="background:#34a853;width:0%"></div></div>
+    </div>
+    <div class="dash-card">
+      <div class="icon" style="background:#f4b400"><i class="fas fa-pencil-alt"></i></div>
+      <h3 id="quizScore">—</h3>
+      <p>آخر نتيجة اختبار</p>
+      <div class="mini-bar"><div class="mini-fill" id="quizBar" style="background:#f4b400;width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- قائمة النشاطات -->
+  <div class="section-title"><i class="fas fa-history"></i> حالة التعلم التفصيلية</div>
+  <div class="act-list">
+    <div class="act-item">
+      <div class="act-icon" style="background:#1a73e8"><i class="fas fa-book-open"></i></div>
+      <div class="act-text"><h4>الدروس النظرية</h4><p id="lessonsDetail">لم تُراجع أي فصل بعد</p></div>
+      <a href="lessons.html" class="act-badge badge-go">ابدأ <i class="fas fa-arrow-left"></i></a>
+    </div>
+    <div class="act-item">
+      <div class="act-icon" style="background:#e74c3c"><i class="fas fa-play-circle"></i></div>
+      <div class="act-text"><h4>مكتبة الفيديوهات</h4><p id="vidsDetail">لم تشاهد أي فيديو بعد</p></div>
+      <a href="videos.html" class="act-badge badge-go">شاهد <i class="fas fa-arrow-left"></i></a>
+    </div>
+    <div class="act-item">
+      <div class="act-icon" style="background:#34a853"><i class="fas fa-pencil-ruler"></i></div>
+      <div class="act-text"><h4>التمارين التطبيقية</h4><p id="exDetail">لم تحل أي تمرين بعد</p></div>
+      <a href="exercises.html" class="act-badge badge-go">حل <i class="fas fa-arrow-left"></i></a>
+    </div>
+    <div class="act-item">
+      <div class="act-icon" style="background:#f4b400"><i class="fas fa-pencil-alt"></i></div>
+      <div class="act-text"><h4>الاختبار التفاعلي</h4><p id="quizDetail">لم تجر الاختبار بعد</p></div>
+      <a href="quiz.html" class="act-badge badge-go">اختبر <i class="fas fa-arrow-left"></i></a>
+    </div>
+  </div>
+
+  <!-- الإنجازات -->
+  <div class="section-title"><i class="fas fa-trophy"></i> الإنجازات</div>
+  <div class="dash-grid" id="achievements"></div>
+
+  <div style="text-align:center;margin-top:2rem">
+    <button class="reset-btn" onclick="resetProgress()"><i class="fas fa-redo"></i> إعادة تعيين كل التقدم</button>
+  </div>
+</div>
+
+<footer class="footer"><p>© 2026 موقع تعلم المحاسبة المالية</p></footer>
+<script src="../js/main.js"></script>
+<script>
+const achievements = [
+  {id:'first_lesson',icon:'fas fa-star',title:'الخطوة الأولى',desc:'قرأ أول فصل',color:'#f4b400'},
+  {id:'all_lessons',icon:'fas fa-graduation-cap',title:'طالب متميز',desc:'أكمل جميع الفصول',color:'#1a73e8'},
+  {id:'first_video',icon:'fas fa-play',title:'مشاهد نشط',desc:'شاهد أول فيديو',color:'#e74c3c'},
+  {id:'five_videos',icon:'fas fa-film',title:'مدمن تعلم',desc:'شاهد 5 فيديوهات',color:'#9b59b6'},
+  {id:'first_exercise',icon:'fas fa-pencil-ruler',title:'ممارس',desc:'حل أول تمرين',color:'#34a853'},
+  {id:'all_exercises',icon:'fas fa-award',title:'متفوق',desc:'أكمل جميع التمارين',color:'#e67e22'},
+  {id:'quiz_pass',icon:'fas fa-check-double',title:'ناجح',desc:'حقق 60% في الاختبار',color:'#1abc9c'},
+  {id:'quiz_excellence',icon:'fas fa-crown',title:'متفوق',desc:'حقق 90%+ في الاختبار',color:'#f4b400'},
+];
+
+function loadDash() {
+  const readLessons = JSON.parse(localStorage.getItem('readLessons') || '[]');
+  const watchedVids = JSON.parse(localStorage.getItem('watchedVids') || '[]');
+  const solvedEx = JSON.parse(localStorage.getItem('solvedExercises') || '[]');
+  const quizScore = localStorage.getItem('quizBestScore');
+
+  const lr = Math.min(readLessons.length, 10);
+  const vw = Math.min(watchedVids.length, 17);
+  const es = Math.min(solvedEx.length, 6);
+  const qs = quizScore ? parseInt(quizScore) : 0;
+
+  document.getElementById('lessonsRead').textContent = lr;
+  document.getElementById('vidsWatched').textContent = vw;
+  document.getElementById('exSolved').textContent = es;
+  document.getElementById('quizScore').textContent = quizScore ? quizScore + '%' : '—';
+
+  document.getElementById('lessonBar').style.width = (lr/10*100)+'%';
+  document.getElementById('vidBar').style.width = (vw/17*100)+'%';
+  document.getElementById('exBar').style.width = (es/6*100)+'%';
+  document.getElementById('quizBar').style.width = (qs)+'%';
+
+  document.getElementById('lessonsDetail').textContent = lr > 0 ? `راجعت ${lr} فصلاً من 10` : 'لم تُراجع أي فصل بعد';
+  document.getElementById('vidsDetail').textContent = vw > 0 ? `شاهدت ${vw} فيديو من 17` : 'لم تشاهد أي فيديو بعد';
+  document.getElementById('exDetail').textContent = es > 0 ? `حللت ${es} تمارين من 6` : 'لم تحل أي تمرين بعد';
+  document.getElementById('quizDetail').textContent = quizScore ? `آخر نتيجة: ${quizScore}%` : 'لم تجر الاختبار بعد';
+
+  const total = Math.round((lr/10 + vw/17 + es/6 + qs/100) / 4 * 100);
+  document.getElementById('totalPct').textContent = total + '%';
+  const circum = 2 * Math.PI * 75;
+  document.getElementById('ringCircle').style.strokeDashoffset = circum - (circum * total / 100);
+
+  // إنجازات
+  const earned = [];
+  if (lr >= 1) earned.push('first_lesson');
+  if (lr >= 10) earned.push('all_lessons');
+  if (vw >= 1) earned.push('first_video');
+  if (vw >= 5) earned.push('five_videos');
+  if (es >= 1) earned.push('first_exercise');
+  if (es >= 6) earned.push('all_exercises');
+  if (qs >= 60) earned.push('quiz_pass');
+  if (qs >= 90) earned.push('quiz_excellence');
+
+  const grid = document.getElementById('achievements');
+  grid.innerHTML = '';
+  achievements.forEach(a => {
+    const has = earned.includes(a.id);
+    grid.innerHTML += `<div class="dash-card" style="opacity:${has?1:.4};transition:opacity .3s">
+      <div class="icon" style="background:${has?a.color:'#999'}"><i class="${a.icon}"></i></div>
+      <h3 style="font-size:1rem;color:var(--text)">${a.title}</h3>
+      <p>${a.desc}</p>
+      ${has ? '<p style="color:#34a853;font-weight:600;font-size:.85rem;margin-top:.4rem">✅ محقق</p>' : '<p style="color:var(--text2);font-size:.8rem;margin-top:.4rem">🔒 لم يُحقق بعد</p>'}
+    </div>`;
+  });
+}
+
+function resetProgress() {
+  if (!confirm('هل تريد حذف كل بيانات تقدمك؟')) return;
+  localStorage.removeItem('readLessons');
+  localStorage.removeItem('watchedVids');
+  localStorage.removeItem('solvedExercises');
+  localStorage.removeItem('quizBestScore');
+  loadDash();
+}
+
+loadDash();
+</script>
+</body>
+</html>
