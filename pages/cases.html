@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>دراسات الحالة - المحاسبة المالية</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-logo"><i class="fas fa-calculator"></i><span>المحاسبة المالية</span></div>
+  <ul class="nav-links">
+    <li><a href="../index.html">الرئيسية</a></li>
+    <li><a href="lessons.html" id="nl-lessons">الدروس</a></li>
+    <li><a href="exercises.html" id="nl-exercises">التمارين</a></li>
+    <li><a href="quiz.html" id="nl-quiz">الاختبارات</a></li>
+    <li><a href="calculator.html" id="nl-calc">الحاسبة</a></li>
+    <li><a href="cases.html" id="nl-cases">دراسات حالة</a></li>
+    <li><a href="glossary.html" id="nl-glossary">المصطلحات</a></li>
+    <li><a href="formulas.html" id="nl-formulas">المعادلات</a></li>
+  </ul>
+  <button id="darkToggle" class="dark-btn"><i class="fas fa-moon"></i></button>
+</nav>
+<div class="page-hero">
+  <h1><i class="fas fa-briefcase"></i> دراسات الحالة العملية</h1>
+  <p>تطبيق المفاهيم المحاسبية على سيناريوهات شركات حقيقية</p>
+</div>
+<div class="cases-container">
+
+  <!-- CASE 1 -->
+  <div class="case-card">
+    <div class="case-header">
+      <h3><i class="fas fa-store"></i> دراسة حالة 1 — شركة النور للتجارة</h3>
+      <span class="case-tag tag-green">مبتدئ</span>
+    </div>
+    <div class="case-body">
+      <p><strong>الخلفية:</strong> شركة النور للتجارة شركة فردية تأسست في يناير 2026 برأس مال 500,000 ريال نقداً. خلال الشهر الأول نفّذت الشركة عمليات متعددة.</p>
+      <p><strong>العمليات خلال يناير 2026:</strong></p>
+      <ul>
+        <li>2 يناير: اشترت أثاثاً بـ 50,000 ريال نقداً</li>
+        <li>8 يناير: اشترت بضاعة للبيع بـ 150,000 ريال، دفعت نصفها نقداً والباقي بالآجل</li>
+        <li>15 يناير: باعت بضاعة بـ 120,000 ريال (تكلفتها 80,000) قُبضت نقداً</li>
+        <li>20 يناير: دفعت رواتب موظفين 15,000 ريال</li>
+        <li>25 يناير: سددت نصف الديون المستحقة للموردين</li>
+      </ul>
+      <div class="case-steps">
+        <div class="case-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>تسجيل قيود اليومية</h4>
+            <p>الأصول ↑ مدين / الخصوم ↑ دائن / الإيرادات ↑ دائن / المصروفات ↑ مدين</p>
+          </div>
+        </div>
+        <div class="case-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>الترحيل لدفتر الأستاذ</h4>
+            <p>النقدية: 500,000 − 50,000 − 75,000 + 120,000 − 15,000 − 37,500 = <strong>442,500 ريال</strong></p>
+          </div>
+        </div>
+        <div class="case-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>قائمة الدخل (يناير)</h4>
+            <p>المبيعات: 120,000 | تكلفة المبيعات: 80,000 | إجمالي الربح: 40,000 | الرواتب: 15,000 | <strong>صافي الربح: 25,000</strong></p>
+          </div>
+        </div>
+        <div class="case-step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>الميزانية في 31/1/2026</h4>
+            <p>الأصول: نقدية 442,500 + بضاعة 70,000 + أثاث 50,000 = 562,500 | الخصوم: موردون 37,500 | حقوق الملكية: 525,000</p>
+          </div>
+        </div>
+      </div>
+      <div class="info-box">💡 <strong>الدرس المستفاد:</strong> رأس المال ينمو بإضافة صافي الربح: 500,000 + 25,000 = 525,000 ريال</div>
+    </div>
+  </div>
+
+  <!-- CASE 2 -->
+  <div class="case-card">
+    <div class="case-header">
+      <h3><i class="fas fa-industry"></i> دراسة حالة 2 — تحليل القوائم المالية لشركة مصنعة</h3>
+      <span class="case-tag tag-blue">متوسط</span>
+    </div>
+    <div class="case-body">
+      <p><strong>الخلفية:</strong> فيما يلي مقتطفات من القوائم المالية لشركة الصناعة الحديثة للعام 2025:</p>
+      <table class="ex-table">
+        <tr><th colspan="2">بيانات مختارة — 31 ديسمبر 2025</th></tr>
+        <tr><td>صافي المبيعات</td><td>2,400,000 ريال</td></tr>
+        <tr><td>تكلفة البضائع المباعة</td><td>1,440,000 ريال</td></tr>
+        <tr><td>مصروفات التشغيل</td><td>480,000 ريال</td></tr>
+        <tr><td>الأصول المتداولة</td><td>600,000 ريال</td></tr>
+        <tr><td>المخزون</td><td>200,000 ريال</td></tr>
+        <tr><td>الخصوم المتداولة</td><td>300,000 ريال</td></tr>
+        <tr><td>إجمالي الأصول</td><td>1,800,000 ريال</td></tr>
+        <tr><td>حقوق الملكية</td><td>900,000 ريال</td></tr>
+      </table>
+      <div class="case-steps">
+        <div class="case-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>صافي الربح</h4>
+            <p>2,400,000 − 1,440,000 − 480,000 = <strong>480,000 ريال</strong></p>
+          </div>
+        </div>
+        <div class="case-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>نسب السيولة</h4>
+            <p>نسبة التداول = 600,000 ÷ 300,000 = <strong>2:1 ✅</strong> | نسبة السريعة = (600,000−200,000) ÷ 300,000 = <strong>1.33:1 ✅</strong></p>
+          </div>
+        </div>
+        <div class="case-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>نسب الربحية</h4>
+            <p>هامش الربح = 480,000 ÷ 2,400,000 = <strong>20% ✅</strong> | ROE = 480,000 ÷ 900,000 = <strong>53% ممتاز</strong></p>
+          </div>
+        </div>
+        <div class="case-step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>الاستنتاج العام</h4>
+            <p>الشركة في وضع مالي ممتاز: سيولة جيدة، ربحية مرتفعة، وعائد مجزٍ لحملة الأسهم</p>
+          </div>
+        </div>
+      </div>
+      <div class="success-box">✅ <strong>التوصية:</strong> الشركة مرشحة للتوسع والاستثمار في أصول إنتاجية جديدة بفضل قوتها المالية</div>
+    </div>
+  </div>
+
+  <!-- CASE 3 -->
+  <div class="case-card">
+    <div class="case-header">
+      <h3><i class="fas fa-hospital"></i> دراسة حالة 3 — قيود التسوية في عيادة طبية</h3>
+      <span class="case-tag tag-orange">متقدم</span>
+    </div>
+    <div class="case-body">
+      <p><strong>الخلفية:</strong> عيادة الشفاء الطبية تُعدّ قيودها في 31 ديسمبر 2025. البيانات التالية تحتاج إلى تسوية:</p>
+      <ul>
+        <li>رواتب موظفين مستحقة غير مدفوعة: 8,000 ريال</li>
+        <li>إيجار مدفوع مقدماً في أكتوبر بـ 18,000 ريال لمدة 6 أشهر (استُهلك 3 أشهر)</li>
+        <li>رسوم خدمات طبية مكتسبة لكن لم تُحصَّل: 12,000 ريال</li>
+        <li>مستلزمات طبية مشتراة بـ 5,000 ريال، استُهلك منها 3,500 ريال</li>
+      </ul>
+      <div class="case-steps">
+        <div class="case-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>تسوية الرواتب المستحقة</h4>
+            <p>من حـ/ مصروف الرواتب 8,000 | إلى حـ/ رواتب مستحقة الدفع 8,000</p>
+          </div>
+        </div>
+        <div class="case-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>تسوية الإيجار المدفوع مقدماً</h4>
+            <p>المستهلك = 18,000 × 3/6 = 9,000 | من حـ/ مصروف الإيجار 9,000 | إلى حـ/ إيجار مدفوع مقدماً 9,000</p>
+          </div>
+        </div>
+        <div class="case-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>تسوية الإيرادات المستحقة</h4>
+            <p>من حـ/ إيرادات مستحقة القبض 12,000 | إلى حـ/ إيرادات الخدمات الطبية 12,000</p>
+          </div>
+        </div>
+        <div class="case-step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>تسوية المستلزمات الطبية</h4>
+            <p>من حـ/ مصروف المستلزمات 3,500 | إلى حـ/ مخزون المستلزمات 3,500</p>
+          </div>
+        </div>
+      </div>
+      <div class="info-box">⚠️ <strong>تأثير التسويات على الربح:</strong> الربح يتأثر بزيادة المصروفات (−20,500) وزيادة الإيرادات (+12,000) → أثر صافٍ: تخفيض الربح بـ 8,500 ريال</div>
+    </div>
+  </div>
+
+</div>
+<footer class="footer"><p>© 2026 موقع تعلم المحاسبة المالية</p></footer>
+<script src="../js/main.js"></script>
+</body>
+</html>
