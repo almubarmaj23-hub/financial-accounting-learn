@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>المصطلحات - المحاسبة المالية</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-logo"><i class="fas fa-calculator"></i><span>المحاسبة المالية</span></div>
+  <ul class="nav-links">
+    <li><a href="../index.html">الرئيسية</a></li>
+    <li><a href="lessons.html">الدروس</a></li>
+    <li><a href="quiz.html">الاختبارات</a></li>
+    <li><a href="glossary.html" class="active">المصطلحات</a></li>
+    <li><a href="formulas.html">المعادلات</a></li>
+  </ul>
+  <button id="darkToggle" class="dark-btn"><i class="fas fa-moon"></i></button>
+</nav>
+<div class="page-hero">
+  <h1><i class="fas fa-language"></i> قاموس المصطلحات المحاسبية</h1>
+  <p>أكثر من 30 مصطلح محاسبي بالعربية والإنجليزية مع الشرح</p>
+</div>
+<div class="glossary-container">
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="ابحث عن مصطلح..." oninput="filterTerms()"/>
+    <i class="fas fa-search" style="align-self:center;color:var(--text2)"></i>
+  </div>
+  <div class="glossary-grid" id="glossaryGrid"></div>
+</div>
+<footer class="footer"><p>© 2026 موقع تعلم المحاسبة المالية</p></footer>
+<script src="../js/main.js"></script>
+<script>
+const terms = [
+  {ar:"الأصول",en:"Assets",def:"الموارد الاقتصادية التي تمتلكها المنشأة والتي يُتوقع أن تُدرّ منافع مستقبلية"},
+  {ar:"الخصوم",en:"Liabilities",def:"الالتزامات المالية الواجبة على المنشأة تجاه الأطراف الخارجية"},
+  {ar:"حقوق الملكية",en:"Equity",def:"حق أصحاب المنشأة في أصولها بعد خصم الخصوم"},
+  {ar:"الإيرادات",en:"Revenue",def:"الدخل المتحقق من ممارسة المنشأة لنشاطها الرئيسي"},
+  {ar:"المصروفات",en:"Expenses",def:"التكاليف المتكبّدة في سبيل تحقيق الإيرادات"},
+  {ar:"صافي الربح",en:"Net Income",def:"الفرق بين الإيرادات والمصروفات إذا كانت الإيرادات أكبر"},
+  {ar:"الميزانية العمومية",en:"Balance Sheet",def:"قائمة تُظهر الأصول والخصوم وحقوق الملكية في لحظة زمنية محددة"},
+  {ar:"قائمة الدخل",en:"Income Statement",def:"قائمة تُظهر نتيجة أعمال المنشأة (ربح أو خسارة) خلال فترة"},
+  {ar:"التدفقات النقدية",en:"Cash Flow",def:"حركة النقد الداخلة والخارجة من المنشأة خلال الفترة"},
+  {ar:"قيد اليومية",en:"Journal Entry",def:"تسجيل العملية المالية في دفتر اليومية بالطرف المدين والدائن"},
+  {ar:"دفتر الأستاذ",en:"General Ledger",def:"سجل يُجمع فيه جميع القيود المتعلقة بكل حساب بشكل منفصل"},
+  {ar:"ميزان المراجعة",en:"Trial Balance",def:"قائمة بأرصدة الحسابات للتحقق من توازن المدين والدائن"},
+  {ar:"الإهلاك",en:"Depreciation",def:"توزيع تكلفة الأصل الثابت على سنوات عمره الإنتاجي"},
+  {ar:"القيمة الدفترية",en:"Book Value",def:"تكلفة الأصل مطروحاً منها مجمّع الإهلاك"},
+  {ar:"مبدأ الاستحقاق",en:"Accrual Basis",def:"تسجيل الإيرادات عند تحققها والمصروفات عند تكبّدها بغض النظر عن الدفع"},
+  {ar:"الأصول الثابتة",en:"Fixed Assets",def:"الأصول طويلة الأجل المستخدمة في النشاط كالأراضي والمعدات"},
+  {ar:"الأصول المتداولة",en:"Current Assets",def:"الأصول التي يُتوقع تحويلها لنقد خلال سنة كالمخزون والذمم"},
+  {ar:"الذمم المدينة",en:"Accounts Receivable",def:"مبالغ مستحقة للمنشأة من العملاء مقابل خدمات أو بضائع مقدَّمة"},
+  {ar:"الذمم الدائنة",en:"Accounts Payable",def:"مبالغ مستحقة على المنشأة للموردين مقابل مشتريات بالأجل"},
+  {ar:"رأس المال العامل",en:"Working Capital",def:"الفرق بين الأصول المتداولة والخصوم المتداولة"},
+  {ar:"قيود التسوية",en:"Adjusting Entries",def:"قيود تُسجَّل في نهاية الفترة لتطبيق مبدأ الاستحقاق"},
+  {ar:"قيود الإقفال",en:"Closing Entries",def:"قيود لإغلاق الحسابات المؤقتة في نهاية الفترة المحاسبية"},
+  {ar:"المخزون",en:"Inventory",def:"البضائع والسلع المتاحة للبيع أو قيد الإنتاج"},
+  {ar:"الشهرة التجارية",en:"Goodwill",def:"أصل غير ملموس يُمثّل قيمة إضافية عند شراء منشأة بأكثر من قيمتها الدفترية"},
+  {ar:"الأوراق المالية",en:"Securities",def:"أدوات مالية كالأسهم والسندات تُمثّل حقوقاً أو ديوناً"},
+  {ar:"التدقيق",en:"Auditing",def:"فحص مستقل للقوائم المالية للتحقق من صحتها وعدالتها"},
+  {ar:"النسب المالية",en:"Financial Ratios",def:"مؤشرات مشتقة من القوائم المالية لتقييم الأداء والملاءة المالية"},
+  {ar:"نسبة السيولة",en:"Liquidity Ratio",def:"قياس قدرة المنشأة على الوفاء بالتزاماتها قصيرة الأجل"},
+  {ar:"الرفع المالي",en:"Financial Leverage",def:"استخدام الديون لتمويل الأصول بهدف تعظيم العائد"},
+  {ar:"التكلفة التاريخية",en:"Historical Cost",def:"مبدأ يقضي بتسجيل الأصول بسعر الاقتناء الأصلي"}
+];
+
+function renderTerms(list) {
+  const grid = document.getElementById('glossaryGrid');
+  grid.innerHTML = '';
+  list.forEach(t => {
+    grid.innerHTML += `<div class="glossary-item">
+      <div class="term-ar">${t.ar}</div>
+      <div class="term-en">${t.en}</div>
+      <div class="term-def">${t.def}</div>
+    </div>`;
+  });
+}
+
+function filterTerms() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  renderTerms(terms.filter(t => t.ar.includes(q) || t.en.toLowerCase().includes(q) || t.def.includes(q)));
+}
+
+renderTerms(terms);
+</script>
+</body>
+</html>
