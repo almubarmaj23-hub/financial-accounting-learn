@@ -3,9 +3,42 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>المصطلحات - المحاسبة المالية</title>
+  <title>قاموس المصطلحات - المحاسبة المالية</title>
   <link rel="stylesheet" href="../css/style.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    .gl-wrap{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
+    .gl-search{display:flex;gap:.8rem;margin-bottom:1.5rem;align-items:center;flex-wrap:wrap}
+    .gl-search input{flex:1;min-width:200px;padding:.75rem 1.1rem;border-radius:12px;border:2px solid var(--border);background:var(--card-bg);color:var(--text);font-size:1rem;font-family:inherit;outline:none;transition:var(--transition)}
+    .gl-search input:focus{border-color:var(--primary)}
+    .alpha-filter{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
+    .alpha-btn{padding:.3rem .7rem;border-radius:8px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text2);cursor:pointer;font-size:.85rem;font-weight:600;font-family:inherit;transition:var(--transition)}
+    .alpha-btn.active,.alpha-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .cat-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.8rem}
+    .cat-pill{padding:.4rem 1rem;border-radius:20px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text2);cursor:pointer;font-size:.82rem;font-weight:600;font-family:inherit;transition:var(--transition)}
+    .cat-pill.active,.cat-pill:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .gl-stats{display:flex;gap:1.5rem;margin-bottom:2rem;flex-wrap:wrap}
+    .gl-stat{background:var(--card-bg);border-radius:12px;padding:.9rem 1.5rem;border:1px solid var(--border);text-align:center;flex:1;min-width:110px}
+    .gl-stat h3{font-size:1.6rem;color:var(--primary);margin:0 0 .2rem}
+    .gl-stat p{font-size:.8rem;color:var(--text2);margin:0}
+    .gl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+    .gl-card{background:var(--card-bg);border-radius:14px;padding:1.3rem 1.5rem;border:1px solid var(--border);box-shadow:var(--shadow);transition:var(--transition);cursor:default}
+    .gl-card:hover{transform:translateY(-2px);border-color:var(--primary)}
+    .gl-ar{font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:.3rem}
+    .gl-en{font-size:.85rem;font-weight:600;color:var(--primary);margin-bottom:.6rem;direction:ltr;text-align:right}
+    .gl-def{font-size:.88rem;color:var(--text2);line-height:1.6}
+    .gl-cat-badge{display:inline-block;padding:.15rem .6rem;border-radius:8px;font-size:.72rem;font-weight:700;margin-bottom:.5rem}
+    .badge-blue{background:#dbeafe;color:#1d4ed8} .badge-green{background:#dcfce7;color:#15803d}
+    .badge-purple{background:#f3e8ff;color:#7e22ce} .badge-orange{background:#ffedd5;color:#c2410c}
+    .badge-teal{background:#ccfbf1;color:#0f766e} .badge-red{background:#fee2e2;color:#b91c1c}
+    .no-res{text-align:center;padding:3rem;color:var(--text2)}
+    [data-theme="dark"] .badge-blue{background:#1e3a5f;color:#93c5fd}
+    [data-theme="dark"] .badge-green{background:#14532d;color:#86efac}
+    [data-theme="dark"] .badge-purple{background:#3b0764;color:#d8b4fe}
+    [data-theme="dark"] .badge-orange{background:#431407;color:#fdba74}
+    [data-theme="dark"] .badge-teal{background:#134e4a;color:#5eead4}
+    [data-theme="dark"] .badge-red{background:#450a0a;color:#fca5a5}
+  </style>
 </head>
 <body>
 <nav class="navbar">
@@ -13,83 +46,207 @@
   <button class="nav-toggle" id="navToggle" aria-label="القائمة"><i class="fas fa-bars"></i></button>
   <ul class="nav-links" id="navLinks">
     <li><a href="../index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
-    <li><a href="lessons.html" ><i class="fas fa-book-open"></i> الدروس</a></li>
-    <li><a href="videos.html" ><i class="fas fa-play-circle"></i> الفيديوهات</a></li>
-    <li><a href="quiz.html" ><i class="fas fa-question-circle"></i> الاختبارات</a></li>
-    <li><a href="exercises.html" ><i class="fas fa-pencil-alt"></i> التمارين</a></li>
+    <li><a href="lessons.html"><i class="fas fa-book-open"></i> الدروس</a></li>
+    <li><a href="videos.html"><i class="fas fa-play-circle"></i> الفيديوهات</a></li>
+    <li><a href="quiz.html"><i class="fas fa-question-circle"></i> الاختبارات</a></li>
+    <li><a href="exercises.html"><i class="fas fa-pencil-alt"></i> التمارين</a></li>
     <li><a href="glossary.html" class="active"><i class="fas fa-language"></i> المصطلحات</a></li>
-    <li><a href="formulas.html" ><i class="fas fa-square-root-alt"></i> المعادلات</a></li>
-    <li><a href="calculator.html" ><i class="fas fa-calculator"></i> الحاسبة</a></li>
-    <li><a href="cases.html" ><i class="fas fa-briefcase"></i> دراسات الحالة</a></li>
-    <li><a href="dashboard.html" ><i class="fas fa-chart-line"></i> تقدمي</a></li>
+    <li><a href="formulas.html"><i class="fas fa-square-root-alt"></i> المعادلات</a></li>
+    <li><a href="calculator.html"><i class="fas fa-calculator"></i> الحاسبة</a></li>
+    <li><a href="cases.html"><i class="fas fa-briefcase"></i> دراسات الحالة</a></li>
+    <li><a href="dashboard.html"><i class="fas fa-chart-line"></i> تقدمي</a></li>
   </ul>
   <button id="darkToggle" class="dark-btn"><i class="fas fa-moon"></i></button>
 </nav>
+
 <div class="page-hero">
   <h1><i class="fas fa-language"></i> قاموس المصطلحات المحاسبية</h1>
-  <p>أكثر من 30 مصطلح محاسبي بالعربية والإنجليزية مع الشرح</p>
+  <p>أكثر من 70 مصطلح محاسبي بالعربية والإنجليزية مع الشرح والتصنيف</p>
 </div>
-<div class="glossary-container">
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="ابحث عن مصطلح..." oninput="filterTerms()"/>
-    <i class="fas fa-search" style="align-self:center;color:var(--text2)"></i>
+
+<div class="gl-wrap">
+  <div class="gl-stats">
+    <div class="gl-stat"><h3 id="totalCount">0</h3><p>إجمالي المصطلحات</p></div>
+    <div class="gl-stat"><h3 id="shownCount">0</h3><p>نتائج البحث</p></div>
+    <div class="gl-stat"><h3>7</h3><p>تصنيفات</p></div>
   </div>
-  <div class="glossary-grid" id="glossaryGrid"></div>
+
+  <div class="gl-search">
+    <i class="fas fa-search" style="color:var(--text2)"></i>
+    <input type="text" id="searchInput" placeholder="ابحث بالعربية أو الإنجليزية..." oninput="render()"/>
+    <button class="alpha-btn" onclick="clearAll()" style="padding:.55rem 1rem">مسح الكل</button>
+  </div>
+
+  <div class="alpha-filter" id="alphaFilter"></div>
+  <div class="cat-pills" id="catFilter"></div>
+  <div class="gl-grid" id="glossaryGrid"></div>
 </div>
+
 <footer class="footer"><p>© 2026 موقع تعلم المحاسبة المالية</p></footer>
 <script src="../js/main.js"></script>
 <script>
 const terms = [
-  {ar:"الأصول",en:"Assets",def:"الموارد الاقتصادية التي تمتلكها المنشأة والتي يُتوقع أن تُدرّ منافع مستقبلية"},
-  {ar:"الخصوم",en:"Liabilities",def:"الالتزامات المالية الواجبة على المنشأة تجاه الأطراف الخارجية"},
-  {ar:"حقوق الملكية",en:"Equity",def:"حق أصحاب المنشأة في أصولها بعد خصم الخصوم"},
-  {ar:"الإيرادات",en:"Revenue",def:"الدخل المتحقق من ممارسة المنشأة لنشاطها الرئيسي"},
-  {ar:"المصروفات",en:"Expenses",def:"التكاليف المتكبّدة في سبيل تحقيق الإيرادات"},
-  {ar:"صافي الربح",en:"Net Income",def:"الفرق بين الإيرادات والمصروفات إذا كانت الإيرادات أكبر"},
-  {ar:"الميزانية العمومية",en:"Balance Sheet",def:"قائمة تُظهر الأصول والخصوم وحقوق الملكية في لحظة زمنية محددة"},
-  {ar:"قائمة الدخل",en:"Income Statement",def:"قائمة تُظهر نتيجة أعمال المنشأة (ربح أو خسارة) خلال فترة"},
-  {ar:"التدفقات النقدية",en:"Cash Flow",def:"حركة النقد الداخلة والخارجة من المنشأة خلال الفترة"},
-  {ar:"قيد اليومية",en:"Journal Entry",def:"تسجيل العملية المالية في دفتر اليومية بالطرف المدين والدائن"},
-  {ar:"دفتر الأستاذ",en:"General Ledger",def:"سجل يُجمع فيه جميع القيود المتعلقة بكل حساب بشكل منفصل"},
-  {ar:"ميزان المراجعة",en:"Trial Balance",def:"قائمة بأرصدة الحسابات للتحقق من توازن المدين والدائن"},
-  {ar:"الإهلاك",en:"Depreciation",def:"توزيع تكلفة الأصل الثابت على سنوات عمره الإنتاجي"},
-  {ar:"القيمة الدفترية",en:"Book Value",def:"تكلفة الأصل مطروحاً منها مجمّع الإهلاك"},
-  {ar:"مبدأ الاستحقاق",en:"Accrual Basis",def:"تسجيل الإيرادات عند تحققها والمصروفات عند تكبّدها بغض النظر عن الدفع"},
-  {ar:"الأصول الثابتة",en:"Fixed Assets",def:"الأصول طويلة الأجل المستخدمة في النشاط كالأراضي والمعدات"},
-  {ar:"الأصول المتداولة",en:"Current Assets",def:"الأصول التي يُتوقع تحويلها لنقد خلال سنة كالمخزون والذمم"},
-  {ar:"الذمم المدينة",en:"Accounts Receivable",def:"مبالغ مستحقة للمنشأة من العملاء مقابل خدمات أو بضائع مقدَّمة"},
-  {ar:"الذمم الدائنة",en:"Accounts Payable",def:"مبالغ مستحقة على المنشأة للموردين مقابل مشتريات بالأجل"},
-  {ar:"رأس المال العامل",en:"Working Capital",def:"الفرق بين الأصول المتداولة والخصوم المتداولة"},
-  {ar:"قيود التسوية",en:"Adjusting Entries",def:"قيود تُسجَّل في نهاية الفترة لتطبيق مبدأ الاستحقاق"},
-  {ar:"قيود الإقفال",en:"Closing Entries",def:"قيود لإغلاق الحسابات المؤقتة في نهاية الفترة المحاسبية"},
-  {ar:"المخزون",en:"Inventory",def:"البضائع والسلع المتاحة للبيع أو قيد الإنتاج"},
-  {ar:"الشهرة التجارية",en:"Goodwill",def:"أصل غير ملموس يُمثّل قيمة إضافية عند شراء منشأة بأكثر من قيمتها الدفترية"},
-  {ar:"الأوراق المالية",en:"Securities",def:"أدوات مالية كالأسهم والسندات تُمثّل حقوقاً أو ديوناً"},
-  {ar:"التدقيق",en:"Auditing",def:"فحص مستقل للقوائم المالية للتحقق من صحتها وعدالتها"},
-  {ar:"النسب المالية",en:"Financial Ratios",def:"مؤشرات مشتقة من القوائم المالية لتقييم الأداء والملاءة المالية"},
-  {ar:"نسبة السيولة",en:"Liquidity Ratio",def:"قياس قدرة المنشأة على الوفاء بالتزاماتها قصيرة الأجل"},
-  {ar:"الرفع المالي",en:"Financial Leverage",def:"استخدام الديون لتمويل الأصول بهدف تعظيم العائد"},
-  {ar:"التكلفة التاريخية",en:"Historical Cost",def:"مبدأ يقضي بتسجيل الأصول بسعر الاقتناء الأصلي"}
+  // ─── المبادئ والأسس ───
+  {ar:"الأصول",en:"Assets",cat:"أساسيات",def:"الموارد الاقتصادية التي تمتلكها المنشأة والتي يُتوقع أن تُدرّ منافع مستقبلية."},
+  {ar:"الخصوم",en:"Liabilities",cat:"أساسيات",def:"الالتزامات المالية الواجبة على المنشأة تجاه الأطراف الخارجية كالموردين والبنوك."},
+  {ar:"حقوق الملكية",en:"Owner's Equity",cat:"أساسيات",def:"حق أصحاب المنشأة في أصولها بعد خصم جميع الخصوم."},
+  {ar:"الإيرادات",en:"Revenue",cat:"أساسيات",def:"الدخل المتحقق من ممارسة المنشأة لنشاطها الرئيسي كالمبيعات وأتعاب الخدمات."},
+  {ar:"المصروفات",en:"Expenses",cat:"أساسيات",def:"التكاليف المتكبّدة في سبيل تحقيق الإيرادات كالرواتب والإيجار."},
+  {ar:"صافي الربح",en:"Net Income",cat:"أساسيات",def:"الفرق بين الإيرادات والمصروفات عندما تكون الإيرادات أكبر."},
+  {ar:"صافي الخسارة",en:"Net Loss",cat:"أساسيات",def:"الفرق بين المصروفات والإيرادات عندما تكون المصروفات أكبر."},
+  {ar:"رأس المال",en:"Capital",cat:"أساسيات",def:"المبلغ الذي أستثمره صاحب المنشأة فيها عند التأسيس والإضافات اللاحقة."},
+  {ar:"المسحوبات",en:"Drawings / Withdrawals",cat:"أساسيات",def:"المبالغ التي يسحبها صاحب المنشأة من أموال المنشأة لأغراض شخصية."},
+  {ar:"المبيعات",en:"Sales",cat:"أساسيات",def:"إيراد ناتج عن بيع البضاعة أو تقديم الخدمات للعملاء."},
+  // ─── الدفاتر والسجلات ───
+  {ar:"قيد اليومية",en:"Journal Entry",cat:"دفاتر وقيود",def:"تسجيل العملية المالية في دفتر اليومية بالطرف المدين والدائن."},
+  {ar:"دفتر اليومية",en:"General Journal",cat:"دفاتر وقيود",def:"أول سجل تُسجَّل فيه العمليات المالية بترتيب تاريخي."},
+  {ar:"دفتر الأستاذ",en:"General Ledger",cat:"دفاتر وقيود",def:"سجل يُجمع فيه جميع القيود المتعلقة بكل حساب بشكل منفصل."},
+  {ar:"ميزان المراجعة",en:"Trial Balance",cat:"دفاتر وقيود",def:"قائمة بأرصدة الحسابات للتحقق من توازن المدين والدائن."},
+  {ar:"الترحيل",en:"Posting",cat:"دفاتر وقيود",def:"نقل القيود من دفتر اليومية إلى الحسابات المقابلة في دفتر الأستاذ."},
+  {ar:"المدين",en:"Debit",cat:"دفاتر وقيود",def:"الجانب الأيسر لأي حساب في قيد اليومية. يزيد الأصول والمصروفات."},
+  {ar:"الدائن",en:"Credit",cat:"دفاتر وقيود",def:"الجانب الأيمن لأي حساب في قيد اليومية. يزيد الخصوم والإيرادات وحقوق الملكية."},
+  {ar:"قيود التسوية",en:"Adjusting Entries",cat:"دفاتر وقيود",def:"قيود تُسجَّل في نهاية الفترة المحاسبية لتطبيق مبدأ الاستحقاق."},
+  {ar:"قيود الإقفال",en:"Closing Entries",cat:"دفاتر وقيود",def:"قيود تُغلق الحسابات المؤقتة في نهاية الفترة المحاسبية."},
+  {ar:"ميزان المراجعة المعدّل",en:"Adjusted Trial Balance",cat:"دفاتر وقيود",def:"ميزان المراجعة بعد قيود التسوية وقبل إعداد القوائم المالية."},
+  // ─── القوائم المالية ───
+  {ar:"الميزانية العمومية",en:"Balance Sheet",cat:"قوائم مالية",def:"قائمة تُظهر الأصول والخصوم وحقوق الملكية في لحظة زمنية محددة."},
+  {ar:"قائمة الدخل",en:"Income Statement",cat:"قوائم مالية",def:"قائمة تُظهر الإيرادات والمصروفات وصافي النتيجة خلال فترة محاسبية."},
+  {ar:"قائمة التدفقات النقدية",en:"Cash Flow Statement",cat:"قوائم مالية",def:"قائمة تُظهر حركة النقد الداخلة والخارجة من أنشطة التشغيل والاستثمار والتمويل."},
+  {ar:"قائمة حقوق الملكية",en:"Statement of Owner's Equity",cat:"قوائم مالية",def:"قائمة تُظهر التغيرات في حقوق الملكية خلال الفترة المحاسبية."},
+  {ar:"الإيضاحات المرفقة",en:"Notes to Financial Statements",cat:"قوائم مالية",def:"معلومات تكميلية تُوضح السياسات المحاسبية وتفاصيل بنود القوائم المالية."},
+  // ─── الأصول ───
+  {ar:"الأصول المتداولة",en:"Current Assets",cat:"الأصول",def:"الأصول التي يُتوقع تحويلها لنقد أو استخدامها خلال سنة واحدة."},
+  {ar:"الأصول الثابتة",en:"Fixed Assets / PPE",cat:"الأصول",def:"الأصول طويلة الأجل المستخدمة في النشاط كالأراضي والمباني والمعدات."},
+  {ar:"الأصول غير الملموسة",en:"Intangible Assets",cat:"الأصول",def:"الأصول التي لا يوجد لها كيان مادي كالعلامات التجارية وبراءات الاختراع."},
+  {ar:"الإهلاك",en:"Depreciation",cat:"الأصول",def:"توزيع تكلفة الأصل الثابت على سنوات عمره الإنتاجي."},
+  {ar:"مجمّع الإهلاك",en:"Accumulated Depreciation",cat:"الأصول",def:"إجمالي الإهلاك المتراكم منذ الحصول على الأصل حتى تاريخ القائمة."},
+  {ar:"القيمة الدفترية",en:"Book Value / Carrying Value",cat:"الأصول",def:"تكلفة الأصل مطروحاً منها مجمّع الإهلاك."},
+  {ar:"القيمة التخريدية",en:"Salvage / Residual Value",cat:"الأصول",def:"القيمة المتوقعة للأصل في نهاية عمره الإنتاجي."},
+  {ar:"الذمم المدينة",en:"Accounts Receivable",cat:"الأصول",def:"مبالغ مستحقة للمنشأة من العملاء مقابل خدمات أو بضائع مقدَّمة بالأجل."},
+  {ar:"المخزون",en:"Inventory",cat:"الأصول",def:"البضائع والمواد الخام المتاحة للبيع أو قيد الإنتاج."},
+  {ar:"الاستثمارات",en:"Investments",cat:"الأصول",def:"الأصول المالية التي تمتلكها المنشأة بهدف تحقيق عائد أو السيطرة على منشأة أخرى."},
+  // ─── الخصوم وحقوق الملكية ───
+  {ar:"الخصوم المتداولة",en:"Current Liabilities",cat:"الخصوم",def:"الالتزامات الواجبة السداد خلال سنة واحدة."},
+  {ar:"الخصوم طويلة الأجل",en:"Long-term Liabilities",cat:"الخصوم",def:"الالتزامات التي يتجاوز أجل سدادها سنة واحدة كالقروض بعيدة الأجل."},
+  {ar:"الذمم الدائنة",en:"Accounts Payable",cat:"الخصوم",def:"مبالغ مستحقة على المنشأة للموردين مقابل مشتريات بالأجل."},
+  {ar:"المصروفات المستحقة",en:"Accrued Expenses",cat:"الخصوم",def:"مصروفات استُهلكت خلال الفترة لكن لم تُدفع بعد."},
+  {ar:"الإيرادات المقدمة",en:"Deferred Revenue",cat:"الخصوم",def:"مبالغ حُصّلت من العملاء مقدماً عن خدمات لم تُؤدَّ بعد."},
+  {ar:"القرض طويل الأجل",en:"Long-term Loan",cat:"الخصوم",def:"دين مستحق السداد خلال أكثر من سنة."},
+  {ar:"رأس المال العامل",en:"Working Capital",cat:"الخصوم",def:"الفرق بين الأصول المتداولة والخصوم المتداولة."},
+  // ─── النسب والتحليل ───
+  {ar:"نسبة التداول",en:"Current Ratio",cat:"نسب مالية",def:"الأصول المتداولة ÷ الخصوم المتداولة. تقيس السيولة قصيرة الأجل."},
+  {ar:"نسبة السيولة السريعة",en:"Quick Ratio",cat:"نسب مالية",def:"(الأصول المتداولة - المخزون) ÷ الخصوم المتداولة."},
+  {ar:"هامش الربح الصافي",en:"Net Profit Margin",cat:"نسب مالية",def:"(صافي الربح ÷ صافي المبيعات) × 100%."},
+  {ar:"العائد على الأصول",en:"Return on Assets (ROA)",cat:"نسب مالية",def:"(صافي الربح ÷ إجمالي الأصول) × 100%."},
+  {ar:"العائد على حقوق الملكية",en:"Return on Equity (ROE)",cat:"نسب مالية",def:"(صافي الربح ÷ حقوق الملكية) × 100%."},
+  {ar:"معدل دوران المخزون",en:"Inventory Turnover",cat:"نسب مالية",def:"تكلفة البضائع المباعة ÷ متوسط المخزون."},
+  {ar:"معدل دوران الذمم",en:"Receivables Turnover",cat:"نسب مالية",def:"صافي المبيعات الآجلة ÷ متوسط الذمم المدينة."},
+  {ar:"نسبة الدين إلى حقوق الملكية",en:"Debt to Equity Ratio",cat:"نسب مالية",def:"إجمالي الخصوم ÷ حقوق الملكية. تقيس الرفع المالي."},
+  // ─── مفاهيم متقدمة ───
+  {ar:"مبدأ الاستحقاق",en:"Accrual Principle",cat:"مبادئ",def:"تسجيل الإيرادات عند تحققها والمصروفات عند تكبّدها بغض النظر عن حركة النقد."},
+  {ar:"مبدأ الوحدة المحاسبية",en:"Business Entity Principle",cat:"مبادئ",def:"تُعامَل المنشأة كيانًا مستقلًا تمامًا عن أصحابها."},
+  {ar:"مبدأ الاستمرارية",en:"Going Concern Principle",cat:"مبادئ",def:"يُفترض أن المنشأة ستستمر في أعمالها للمستقبل المنظور."},
+  {ar:"مبدأ التكلفة التاريخية",en:"Historical Cost Principle",cat:"مبادئ",def:"تُسجَّل الأصول بسعر الاقتناء الأصلي وليس بالقيمة السوقية."},
+  {ar:"مبدأ الإفصاح الكامل",en:"Full Disclosure Principle",cat:"مبادئ",def:"الإفصاح عن كافة المعلومات المالية الجوهرية في القوائم المالية."},
+  {ar:"مبدأ الثبات",en:"Consistency Principle",cat:"مبادئ",def:"استخدام نفس الأساليب والطرق المحاسبية من فترة لأخرى."},
+  {ar:"مبدأ الحيطة والحذر",en:"Conservatism Principle",cat:"مبادئ",def:"الاعتراف بالخسائر المتوقعة فور العلم بها دون انتظار تحققها."},
+  {ar:"الشهرة التجارية",en:"Goodwill",cat:"مفاهيم متقدمة",def:"أصل غير ملموس يُمثّل قيمة إضافية عند شراء منشأة بأكثر من قيمتها الدفترية."},
+  {ar:"التدقيق المالي",en:"Financial Auditing",cat:"مفاهيم متقدمة",def:"فحص مستقل للقوائم المالية للتحقق من صحتها وعدالتها وفق المعايير الدولية."},
+  {ar:"نقطة التعادل",en:"Break-even Point",cat:"مفاهيم متقدمة",def:"مستوى المبيعات الذي تتساوى فيه الإيرادات مع التكاليف الكلية فلا ربح ولا خسارة."},
+  {ar:"هامش المساهمة",en:"Contribution Margin",cat:"مفاهيم متقدمة",def:"الفرق بين سعر البيع والتكاليف المتغيرة للوحدة."},
+  {ar:"الرافعة المالية",en:"Financial Leverage",cat:"مفاهيم متقدمة",def:"استخدام الديون في تمويل الأصول بهدف تعظيم العائد على حقوق الملكية."},
+  {ar:"التدفق النقدي الحر",en:"Free Cash Flow",cat:"مفاهيم متقدمة",def:"النقد المتبقي من أنشطة التشغيل بعد خصم النفقات الرأسمالية."},
+  {ar:"القيمة الدفترية للسهم",en:"Book Value per Share",cat:"مفاهيم متقدمة",def:"حقوق الملكية ÷ عدد الأسهم المصدرة. تعكس قيمة الأصول الصافية لكل سهم."},
+  {ar:"الأوراق التجارية",en:"Notes Payable",cat:"مفاهيم متقدمة",def:"سندات إذنية وكمبيالات تمثل التزامات مكتوبة بسداد مبلغ محدد في موعد محدد."},
+  {ar:"فائض إعادة التقييم",en:"Revaluation Surplus",cat:"مفاهيم متقدمة",def:"الزيادة في القيمة العادلة للأصل عند إعادة تقييمه فوق قيمته الدفترية."},
+  {ar:"السياسة المحاسبية",en:"Accounting Policy",cat:"مفاهيم متقدمة",def:"المبادئ والقواعد والممارسات التي تتبناها المنشأة في إعداد قوائمها المالية."},
+  {ar:"معايير التقارير المالية الدولية",en:"IFRS",cat:"مفاهيم متقدمة",def:"مجموعة معايير محاسبية دولية تُصدرها هيئة IASB لتوحيد إعداد القوائم المالية."},
 ];
 
-function renderTerms(list) {
-  const grid = document.getElementById('glossaryGrid');
-  grid.innerHTML = '';
-  list.forEach(t => {
-    grid.innerHTML += `<div class="glossary-item">
-      <div class="term-ar">${t.ar}</div>
-      <div class="term-en">${t.en}</div>
-      <div class="term-def">${t.def}</div>
-    </div>`;
+const catColors = {
+  "أساسيات":"badge-blue","دفاتر وقيود":"badge-green","قوائم مالية":"badge-purple",
+  "الأصول":"badge-orange","الخصوم":"badge-teal","نسب مالية":"badge-red","مبادئ":"badge-blue","مفاهيم متقدمة":"badge-purple"
+};
+
+let selectedLetter = "";
+let selectedCat = "";
+
+function getArabicFirstLetter(word) {
+  const map={"أ":"أ","إ":"أ","آ":"أ","ا":"ا","ب":"ب","ت":"ت","ث":"ث","ج":"ج","ح":"ح","خ":"خ","د":"د","ذ":"ذ","ر":"ر","ز":"ز","س":"س","ش":"ش","ص":"ص","ض":"ض","ط":"ط","ظ":"ظ","ع":"ع","غ":"غ","ف":"ف","ق":"ق","ك":"ك","ل":"ل","م":"م","ن":"ن","ه":"ه","و":"و","ي":"ي","ى":"ي"};
+  const c = word.trim()[0];
+  return map[c] || c;
+}
+
+function buildAlphaFilter() {
+  const letters = [...new Set(terms.map(t => getArabicFirstLetter(t.ar)))].sort((a,b)=>a.localeCompare(b,'ar'));
+  const div = document.getElementById('alphaFilter');
+  div.innerHTML = '<button class="alpha-btn active" onclick="selectLetter(this,\'\')">الكل</button>';
+  letters.forEach(l => {
+    div.innerHTML += `<button class="alpha-btn" onclick="selectLetter(this,'${l}')">${l}</button>`;
   });
 }
 
-function filterTerms() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  renderTerms(terms.filter(t => t.ar.includes(q) || t.en.toLowerCase().includes(q) || t.def.includes(q)));
+function buildCatFilter() {
+  const cats = [...new Set(terms.map(t => t.cat))];
+  const div = document.getElementById('catFilter');
+  div.innerHTML = '<button class="cat-pill active" onclick="selectCat(this,\'\')">📚 الكل</button>';
+  const icons = {"أساسيات":"📖","دفاتر وقيود":"✍️","قوائم مالية":"📊","الأصول":"🏛️","الخصوم":"⚖️","نسب مالية":"📈","مبادئ":"💡","مفاهيم متقدمة":"🎓"};
+  cats.forEach(c => {
+    div.innerHTML += `<button class="cat-pill" onclick="selectCat(this,'${c}')">${icons[c]||'•'} ${c}</button>`;
+  });
 }
 
-renderTerms(terms);
+function selectLetter(btn, l) {
+  selectedLetter = l;
+  document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function selectCat(btn, c) {
+  selectedCat = c;
+  document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function clearAll() {
+  selectedLetter = ""; selectedCat = "";
+  document.getElementById('searchInput').value = "";
+  document.querySelectorAll('.alpha-btn')[0]?.classList.add('active');
+  document.querySelectorAll('.alpha-btn').forEach((b,i) => { if(i>0) b.classList.remove('active'); });
+  document.querySelectorAll('.cat-pill')[0]?.classList.add('active');
+  document.querySelectorAll('.cat-pill').forEach((b,i) => { if(i>0) b.classList.remove('active'); });
+  render();
+}
+
+function render() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  const grid = document.getElementById('glossaryGrid');
+  let filtered = terms.filter(t => {
+    const matchQ = !q || t.ar.includes(q) || t.en.toLowerCase().includes(q) || t.def.includes(q);
+    const matchL = !selectedLetter || getArabicFirstLetter(t.ar) === selectedLetter;
+    const matchC = !selectedCat || t.cat === selectedCat;
+    return matchQ && matchL && matchC;
+  });
+  document.getElementById('shownCount').textContent = filtered.length;
+  if (!filtered.length) {
+    grid.innerHTML = '<div class="no-res"><i class="fas fa-search" style="font-size:2.5rem;margin-bottom:.8rem;opacity:.3"></i><br>لا توجد نتائج مطابقة</div>';
+    return;
+  }
+  grid.innerHTML = filtered.map(t => `
+    <div class="gl-card">
+      <span class="gl-cat-badge ${catColors[t.cat]||'badge-blue'}">${t.cat}</span>
+      <div class="gl-ar">${t.ar}</div>
+      <div class="gl-en">${t.en}</div>
+      <div class="gl-def">${t.def}</div>
+    </div>`).join('');
+}
+
+document.getElementById('totalCount').textContent = terms.length;
+buildAlphaFilter();
+buildCatFilter();
+render();
 </script>
 </body>
 </html>
