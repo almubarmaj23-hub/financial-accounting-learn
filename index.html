@@ -30,21 +30,20 @@
 <body>
 <nav class="navbar">
   <div class="nav-logo"><i class="fas fa-calculator"></i><span>المحاسبة المالية</span></div>
+  <button class="nav-toggle" id="navToggle" aria-label="القائمة"><i class="fas fa-bars"></i></button>
   <ul class="nav-links" id="navLinks">
-    <li><a href="index.html" class="active">الرئيسية</a></li>
-    <li><a href="pages/lessons.html">الدروس</a></li>
-    <li><a href="pages/quiz.html">الاختبارات</a></li>
-    <li><a href="pages/glossary.html">المصطلحات</a></li>
-    <li><a href="pages/formulas.html">المعادلات</a></li>
-    <li><a href="pages/videos.html">فيديوهات</a></li>
-    <li><a href="pages/calculator.html">الحاسبة</a></li>
-    <li><a href="pages/exercises.html">تمارين</a></li>
-    <li><a href="pages/dashboard.html">تقدمي</a></li>
+    <li><a href="index.html" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+    <li><a href="pages/lessons.html"><i class="fas fa-book-open"></i> الدروس</a></li>
+    <li><a href="pages/videos.html"><i class="fas fa-play-circle"></i> الفيديوهات</a></li>
+    <li><a href="pages/quiz.html"><i class="fas fa-question-circle"></i> الاختبارات</a></li>
+    <li><a href="pages/exercises.html"><i class="fas fa-pencil-alt"></i> التمارين</a></li>
+    <li><a href="pages/glossary.html"><i class="fas fa-language"></i> المصطلحات</a></li>
+    <li><a href="pages/formulas.html"><i class="fas fa-square-root-alt"></i> المعادلات</a></li>
+    <li><a href="pages/calculator.html"><i class="fas fa-calculator"></i> الحاسبة</a></li>
+    <li><a href="pages/cases.html"><i class="fas fa-briefcase"></i> دراسات الحالة</a></li>
+    <li><a href="pages/dashboard.html"><i class="fas fa-chart-line"></i> تقدمي</a></li>
   </ul>
-  <div style="display:flex;align-items:center;gap:.8rem">
-    <button id="darkToggle" class="dark-btn" title="وضع ليلي"><i class="fas fa-moon"></i></button>
-    <button class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><i class="fas fa-bars"></i></button>
-  </div>
+  <button id="darkToggle" class="dark-btn"><i class="fas fa-moon"></i></button>
 </nav>
 
 <header class="hero">
