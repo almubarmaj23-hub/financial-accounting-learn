@@ -3,9 +3,36 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>المعادلات - المحاسبة المالية</title>
+  <title>المعادلات المحاسبية - المحاسبة المالية</title>
   <link rel="stylesheet" href="../css/style.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    .fm-wrap{max-width:1050px;margin:0 auto;padding:2rem 1.5rem}
+    .fm-cats{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+    .fm-cat{padding:.45rem 1.1rem;border-radius:20px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text2);cursor:pointer;font-size:.85rem;font-weight:600;font-family:inherit;transition:var(--transition)}
+    .fm-cat.active,.fm-cat:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .fm-section{margin-bottom:3rem}
+    .fm-section-title{font-size:1.2rem;font-weight:800;color:var(--primary);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:.6rem}
+    .fm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:1.2rem}
+    .fm-card{background:var(--card-bg);border-radius:14px;padding:1.5rem;border:1px solid var(--border);box-shadow:var(--shadow);transition:var(--transition)}
+    .fm-card:hover{border-color:var(--primary);transform:translateY(-2px)}
+    .fm-card h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
+    .fm-formula{background:linear-gradient(135deg,var(--primary),var(--accent,#6366f1));color:#fff;border-radius:10px;padding:.9rem 1.2rem;font-size:.95rem;font-weight:700;text-align:center;margin-bottom:.9rem;line-height:1.5;letter-spacing:.02em}
+    .fm-desc{font-size:.87rem;color:var(--text2);line-height:1.65;margin-bottom:.9rem}
+    .fm-example{background:var(--bg2,#f8fafc);border-radius:8px;padding:.7rem 1rem;font-size:.83rem;color:var(--text2);border-right:3px solid var(--primary)}
+    [data-theme="dark"] .fm-example{background:#1e293b}
+    .calc-toggle{margin-top:.9rem;background:none;border:1.5px solid var(--primary);color:var(--primary);border-radius:8px;padding:.4rem .9rem;font-size:.82rem;font-weight:600;cursor:pointer;font-family:inherit;transition:var(--transition);display:flex;align-items:center;gap:.4rem}
+    .calc-toggle:hover{background:var(--primary);color:#fff}
+    .fm-calc{display:none;margin-top:.9rem;background:var(--bg2,#f8fafc);border-radius:10px;padding:1rem;border:1px solid var(--border)}
+    [data-theme="dark"] .fm-calc{background:#1e293b}
+    .fm-calc.open{display:block}
+    .fm-calc label{font-size:.82rem;color:var(--text2);display:block;margin-bottom:.25rem;font-weight:600}
+    .fm-calc input{width:100%;padding:.5rem .8rem;border-radius:8px;border:1.5px solid var(--border);background:var(--card-bg);color:var(--text);font-size:.9rem;font-family:inherit;margin-bottom:.7rem;outline:none;transition:var(--transition);box-sizing:border-box}
+    .fm-calc input:focus{border-color:var(--primary)}
+    .fm-calc button{background:var(--primary);color:#fff;border:none;border-radius:8px;padding:.55rem 1.2rem;font-size:.88rem;font-weight:700;cursor:pointer;font-family:inherit;width:100%;transition:var(--transition)}
+    .fm-calc button:hover{opacity:.9}
+    .fm-result{margin-top:.7rem;padding:.6rem 1rem;background:var(--primary);color:#fff;border-radius:8px;font-weight:700;font-size:.95rem;text-align:center;display:none}
+  </style>
 </head>
 <body>
 <nav class="navbar">
@@ -13,108 +40,253 @@
   <button class="nav-toggle" id="navToggle" aria-label="القائمة"><i class="fas fa-bars"></i></button>
   <ul class="nav-links" id="navLinks">
     <li><a href="../index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
-    <li><a href="lessons.html" ><i class="fas fa-book-open"></i> الدروس</a></li>
-    <li><a href="videos.html" ><i class="fas fa-play-circle"></i> الفيديوهات</a></li>
-    <li><a href="quiz.html" ><i class="fas fa-question-circle"></i> الاختبارات</a></li>
-    <li><a href="exercises.html" ><i class="fas fa-pencil-alt"></i> التمارين</a></li>
-    <li><a href="glossary.html" ><i class="fas fa-language"></i> المصطلحات</a></li>
+    <li><a href="lessons.html"><i class="fas fa-book-open"></i> الدروس</a></li>
+    <li><a href="videos.html"><i class="fas fa-play-circle"></i> الفيديوهات</a></li>
+    <li><a href="quiz.html"><i class="fas fa-question-circle"></i> الاختبارات</a></li>
+    <li><a href="exercises.html"><i class="fas fa-pencil-alt"></i> التمارين</a></li>
+    <li><a href="glossary.html"><i class="fas fa-language"></i> المصطلحات</a></li>
     <li><a href="formulas.html" class="active"><i class="fas fa-square-root-alt"></i> المعادلات</a></li>
-    <li><a href="calculator.html" ><i class="fas fa-calculator"></i> الحاسبة</a></li>
-    <li><a href="cases.html" ><i class="fas fa-briefcase"></i> دراسات الحالة</a></li>
-    <li><a href="dashboard.html" ><i class="fas fa-chart-line"></i> تقدمي</a></li>
+    <li><a href="calculator.html"><i class="fas fa-calculator"></i> الحاسبة</a></li>
+    <li><a href="cases.html"><i class="fas fa-briefcase"></i> دراسات الحالة</a></li>
+    <li><a href="dashboard.html"><i class="fas fa-chart-line"></i> تقدمي</a></li>
   </ul>
   <button id="darkToggle" class="dark-btn"><i class="fas fa-moon"></i></button>
 </nav>
 <div class="page-hero">
-  <h1><i class="fas fa-superscript"></i> المعادلات والنسب المحاسبية</h1>
-  <p>جميع المعادلات الأساسية لتحليل القوائم المالية في مكان واحد</p>
+  <h1><i class="fas fa-square-root-alt"></i> المعادلات والنسب المحاسبية</h1>
+  <p>25+ معادلة مع حاسبة تفاعلية فورية لكل معادلة</p>
 </div>
-<div class="formulas-container">
-
-  <h2 style="color:var(--primary);margin-bottom:1.5rem;text-align:center">📐 المعادلات الأساسية</h2>
-
-  <div class="formula-card">
-    <h3><i class="fas fa-equals"></i> المعادلة المحاسبية الأساسية</h3>
-    <div class="formula-box">الأصول = الخصوم + حقوق الملكية</div>
-    <p>القاعدة الذهبية للمحاسبة. يجب أن تتوازن هذه المعادلة في كل لحظة.</p>
+<div class="fm-wrap">
+  <div class="fm-cats">
+    <button class="fm-cat active" onclick="filterCat(this,'')">📚 الكل</button>
+    <button class="fm-cat" onclick="filterCat(this,'أساسية')">📐 أساسية</button>
+    <button class="fm-cat" onclick="filterCat(this,'إهلاك')">🏗️ الإهلاك</button>
+    <button class="fm-cat" onclick="filterCat(this,'مخزون')">📦 المخزون</button>
+    <button class="fm-cat" onclick="filterCat(this,'سيولة')">💧 السيولة</button>
+    <button class="fm-cat" onclick="filterCat(this,'ربحية')">📈 الربحية</button>
+    <button class="fm-cat" onclick="filterCat(this,'نشاط')">🔄 النشاط</button>
+    <button class="fm-cat" onclick="filterCat(this,'تكاليف')">💰 التكاليف</button>
   </div>
-
-  <div class="formula-card">
-    <h3><i class="fas fa-chart-line"></i> صافي الربح / الخسارة</h3>
-    <div class="formula-box">صافي الربح = إجمالي الإيرادات - إجمالي المصروفات</div>
-    <p>إذا كانت الإيرادات أكبر من المصروفات فالنتيجة ربح، وإلا فهي خسارة.</p>
-  </div>
-
-  <div class="formula-card">
-    <h3><i class="fas fa-building"></i> حقوق الملكية</h3>
-    <div class="formula-box">حقوق الملكية = الأصول - الخصوم</div>
-    <p>تُمثّل صافي ثروة أصحاب المنشأة بعد سداد جميع الالتزامات.</p>
-  </div>
-
-  <div class="formula-card">
-    <h3><i class="fas fa-tools"></i> الإهلاك (القسط الثابت)</h3>
-    <div class="formula-box">قسط الإهلاك السنوي = (التكلفة - القيمة التخريدية) ÷ العمر الإنتاجي</div>
-    <p>يُوزّع تكلفة الأصل الثابت على عمره الإنتاجي بصورة متساوية كل سنة.</p>
-  </div>
-
-  <div class="formula-card">
-    <h3><i class="fas fa-book"></i> القيمة الدفترية للأصل</h3>
-    <div class="formula-box">القيمة الدفترية = التكلفة الأصلية - مجمّع الإهلاك</div>
-    <p>تُمثّل القيمة المتبقية للأصل في الدفاتر بعد خصم الإهلاك المتراكم.</p>
-  </div>
-
-  <h2 style="color:var(--primary);margin:2rem 0 1.5rem;text-align:center">📊 نسب التحليل المالي</h2>
-
-  <div class="formula-card">
-    <h3><i class="fas fa-tint"></i> نسبة التداول (السيولة الجارية)</h3>
-    <div class="formula-box">نسبة التداول = الأصول المتداولة ÷ الخصوم المتداولة</div>
-    <p>تقيس قدرة المنشأة على سداد التزاماتها قصيرة الأجل. النسبة المثالية: 2:1</p>
-  </div>
-
-  <div class="formula-card">
-    <h3><i class="fas fa-bolt"></i> نسبة السيولة السريعة</h3>
-    <div class="formula-box">نسبة السيولة السريعة = (الأصول المتداولة - المخزون) ÷ الخصوم المتداولة</div>
-    <p>أكثر دقة من نسبة التداول لأنها تستثني المخزون الأقل سيولة.</p>
-  </div>
-
-  <div class="formula-card">
-    <h3><i class="fas fa-percent"></i> هامش الربح الصافي</h3>
-    <div class="formula-box">هامش الربح الصافي = (صافي الربح ÷ صافي المبيعات) × 100%</div>
-    <p>يُبيّن النسبة المئوية لصافي الربح المتحقق من كل ريال مبيعات.</p>
-  </div>
-
-  <div class="formula-card">
-    <h3><i class="fas fa-redo"></i> معدل دوران الأصول</h3>
-    <div class="formula-box">معدل دوران الأصول = صافي المبيعات ÷ متوسط إجمالي الأصول</div>
-    <p>يقيس كفاءة استخدام المنشأة لأصولها في توليد الإيرادات.</p>
-  </div>
-
-  <div class="formula-card">
-    <h3><i class="fas fa-balance-scale-right"></i> نسبة الدين إلى حقوق الملكية</h3>
-    <div class="formula-box">نسبة الدين = إجمالي الخصوم ÷ حقوق الملكية</div>
-    <p>تقيس حجم الاعتماد على التمويل بالدين مقارنةً بتمويل الملاك.</p>
-  </div>
-
-  <div class="formula-card">
-    <h3><i class="fas fa-warehouse"></i> معدل دوران المخزون</h3>
-    <div class="formula-box">معدل دوران المخزون = تكلفة البضائع المباعة ÷ متوسط المخزون</div>
-    <p>يُبيّن عدد المرات التي يُباع فيها المخزون ويُستبدل خلال الفترة.</p>
-  </div>
-
-  <div class="formula-card">
-    <h3><i class="fas fa-trophy"></i> العائد على حقوق الملكية (ROE)</h3>
-    <div class="formula-box">ROE = (صافي الربح ÷ حقوق الملكية) × 100%</div>
-    <p>من أهم مؤشرات الربحية. يقيس العائد الذي يحققه أصحاب المنشأة على استثماراتهم.</p>
-  </div>
-
-  <div class="formula-card">
-    <h3><i class="fas fa-star"></i> العائد على الأصول (ROA)</h3>
-    <div class="formula-box">ROA = (صافي الربح ÷ إجمالي الأصول) × 100%</div>
-    <p>يقيس كفاءة الإدارة في استخدام أصول المنشأة لتوليد الأرباح.</p>
-  </div>
-
+  <div id="fmContent"></div>
 </div>
 <footer class="footer"><p>© 2026 موقع تعلم المحاسبة المالية</p></footer>
 <script src="../js/main.js"></script>
+<script>
+const formulas = [
+  // ─── أساسية ───
+  {cat:"أساسية",icon:"fas fa-equals",title:"المعادلة المحاسبية الأساسية",
+   formula:"الأصول = الخصوم + حقوق الملكية",
+   desc:"القاعدة الذهبية للمحاسبة — يجب أن تتوازن هذه المعادلة في كل لحظة زمنية دون استثناء.",
+   example:"أصول = 500,000 ريال | خصوم = 200,000 | حقوق الملكية = 300,000 ✓",
+   calcFields:[{label:"الخصوم (ريال)",id:"c1a"},{label:"حقوق الملكية (ريال)",id:"c1b"}],
+   calcFn:"()=>{const a=+document.getElementById('c1a').value||0,b=+document.getElementById('c1b').value||0;showRes('res1','الأصول = '+(a+b).toLocaleString()+' ريال');}",resId:"res1"},
+  {cat:"أساسية",icon:"fas fa-chart-bar",title:"صافي الربح / الخسارة",
+   formula:"صافي الربح = إجمالي الإيرادات − إجمالي المصروفات",
+   desc:"إذا كانت النتيجة موجبة فهي ربح، وإذا كانت سالبة فهي خسارة.",
+   example:"إيرادات 800,000 − مصروفات 550,000 = صافي ربح 250,000 ريال",
+   calcFields:[{label:"إجمالي الإيرادات",id:"c2a"},{label:"إجمالي المصروفات",id:"c2b"}],
+   calcFn:"()=>{const a=+document.getElementById('c2a').value||0,b=+document.getElementById('c2b').value||0;const r=a-b;showRes('res2',(r>=0?'صافي ربح = ':'خسارة = ')+Math.abs(r).toLocaleString()+' ريال');}",resId:"res2"},
+  {cat:"أساسية",icon:"fas fa-building",title:"حقوق الملكية",
+   formula:"حقوق الملكية = الأصول − الخصوم",
+   desc:"تُمثّل صافي ثروة أصحاب المنشأة بعد سداد جميع الالتزامات.",
+   example:"أصول 900,000 − خصوم 400,000 = حقوق ملكية 500,000",
+   calcFields:[{label:"إجمالي الأصول",id:"c3a"},{label:"إجمالي الخصوم",id:"c3b"}],
+   calcFn:"()=>{const a=+document.getElementById('c3a').value||0,b=+document.getElementById('c3b').value||0;showRes('res3','حقوق الملكية = '+(a-b).toLocaleString()+' ريال');}",resId:"res3"},
+  {cat:"أساسية",icon:"fas fa-coins",title:"رأس المال العامل",
+   formula:"رأس المال العامل = الأصول المتداولة − الخصوم المتداولة",
+   desc:"يقيس قدرة المنشأة على الوفاء بالتزاماتها قصيرة الأجل من أصولها المتداولة.",
+   example:"أصول متداولة 300,000 − خصوم متداولة 120,000 = رأس مال عامل 180,000",
+   calcFields:[{label:"الأصول المتداولة",id:"c4a"},{label:"الخصوم المتداولة",id:"c4b"}],
+   calcFn:"()=>{const a=+document.getElementById('c4a').value||0,b=+document.getElementById('c4b').value||0;showRes('res4','رأس المال العامل = '+(a-b).toLocaleString()+' ريال');}",resId:"res4"},
+  // ─── إهلاك ───
+  {cat:"إهلاك",icon:"fas fa-tools",title:"إهلاك القسط الثابت",
+   formula:"قسط الإهلاك = (التكلفة − القيمة التخريدية) ÷ العمر الإنتاجي",
+   desc:"يُوزّع تكلفة الأصل الثابت على سنوات عمره بشكل متساوٍ كل سنة.",
+   example:"(100,000 − 10,000) ÷ 10 سنوات = 9,000 ريال سنوياً",
+   calcFields:[{label:"تكلفة الأصل",id:"d1a"},{label:"القيمة التخريدية",id:"d1b"},{label:"العمر الإنتاجي (سنة)",id:"d1c"}],
+   calcFn:"()=>{const a=+document.getElementById('d1a').value||0,b=+document.getElementById('d1b').value||0,c=+document.getElementById('d1c').value||1;showRes('resd1','قسط الإهلاك السنوي = '+((a-b)/c).toFixed(2)+' ريال');}",resId:"resd1"},
+  {cat:"إهلاك",icon:"fas fa-arrow-down",title:"القيمة الدفترية للأصل",
+   formula:"القيمة الدفترية = التكلفة الأصلية − مجمّع الإهلاك",
+   desc:"تُمثّل القيمة المتبقية للأصل في الدفاتر بعد خصم الإهلاك المتراكم.",
+   example:"تكلفة 100,000 − مجمّع الإهلاك 45,000 = قيمة دفترية 55,000",
+   calcFields:[{label:"التكلفة الأصلية",id:"d2a"},{label:"مجمّع الإهلاك",id:"d2b"}],
+   calcFn:"()=>{const a=+document.getElementById('d2a').value||0,b=+document.getElementById('d2b').value||0;showRes('resd2','القيمة الدفترية = '+(a-b).toLocaleString()+' ريال');}",resId:"resd2"},
+  {cat:"إهلاك",icon:"fas fa-percentage",title:"إهلاك القسط المتناقص",
+   formula:"معدل الإهلاك = 2 ÷ العمر الإنتاجي | قسط السنة = القيمة الدفترية × المعدل",
+   desc:"يُركّز الإهلاك في السنوات الأولى من عمر الأصل — مناسب للأصول التكنولوجية.",
+   example:"أصل بتكلفة 100,000 عمره 5 سنوات: السنة الأولى = 100,000 × 40% = 40,000",
+   calcFields:[{label:"القيمة الدفترية الحالية",id:"d3a"},{label:"العمر الإنتاجي (سنة)",id:"d3b"}],
+   calcFn:"()=>{const a=+document.getElementById('d3a').value||0,b=+document.getElementById('d3b').value||1;const rate=2/b;showRes('resd3','قسط الإهلاك = '+(a*rate).toFixed(2)+' ريال (معدل '+(rate*100).toFixed(0)+'%)');}",resId:"resd3"},
+  // ─── مخزون ───
+  {cat:"مخزون",icon:"fas fa-warehouse",title:"تكلفة البضائع المباعة (COGS)",
+   formula:"تكلفة البضائع المباعة = مخزون أول المدة + المشتريات − مخزون آخر المدة",
+   desc:"تُمثّل التكلفة الفعلية للبضاعة التي بِيعت خلال الفترة.",
+   example:"50,000 + 300,000 − 60,000 = تكلفة 290,000 ريال",
+   calcFields:[{label:"مخزون أول المدة",id:"m1a"},{label:"المشتريات",id:"m1b"},{label:"مخزون آخر المدة",id:"m1c"}],
+   calcFn:"()=>{const a=+document.getElementById('m1a').value||0,b=+document.getElementById('m1b').value||0,c=+document.getElementById('m1c').value||0;showRes('resm1','تكلفة البضائع المباعة = '+(a+b-c).toLocaleString()+' ريال');}",resId:"resm1"},
+  {cat:"مخزون",icon:"fas fa-redo",title:"معدل دوران المخزون",
+   formula:"معدل دوران المخزون = تكلفة البضائع المباعة ÷ متوسط المخزون",
+   desc:"يُبيّن عدد المرات التي يُباع فيها المخزون خلال الفترة — كلما زاد كلما كانت الإدارة أفضل.",
+   example:"تكلفة 290,000 ÷ متوسط مخزون 55,000 = 5.27 مرة",
+   calcFields:[{label:"تكلفة البضائع المباعة",id:"m2a"},{label:"متوسط المخزون",id:"m2b"}],
+   calcFn:"()=>{const a=+document.getElementById('m2a').value||0,b=+document.getElementById('m2b').value||1;showRes('resm2','معدل الدوران = '+(a/b).toFixed(2)+' مرة | أيام الدوران = '+(365/(a/b)).toFixed(0)+' يوم');}",resId:"resm2"},
+  {cat:"مخزون",icon:"fas fa-calculator",title:"المتوسط المرجّح للمخزون",
+   formula:"تكلفة الوحدة = إجمالي التكلفة ÷ إجمالي الوحدات",
+   desc:"طريقة تقييم المخزون بالمتوسط المرجح — تسوّي بين تكاليف الوحدات المختلفة.",
+   example:"(100×10 + 150×12) ÷ 250 = 2800÷250 = 11.2 ريال/وحدة",
+   calcFields:[{label:"إجمالي تكلفة المخزون",id:"m3a"},{label:"إجمالي الوحدات",id:"m3b"}],
+   calcFn:"()=>{const a=+document.getElementById('m3a').value||0,b=+document.getElementById('m3b').value||1;showRes('resm3','تكلفة الوحدة الواحدة = '+(a/b).toFixed(3)+' ريال');}",resId:"resm3"},
+  // ─── سيولة ───
+  {cat:"سيولة",icon:"fas fa-tint",title:"نسبة التداول (السيولة الجارية)",
+   formula:"نسبة التداول = الأصول المتداولة ÷ الخصوم المتداولة",
+   desc:"تقيس قدرة المنشأة على سداد التزاماتها قصيرة الأجل. النسبة المثالية تتراوح بين 1.5 و 2.",
+   example:"أصول متداولة 240,000 ÷ خصوم متداولة 120,000 = نسبة 2 ✓",
+   calcFields:[{label:"الأصول المتداولة",id:"s1a"},{label:"الخصوم المتداولة",id:"s1b"}],
+   calcFn:"()=>{const a=+document.getElementById('s1a').value||0,b=+document.getElementById('s1b').value||1;const r=(a/b).toFixed(2);showRes('ress1','نسبة التداول = '+r+' | '+(r>=1.5&&r<=2?'✅ ممتاز':r>=1?'⚠️ مقبول':'❌ ضعيف'));}",resId:"ress1"},
+  {cat:"سيولة",icon:"fas fa-bolt",title:"نسبة السيولة السريعة (Acid Test)",
+   formula:"نسبة السيولة السريعة = (الأصول المتداولة − المخزون) ÷ الخصوم المتداولة",
+   desc:"أكثر دقة من نسبة التداول لاستبعاد المخزون الأقل سيولة. النسبة المثالية 1:1.",
+   example:"(240,000 − 60,000) ÷ 120,000 = نسبة 1.5",
+   calcFields:[{label:"الأصول المتداولة",id:"s2a"},{label:"المخزون",id:"s2b"},{label:"الخصوم المتداولة",id:"s2c"}],
+   calcFn:"()=>{const a=+document.getElementById('s2a').value||0,b=+document.getElementById('s2b').value||0,c=+document.getElementById('s2c').value||1;showRes('ress2','نسبة السيولة السريعة = '+((a-b)/c).toFixed(2));}",resId:"ress2"},
+  {cat:"سيولة",icon:"fas fa-money-bill",title:"نسبة النقدية",
+   formula:"نسبة النقدية = (النقد + الأوراق المالية قصيرة الأجل) ÷ الخصوم المتداولة",
+   desc:"أكثر نسب السيولة تحفظاً — تعتمد على النقد الفوري فقط.",
+   example:"(50,000 + 30,000) ÷ 120,000 = 0.67",
+   calcFields:[{label:"النقد",id:"s3a"},{label:"الأوراق المالية قصيرة الأجل",id:"s3b"},{label:"الخصوم المتداولة",id:"s3c"}],
+   calcFn:"()=>{const a=+document.getElementById('s3a').value||0,b=+document.getElementById('s3b').value||0,c=+document.getElementById('s3c').value||1;showRes('ress3','نسبة النقدية = '+((a+b)/c).toFixed(2));}",resId:"ress3"},
+  // ─── ربحية ───
+  {cat:"ربحية",icon:"fas fa-percent",title:"هامش الربح الإجمالي",
+   formula:"هامش الربح الإجمالي = (إجمالي الربح ÷ صافي المبيعات) × 100%",
+   desc:"يُبيّن ما تبقى من كل ريال مبيعات بعد خصم تكلفة البضائع المباعة فقط.",
+   example:"(200,000 ÷ 500,000) × 100% = 40%",
+   calcFields:[{label:"إجمالي الربح",id:"p1a"},{label:"صافي المبيعات",id:"p1b"}],
+   calcFn:"()=>{const a=+document.getElementById('p1a').value||0,b=+document.getElementById('p1b').value||1;showRes('resp1','هامش الربح الإجمالي = '+(a/b*100).toFixed(2)+'%');}",resId:"resp1"},
+  {cat:"ربحية",icon:"fas fa-chart-line",title:"هامش الربح الصافي",
+   formula:"هامش الربح الصافي = (صافي الربح ÷ صافي المبيعات) × 100%",
+   desc:"يُبيّن النسبة المئوية لصافي الربح من كل ريال مبيعات بعد خصم كافة المصروفات.",
+   example:"(100,000 ÷ 500,000) × 100% = 20%",
+   calcFields:[{label:"صافي الربح",id:"p2a"},{label:"صافي المبيعات",id:"p2b"}],
+   calcFn:"()=>{const a=+document.getElementById('p2a').value||0,b=+document.getElementById('p2b').value||1;showRes('resp2','هامش الربح الصافي = '+(a/b*100).toFixed(2)+'%');}",resId:"resp2"},
+  {cat:"ربحية",icon:"fas fa-trophy",title:"العائد على حقوق الملكية (ROE)",
+   formula:"ROE = (صافي الربح ÷ متوسط حقوق الملكية) × 100%",
+   desc:"يقيس العائد الذي حققته المنشأة على أموال مساهميها — كلما زاد كلما كانت المنشأة أكفأ.",
+   example:"(100,000 ÷ 500,000) × 100% = ROE = 20%",
+   calcFields:[{label:"صافي الربح",id:"p3a"},{label:"متوسط حقوق الملكية",id:"p3b"}],
+   calcFn:"()=>{const a=+document.getElementById('p3a').value||0,b=+document.getElementById('p3b').value||1;showRes('resp3','ROE = '+(a/b*100).toFixed(2)+'%');}",resId:"resp3"},
+  {cat:"ربحية",icon:"fas fa-star",title:"العائد على الأصول (ROA)",
+   formula:"ROA = (صافي الربح ÷ متوسط إجمالي الأصول) × 100%",
+   desc:"يقيس كفاءة الإدارة في استخدام أصول المنشأة لتوليد الأرباح.",
+   example:"(100,000 ÷ 800,000) × 100% = ROA = 12.5%",
+   calcFields:[{label:"صافي الربح",id:"p4a"},{label:"متوسط إجمالي الأصول",id:"p4b"}],
+   calcFn:"()=>{const a=+document.getElementById('p4a').value||0,b=+document.getElementById('p4b').value||1;showRes('resp4','ROA = '+(a/b*100).toFixed(2)+'%');}",resId:"resp4"},
+  // ─── نشاط ───
+  {cat:"نشاط",icon:"fas fa-sync",title:"معدل دوران الأصول",
+   formula:"معدل دوران الأصول = صافي المبيعات ÷ متوسط إجمالي الأصول",
+   desc:"يقيس كفاءة المنشأة في استخدام أصولها لتوليد المبيعات.",
+   example:"500,000 ÷ 800,000 = 0.625 مرة",
+   calcFields:[{label:"صافي المبيعات",id:"a1a"},{label:"متوسط إجمالي الأصول",id:"a1b"}],
+   calcFn:"()=>{const a=+document.getElementById('a1a').value||0,b=+document.getElementById('a1b').value||1;showRes('resa1','معدل دوران الأصول = '+(a/b).toFixed(2)+' مرة');}",resId:"resa1"},
+  {cat:"نشاط",icon:"fas fa-user-check",title:"معدل دوران الذمم المدينة",
+   formula:"معدل دوران الذمم = صافي المبيعات الآجلة ÷ متوسط الذمم المدينة",
+   desc:"يُبيّن مدى سرعة تحصيل المنشأة لديونها من العملاء.",
+   example:"400,000 ÷ 50,000 = 8 مرات | معدل التحصيل = 46 يوماً",
+   calcFields:[{label:"صافي المبيعات الآجلة",id:"a2a"},{label:"متوسط الذمم المدينة",id:"a2b"}],
+   calcFn:"()=>{const a=+document.getElementById('a2a').value||0,b=+document.getElementById('a2b').value||1;const r=a/b;showRes('resa2','معدل الدوران = '+r.toFixed(2)+' مرة | متوسط فترة التحصيل = '+(365/r).toFixed(0)+' يوم');}",resId:"resa2"},
+  {cat:"نشاط",icon:"fas fa-handshake",title:"معدل دوران الذمم الدائنة",
+   formula:"معدل دوران الدائنة = تكلفة المشتريات ÷ متوسط الذمم الدائنة",
+   desc:"يُبيّن مدى سرعة سداد المنشأة لالتزاماتها تجاه الموردين.",
+   example:"300,000 ÷ 40,000 = 7.5 مرة | يسدد كل 49 يوماً",
+   calcFields:[{label:"تكلفة المشتريات",id:"a3a"},{label:"متوسط الذمم الدائنة",id:"a3b"}],
+   calcFn:"()=>{const a=+document.getElementById('a3a').value||0,b=+document.getElementById('a3b').value||1;const r=a/b;showRes('resa3','معدل الدوران = '+r.toFixed(2)+' مرة | دورة السداد = '+(365/r).toFixed(0)+' يوم');}",resId:"resa3"},
+  // ─── تكاليف ───
+  {cat:"تكاليف",icon:"fas fa-balance-scale",title:"نقطة التعادل (بالوحدات)",
+   formula:"نقطة التعادل = التكاليف الثابتة ÷ (سعر البيع − التكلفة المتغيرة للوحدة)",
+   desc:"عدد الوحدات التي يجب بيعها لتغطية جميع التكاليف دون ربح أو خسارة.",
+   example:"تكاليف ثابتة 120,000 ÷ (100 − 60) = 3,000 وحدة",
+   calcFields:[{label:"التكاليف الثابتة الإجمالية",id:"t1a"},{label:"سعر بيع الوحدة",id:"t1b"},{label:"التكلفة المتغيرة للوحدة",id:"t1c"}],
+   calcFn:"()=>{const a=+document.getElementById('t1a').value||0,b=+document.getElementById('t1b').value||0,c=+document.getElementById('t1c').value||0;if(b<=c){showRes('rest1','❌ سعر البيع يجب أن يكون أكبر من التكلفة المتغيرة');return;}showRes('rest1','نقطة التعادل = '+Math.ceil(a/(b-c)).toLocaleString()+' وحدة | أو '+(Math.ceil(a/(b-c))*b).toLocaleString()+' ريال مبيعات');}",resId:"rest1"},
+  {cat:"تكاليف",icon:"fas fa-hand-holding-usd",title:"هامش المساهمة",
+   formula:"هامش المساهمة للوحدة = سعر البيع − التكلفة المتغيرة للوحدة",
+   desc:"ما يساهم به كل وحدة مباعة في تغطية التكاليف الثابتة وتحقيق الربح.",
+   example:"سعر بيع 100 − تكلفة متغيرة 60 = هامش مساهمة 40 ريال/وحدة",
+   calcFields:[{label:"سعر بيع الوحدة",id:"t2a"},{label:"التكلفة المتغيرة للوحدة",id:"t2b"}],
+   calcFn:"()=>{const a=+document.getElementById('t2a').value||0,b=+document.getElementById('t2b').value||0;const cm=a-b;const ratio=(cm/a*100).toFixed(1);showRes('rest2','هامش المساهمة = '+cm.toLocaleString()+' ريال | نسبة الهامش = '+ratio+'%');}",resId:"rest2"},
+  {cat:"تكاليف",icon:"fas fa-layer-group",title:"نسبة الرفع المالي (D/E)",
+   formula:"نسبة الدين إلى الملكية = إجمالي الخصوم ÷ إجمالي حقوق الملكية",
+   desc:"تقيس اعتماد المنشأة على التمويل الخارجي. كلما زادت زاد الخطر المالي.",
+   example:"خصوم 400,000 ÷ حقوق ملكية 600,000 = 0.67",
+   calcFields:[{label:"إجمالي الخصوم",id:"t3a"},{label:"إجمالي حقوق الملكية",id:"t3b"}],
+   calcFn:"()=>{const a=+document.getElementById('t3a').value||0,b=+document.getElementById('t3b').value||1;const r=(a/b).toFixed(2);showRes('rest3','نسبة الدين/الملكية = '+r+' | '+(r<0.5?'✅ انخفاض الرفع':r<1?'⚠️ معتدل':'❌ رفع مرتفع'));}",resId:"rest3"},
+];
+
+let activeCat = '';
+
+function filterCat(btn, cat) {
+  activeCat = cat;
+  document.querySelectorAll('.fm-cat').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderFormulas();
+}
+
+function showRes(id, text) {
+  const el = document.getElementById(id);
+  el.style.display = 'block';
+  el.textContent = '✅ ' + text;
+}
+
+function toggleCalc(id) {
+  const el = document.getElementById('calc_' + id);
+  el.classList.toggle('open');
+}
+
+function renderFormulas() {
+  const filtered = activeCat ? formulas.filter(f => f.cat === activeCat) : formulas;
+  const catTitles = {
+    "أساسية":"📐 المعادلات الأساسية","إهلاك":"🏗️ معادلات الإهلاك",
+    "مخزون":"📦 معادلات المخزون","سيولة":"💧 نسب السيولة",
+    "ربحية":"📈 نسب الربحية","نشاط":"🔄 نسب النشاط","تكاليف":"💰 معادلات التكاليف"
+  };
+  const groups = {};
+  filtered.forEach(f => { if (!groups[f.cat]) groups[f.cat]=[]; groups[f.cat].push(f); });
+  let html = '';
+  Object.entries(groups).forEach(([cat, fms]) => {
+    html += `<div class="fm-section"><div class="fm-section-title"><i class="fas fa-layer-group"></i>${catTitles[cat]||cat}</div><div class="fm-grid">`;
+    fms.forEach((f, idx) => {
+      const uid = f.resId;
+      const fieldsHtml = f.calcFields.map(fl =>
+        `<label>${fl.label}</label><input type="number" id="${fl.id}" placeholder="0"/>`
+      ).join('');
+      html += `<div class="fm-card">
+        <h3><i class="${f.icon}"></i> ${f.title}</h3>
+        <div class="fm-formula">${f.formula}</div>
+        <p class="fm-desc">${f.desc}</p>
+        <div class="fm-example">📌 مثال: ${f.example}</div>
+        <button class="calc-toggle" onclick="toggleCalc('${uid}')">
+          <i class="fas fa-calculator"></i> جرّب الحاسبة
+        </button>
+        <div class="fm-calc" id="calc_${uid}">
+          ${fieldsHtml}
+          <button onclick="${f.calcFn.slice(4,-1)}()">احسب الآن</button>
+          <div class="fm-result" id="${uid}"></div>
+        </div>
+      </div>`;
+    });
+    html += '</div></div>';
+  });
+  document.getElementById('fmContent').innerHTML = html;
+
+  // إعادة ربط الدوال المحسوبة
+  formulas.forEach(f => {
+    const fn = f.calcFn;
+    const match = fn.match(/^\(\)=>\{([\s\S]*)\}$/);
+    if (match) {
+      window['calc_' + f.resId] = new Function(match[1]);
+    }
+  });
+}
+
+renderFormulas();
+</script>
 </body>
 </html>
