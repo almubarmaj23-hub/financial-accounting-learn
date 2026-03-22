@@ -54,3 +54,22 @@ document.querySelectorAll('.nav-links a').forEach(a => {
     document.getElementById('navLinks')?.classList.remove('open');
   });
 });
+
+// ─── Hamburger Menu ───
+const navToggle = document.getElementById('navToggle');
+const navLinks  = document.getElementById('navLinks');
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    const icon = navToggle.querySelector('i');
+    icon.className = navLinks.classList.contains('open') ? 'fas fa-times' : 'fas fa-bars';
+  });
+  // إغلاق عند الضغط خارج القائمة
+  document.addEventListener('click', (e) => {
+    if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+      navLinks.classList.remove('open');
+      const icon = navToggle.querySelector('i');
+      if (icon) icon.className = 'fas fa-bars';
+    }
+  });
+}
