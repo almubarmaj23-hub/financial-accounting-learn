@@ -391,3 +391,13 @@ body.dark .calc-result{background:#1e3a5f}
   }
   .dark-btn { order: 2; }
 }
+
+/* ═══ تحسينات مرئية إضافية 2026 ═══ */
+.page-hero{background:linear-gradient(135deg,var(--primary) 0%,#6366f1 100%);color:#fff;text-align:center;padding:3.5rem 2rem 2.5rem;margin-bottom:0}
+.page-hero h1{font-size:clamp(1.6rem,4vw,2.4rem);margin-bottom:.8rem;font-weight:900}
+.page-hero p{font-size:1rem;opacity:.9;max-width:600px;margin:0 auto}
+.equation-box{background:linear-gradient(135deg,var(--primary),#6366f1);color:#fff;border-radius:10px;padding:1rem 1.5rem;font-weight:800;font-size:1rem;text-align:center;margin:1rem 0;letter-spacing:.03em}
+.info-box{background:color-mix(in srgb,var(--primary) 8%,transparent);border-right:4px solid var(--primary);border-radius:8px;padding:.9rem 1.1rem;margin:1rem 0;font-size:.9rem;line-height:1.6;color:var(--text)}
+.tag-green{background:#dcfce7;color:#15803d}.tag-yellow{background:#fef9c3;color:#a16207}.tag-red{background:#fee2e2;color:#b91c1c}.tag-blue{background:#dbeafe;color:#1d4ed8}
+[data-theme="dark"] .tag-green{background:#14532d;color:#86efac}[data-theme="dark"] .tag-yellow{background:#422006;color:#fde68a}[data-theme="dark"] .tag-red{background:#450a0a;color:#fca5a5}[data-theme="dark"] .tag-blue{background:#1e3a5f;color:#93c5fd}
+body{-webkit-font-smoothing:antialiased}
