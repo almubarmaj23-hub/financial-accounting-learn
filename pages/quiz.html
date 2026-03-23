@@ -1,10 +1,63 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>الاختبارات - المحاسبة المالية</title>
   <link rel="stylesheet" href="../css/style.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    .quiz-wrap{max-width:820px;margin:0 auto;padding:2.5rem 1.5rem}
+    .quiz-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem;justify-content:center}
+    .qf-btn{padding:.45rem 1.1rem;border-radius:20px;border:1.5px solid var(--border);
+      background:var(--card-bg);color:var(--text2);font-size:.85rem;cursor:pointer;
+      font-family:inherit;font-weight:600;transition:var(--transition)}
+    .qf-btn:hover,.qf-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .quiz-stats{display:flex;justify-content:center;gap:1.2rem;margin-bottom:1.5rem;flex-wrap:wrap}
+    .qs-item{background:var(--card-bg);border:1px solid var(--border);border-radius:10px;
+      padding:.6rem 1.2rem;font-size:.85rem;display:flex;align-items:center;gap:.4rem}
+    .qs-item i{color:var(--primary)}
+    .quiz-card{background:var(--card-bg);border-radius:var(--radius);padding:2rem;
+      box-shadow:var(--shadow);border:1px solid var(--border)}
+    .q-counter{font-size:.85rem;color:var(--text2);margin-bottom:.4rem;font-weight:600}
+    .q-progress-bar{height:6px;background:var(--border);border-radius:3px;margin-bottom:1.5rem;overflow:hidden}
+    .q-progress-fill{height:100%;background:var(--gradient);border-radius:3px;transition:width .4s}
+    .q-text{font-size:1.05rem;font-weight:700;margin-bottom:1.3rem;line-height:1.7;color:var(--text)}
+    .options{display:flex;flex-direction:column;gap:.65rem;margin-bottom:1.3rem}
+    .opt{padding:.85rem 1.1rem;border:2px solid var(--border);border-radius:11px;
+      background:var(--bg);color:var(--text);font-size:.93rem;cursor:pointer;
+      text-align:right;font-family:inherit;transition:var(--transition);font-weight:500;line-height:1.5}
+    .opt:hover:not(:disabled){border-color:var(--primary);background:var(--primary-light);transform:translateX(-3px)}
+    .opt:disabled{cursor:default}
+    .opt.correct{background:#e8f5e9;border-color:#34a853;color:#1b5e20}
+    .opt.wrong{background:#fce4ec;border-color:#e74c3c;color:#b71c1c}
+    body.dark .opt.correct{background:#1b3a27;color:#81c784}
+    body.dark .opt.wrong{background:#3e0f0f;color:#ef9a9a}
+    .feedback{padding:.9rem 1.1rem;border-radius:10px;margin-bottom:1.1rem;
+      font-weight:600;font-size:.9rem;display:none;line-height:1.6}
+    .feedback.show{display:block}
+    .feedback.correct{background:#e8f5e9;color:#1b5e20;border:1px solid #34a853}
+    .feedback.wrong{background:#fce4ec;color:#b71c1c;border:1px solid #e74c3c}
+    body.dark .feedback.correct{background:#1b3a27;color:#a5d6a7}
+    body.dark .feedback.wrong{background:#3e0f0f;color:#fca5a5}
+    .quiz-nav{display:flex;justify-content:space-between;align-items:center}
+    /* Score Screen */
+    .score-screen{text-align:center;padding:2.5rem 1rem;display:none}
+    .score-ring{width:140px;height:140px;border-radius:50%;border:8px solid var(--primary);
+      margin:0 auto 1.5rem;display:flex;flex-direction:column;align-items:center;
+      justify-content:center;background:var(--primary-light);position:relative}
+    .score-ring span{font-size:2.5rem;font-weight:900;color:var(--primary);line-height:1}
+    .score-ring small{font-size:.76rem;color:var(--text2)}
+    .score-meta{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;margin:1.3rem 0}
+    .sm-item{text-align:center;padding:.8rem 1.2rem;border-radius:12px;border:1px solid var(--border);min-width:80px}
+    .sm-num{font-size:1.6rem;font-weight:900;display:block}
+    .sm-lbl{font-size:.78rem;color:var(--text2)}
+    .sm-c .sm-num{color:#34a853}.sm-w .sm-num{color:#e74c3c}
+    @media(max-width:480px){
+      .quiz-card{padding:1.3rem}
+      .opt{font-size:.88rem;padding:.75rem .9rem}
+    }
+  </style>
 </head>
 <body>
 <nav class="navbar">
@@ -19,88 +72,232 @@
     <li><a href="glossary.html" ><i class="fas fa-language"></i> المصطلحات</a></li>
     <li><a href="formulas.html" ><i class="fas fa-square-root-alt"></i> المعادلات</a></li>
     <li><a href="calculator.html" ><i class="fas fa-calculator"></i> الحاسبة</a></li>
-    <li><a href="cases.html" ><i class="fas fa-briefcase"></i> دراسات الحالة</a></li>
+    <li><a href="cases.html"><i class="fas fa-briefcase"></i> دراسات الحالة</a></li>
     <li><a href="dashboard.html" ><i class="fas fa-chart-line"></i> تقدمي</a></li>
   </ul>
   <button id="darkToggle" class="dark-btn"><i class="fas fa-moon"></i></button>
 </nav>
 <div class="page-hero">
   <h1><i class="fas fa-pencil-alt"></i> الاختبارات التفاعلية</h1>
-  <p>اختر مستوى الاختبار واختبر معلوماتك مع تصحيح فوري ومراجعة شاملة</p>
+  <p>60 سؤال موزعة على 6 فصول — اختبر مستواك واحصل على تغذية راجعة فورية</p>
 </div>
-<div class="quiz-container">
-  <div class="quiz-tabs">
-    <button class="quiz-tab active" onclick="loadBank(0,this)">🟢 مبتدئ</button>
-    <button class="quiz-tab" onclick="loadBank(1,this)">🟡 متوسط</button>
-    <button class="quiz-tab" onclick="loadBank(2,this)">🔴 متقدم</button>
+
+<div class="quiz-wrap">
+  <div class="quiz-filters">
+    <button class="qf-btn active" onclick="loadBank(0,this)"><i class="fas fa-layer-group"></i> كل الفصول</button>
+    <button class="qf-btn" onclick="loadBank(1,this)"><i class="fas fa-book"></i> أساسيات</button>
+    <button class="qf-btn" onclick="loadBank(2,this)"><i class="fas fa-pen"></i> قيود يومية</button>
+    <button class="qf-btn" onclick="loadBank(3,this)"><i class="fas fa-file-alt"></i> قوائم مالية</button>
+    <button class="qf-btn" onclick="loadBank(4,this)"><i class="fas fa-chart-bar"></i> نسب مالية</button>
+    <button class="qf-btn" onclick="loadBank(5,this)"><i class="fas fa-boxes"></i> مخزون وإهلاك</button>
+    <button class="qf-btn" onclick="loadBank(6,this)"><i class="fas fa-star"></i> مفاهيم متقدمة</button>
   </div>
-  <div class="quiz-card" id="quizCard">
-    <div id="quizMain">
-      <div class="question-counter" id="qCounter"></div>
-      <div class="progress-bar"><div class="progress-fill" id="pFill"></div></div>
-      <div class="question-text" id="qText"></div>
-      <div class="options" id="opts"></div>
-      <div class="feedback" id="fb"></div>
-      <div class="quiz-nav">
-        <span id="scoreDisp" style="font-weight:700;color:var(--primary)"></span>
-        <button class="btn btn-primary" id="nextBtn" onclick="nextQ()" disabled>التالي <i class="fas fa-arrow-left"></i></button>
-      </div>
-    </div>
-    <div class="score-screen" id="scoreScr" style="display:none">
-      <div class="score-circle" id="scoreCirc"></div>
-      <h2 id="scoreMsg"></h2>
-      <p id="scoreDet" style="color:var(--text2);margin:1rem 0"></p>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem">
-        <button class="btn btn-primary" onclick="restart()"><i class="fas fa-redo"></i> إعادة</button>
-        <a href="lessons.html" class="btn btn-outline"><i class="fas fa-book-open"></i> راجع الدروس</a>
-      </div>
-      <div class="answers-review" id="review"></div>
+  <div class="quiz-stats">
+    <div class="qs-item"><i class="fas fa-question-circle"></i><span id="qs-total">0</span> سؤال</div>
+    <div class="qs-item"><i class="fas fa-clock"></i> تغذية راجعة فورية</div>
+    <div class="qs-item"><i class="fas fa-trophy"></i> درجة فورية</div>
+  </div>
+  <div class="quiz-card" id="quiz-main">
+    <div class="q-counter" id="qCounter"></div>
+    <div class="q-progress-bar"><div class="q-progress-fill" id="qProgress"></div></div>
+    <div class="q-text" id="qText"></div>
+    <div class="options" id="qOptions"></div>
+    <div class="feedback" id="qFeedback"></div>
+    <div class="quiz-nav">
+      <button class="btn btn-outline btn-sm" id="btnPrev" onclick="prevQ()" style="display:none"><i class="fas fa-arrow-right"></i> السابق</button>
+      <button class="btn btn-primary btn-sm" id="btnNext" onclick="nextQ()" disabled>التالي <i class="fas fa-arrow-left"></i></button>
     </div>
   </div>
+  <div class="score-screen" id="scoreScreen">
+    <div class="score-ring"><span id="scoreVal">0</span><small>من <span id="scoreTotal">0</span></small></div>
+    <h2 id="scoreMsg" style="margin-bottom:.5rem"></h2>
+    <p id="scoreDetail" style="color:var(--text2);margin-bottom:1.3rem"></p>
+    <div class="score-meta">
+      <div class="sm-item sm-c"><span class="sm-num" id="scCorrect">0</span><span class="sm-lbl">صحيح</span></div>
+      <div class="sm-item sm-w"><span class="sm-num" id="scWrong">0</span><span class="sm-lbl">خطأ</span></div>
+    </div>
+    <button class="btn btn-primary" onclick="restartQuiz()"><i class="fas fa-redo"></i> إعادة الاختبار</button>
+  </div>
 </div>
+
 <footer class="footer"><p>© 2026 موقع تعلم المحاسبة المالية</p></footer>
 <script src="../js/main.js"></script>
 <script>
-const B=[
- [{q:"المعادلة المحاسبية الأساسية:",o:["أصول=خصوم+ملكية","أصول=إيرادات-مصروفات","خصوم=أصول+ملكية","إيرادات=مصروفات+ربح"],a:0,x:"الأصول = الخصوم + حقوق الملكية"},
-  {q:"حقوق الملكية = ؟",o:["أصول+خصوم","أصول-خصوم","إيرادات-مصروفات","رأسمال+قروض"],a:1,x:"حقوق الملكية = الأصول - الخصوم"},
-  {q:"الذمم المدينة تُصنَّف ضمن:",o:["أصول ثابتة","خصوم متداولة","أصول متداولة","حقوق ملكية"],a:2,x:"الذمم المدينة أصل متداول يتحول لنقد خلال سنة"},
-  {q:"أيٌّ من التالي إيراد؟",o:["شراء معدات","دفع إيجار","بيع خدمات","اقتراض من بنك"],a:2,x:"بيع الخدمات يولّد إيراداً للمنشأة"},
-  {q:"الفرض الذي يعامل المنشأة ككيان مستقل:",o:["الاستمرارية","الوحدة المحاسبية","الفترة","وحدة النقد"],a:1,x:"فرض الوحدة المحاسبية يفصل المنشأة عن أصحابها"},
-  {q:"رأس المال العامل = ؟",o:["أصول ثابتة-خصوم","أصول متداولة-خصوم متداولة","إيرادات-مصروفات","أصول-خصوم"],a:1,x:"رأس المال العامل = الأصول المتداولة - الخصوم المتداولة"},
-  {q:"المحاسبة تُسمى أحياناً:",o:["لغة الأعمال","علم الاقتصاد","فن التسجيل","علم الإحصاء"],a:0,x:"المحاسبة لغة الأعمال لأنها تعبّر عن الوضع المالي"},
-  {q:"الأراضي تُصنَّف كـ:",o:["أصل متداول","خصم","أصل ثابت","حقوق ملكية"],a:2,x:"الأراضي أصل ثابت طويل الأجل"},
-  {q:"الفترة المحاسبية المعتادة:",o:["شهر","ربع سنة","سنة","10 سنوات"],a:2,x:"معظم الشركات تعدّ قوائمها على أساس سنوي"},
-  {q:"صافي الربح = ؟",o:["أصول-خصوم","رأسمال+قروض","إيرادات-مصروفات","مبيعات فقط"],a:2,x:"صافي الربح = الإيرادات - المصروفات"}],
- [{q:"عند شراء معدات نقداً، يُقيَّد مديناً:",o:["النقدية","المعدات","الموردون","رأس المال"],a:1,x:"الأصول (المعدات) تزيد بالجانب المدين"},
-  {q:"الإيرادات تزيد في الجانب:",o:["المدين","الدائن","كلاهما","لا شيء"],a:1,x:"الإيرادات والخصوم وحقوق الملكية تزيد بالجانب الدائن"},
-  {q:"ميزان المراجعة يتحقق من:",o:["صحة القيود","توازن مدين=دائن","دقة قائمة الدخل","سلامة الميزانية"],a:1,x:"ميزان المراجعة يتحقق أن مجموع المدين = مجموع الدائن"},
-  {q:"قيود التسوية تُسجَّل في:",o:["بداية الفترة","منتصف الفترة","نهاية الفترة","عند الدفع"],a:2,x:"قيود التسوية تُعدّ في نهاية الفترة المحاسبية"},
-  {q:"إيجار مدفوع مقدماً يُسجَّل كـ:",o:["مصروف فوري","خصم متداول","أصل مدفوع مقدماً","إيراد"],a:2,x:"المدفوع مقدماً أصل لأن المنفعة لم تُستهلك بعد"},
-  {q:"قائمة الدخل تُغطي:",o:["لحظة محددة","فترة زمنية","بداية الفترة","نهاية الفترة"],a:1,x:"قائمة الدخل فترية تعرض نتائج الأعمال خلال مدة"},
-  {q:"الميزانية العمومية تُظهر الوضع في:",o:["فترة زمنية","لحظة زمنية محددة","خلال السنة","عدة فترات"],a:1,x:"الميزانية لحظية كصورة فوتوغرافية في تاريخ محدد"},
-  {q:"الحسابات المؤقتة التي تُقفَّل سنوياً:",o:["أصول وخصوم","إيرادات ومصروفات","حقوق ملكية","كل الحسابات"],a:1,x:"الإيرادات والمصروفات مؤقتة تُقفَّل في نهاية كل فترة"},
-  {q:"دفتر الأستاذ يجمع قيود:",o:["كل العمليات بالتاريخ","كل حساب على حدة","الإيرادات فقط","المصروفات فقط"],a:1,x:"دفتر الأستاذ يرتب القيود حساباً حساباً"},
-  {q:"قيود الإقفال تهدف إلى:",o:["إعداد الميزانية","تصفير الحسابات المؤقتة","ترحيل القيود","إعداد ميزان المراجعة"],a:1,x:"الإقفال يجعل الحسابات المؤقتة تبدأ صفراً في الفترة التالية"}],
- [{q:"نسبة التداول المثالية:",o:["1:1","2:1","3:1","0.5:1"],a:1,x:"نسبة 2:1 تشير لسيولة جيدة (معيار عام)"},
-  {q:"قسط الإهلاك بالقسط الثابت = ؟",o:["تكلفة÷عمر","(تكلفة-تخريدية)÷عمر","تكلفة×معدل","قيمة دفترية×20%"],a:1,x:"(التكلفة - القيمة التخريدية) ÷ العمر الإنتاجي"},
-  {q:"إيرادات مكتسبة غير محصّلة تُسجَّل كـ:",o:["خصم","إيراد مؤجل","إيراد مستحق القبض","مصروف"],a:2,x:"الإيراد المستحق = أصل متداول بمبدأ الاستحقاق"},
-  {q:"ROE يقيس:",o:["كفاءة الأصول","عائد استثمار الملاك","السيولة","هامش الربح الإجمالي"],a:1,x:"ROE = صافي الربح ÷ حقوق الملكية"},
-  {q:"معدل دوران المخزون = ؟",o:["مبيعات÷مخزون","تكلفة مبيعات÷متوسط مخزون","ربح إجمالي÷مخزون","أصول÷مخزون"],a:1,x:"معدل دوران المخزون = تكلفة البضائع المباعة ÷ متوسط المخزون"},
-  {q:"توازن ميزان المراجعة لا يكشف:",o:["قيود مكررة","خطأ حسابي","قيد مُغفَل كلياً","خطأ في الجمع"],a:2,x:"إغفال قيد كامل لا يؤثر على التوازن ويبقى خفياً"},
-  {q:"الشهرة التجارية تنشأ عند:",o:["شراء معدات","شراء منشأة بأكثر من قيمتها","إصدار أسهم","الحصول على قرض"],a:1,x:"الشهرة = ثمن الشراء - القيمة الدفترية العادلة"},
-  {q:"قائمة التدفقات النقدية تشمل:",o:["تشغيل واستثمار وتمويل","ربح وإيراد ومصروف","إنتاج وتوزيع وتسويق","أصول وخصوم وملكية"],a:0,x:"أنشطة التشغيل والاستثمار والتمويل"},
-  {q:"نسبة الدين/حقوق الملكية تقيس:",o:["الربحية","السيولة","الرفع المالي","كفاءة المخزون"],a:2,x:"تقيس الاعتماد على التمويل بالدين مقابل تمويل الملاك"},
-  {q:"ROA يقيس:",o:["عائد الملاك","كفاءة الأصول في توليد الربح","نسبة السيولة","هامش الربح الصافي"],a:1,x:"ROA = صافي الربح ÷ إجمالي الأصول"}]
+const BANKS = [
+  null, // 0 = all
+  // ─── 1. أساسيات ───
+  [
+    {q:"المعادلة المحاسبية الأساسية:",o:["أصول = خصوم + حقوق الملكية","أصول = إيرادات - مصروفات","خصوم = أصول + ملكية","إيرادات = مصروفات + ربح"],a:0,x:"الأصول دائماً تساوي الخصوم مضافاً إليها حقوق الملكية"},
+    {q:"حقوق الملكية = ؟",o:["أصول + خصوم","أصول - خصوم","إيرادات - مصروفات","رأسمال + قروض"],a:1,x:"حقوق الملكية = الأصول - الخصوم"},
+    {q:"الذمم المدينة تُصنَّف ضمن:",o:["أصول ثابتة","خصوم متداولة","أصول متداولة","حقوق ملكية"],a:2,x:"الذمم المدينة أصل متداول يتحوّل لنقد خلال سنة"},
+    {q:"أيٌّ من التالي يُعدّ إيراداً؟",o:["شراء معدات","دفع إيجار","بيع خدمات","اقتراض من بنك"],a:2,x:"بيع الخدمات يولّد إيراداً للمنشأة"},
+    {q:"فرض الوحدة المحاسبية يعني:",o:["المنشأة ستستمر إلى الأبد","فصل المنشأة عن أصحابها","قياس كل شيء بالنقود","تقسيم الزمن لفترات"],a:1,x:"فرض الوحدة المحاسبية يفصل المنشأة ماليًا عن أصحابها"},
+    {q:"رأس المال العامل يساوي:",o:["أصول ثابتة - خصوم","أصول متداولة - خصوم متداولة","إيرادات - مصروفات","أصول - خصوم"],a:1,x:"رأس المال العامل = الأصول المتداولة - الخصوم المتداولة"},
+    {q:"المحاسبة تُسمى أحياناً:",o:["لغة الأعمال","علم الاقتصاد","فن التسجيل","علم الإحصاء"],a:0,x:"المحاسبة لغة الأعمال لأنها تعبّر عن الوضع المالي"},
+    {q:"الأراضي تُصنَّف كـ:",o:["أصل متداول","خصم","أصل ثابت","حقوق ملكية"],a:2,x:"الأراضي أصل ثابت طويل الأجل"},
+    {q:"الفترة المحاسبية المعتادة:",o:["شهر","ربع سنة","سنة","10 سنوات"],a:2,x:"معظم الشركات تعدّ قوائمها على أساس سنوي"},
+    {q:"صافي الربح = ؟",o:["أصول - خصوم","رأسمال + قروض","إيرادات - مصروفات","مبيعات فقط"],a:2,x:"صافي الربح = الإيرادات - المصروفات"}
+  ],
+  // ─── 2. قيود يومية ───
+  [
+    {q:"عند شراء معدات نقداً، يُقيَّد مديناً:",o:["النقدية","المعدات","الموردون","رأس المال"],a:1,x:"الأصول (المعدات) تزيد بالجانب المدين"},
+    {q:"الإيرادات تزيد في الجانب:",o:["المدين","الدائن","كلاهما","لا شيء"],a:1,x:"الإيرادات والخصوم وحقوق الملكية تزيد بالجانب الدائن"},
+    {q:"ميزان المراجعة يتحقق من:",o:["صحة القيود","توازن مدين = دائن","دقة قائمة الدخل","سلامة الميزانية"],a:1,x:"ميزان المراجعة يتحقق أن مجموع المدين = مجموع الدائن"},
+    {q:"قيود التسوية تُسجَّل في:",o:["بداية الفترة","منتصف الفترة","نهاية الفترة","عند الدفع"],a:2,x:"قيود التسوية تُعدّ في نهاية الفترة المحاسبية"},
+    {q:"إيجار مدفوع مقدماً يُسجَّل كـ:",o:["مصروف فوري","خصم متداول","أصل مدفوع مقدماً","إيراد"],a:2,x:"المدفوع مقدماً أصل لأن المنفعة لم تُستهلك بعد"},
+    {q:"دفتر الأستاذ يُرتَّب:",o:["بالتاريخ","حساباً حساباً","بالمبلغ","أبجدياً"],a:1,x:"دفتر الأستاذ يجمع كل القيود لكل حساب على حدة"},
+    {q:"قيود الإقفال تُصفِّر:",o:["الأصول","الخصوم","الإيرادات والمصروفات","حقوق الملكية"],a:2,x:"تُقفَّل الإيرادات والمصروفات في نهاية كل فترة"},
+    {q:"المصروفات تزيد في الجانب:",o:["الدائن","المدين","لا تُقيَّد","الخصوم"],a:1,x:"المصروفات تزيد في الجانب المدين"},
+    {q:"ترحيل القيود يعني نقلها من:",o:["الأستاذ إلى اليومية","اليومية إلى الأستاذ","الميزان إلى القوائم","اليومية إلى الميزان"],a:1,x:"الترحيل هو نقل القيود من دفتر اليومية إلى دفتر الأستاذ"},
+    {q:"الحسابات الدائمة هي:",o:["الإيرادات والمصروفات","الأصول والخصوم وحقوق الملكية","كل الحسابات","فقط الأصول"],a:1,x:"الحسابات الدائمة لا تُقفَّل وتنتقل رصيدها للفترة التالية"}
+  ],
+  // ─── 3. قوائم مالية ───
+  [
+    {q:"قائمة الدخل تُغطي:",o:["لحظة محددة","فترة زمنية","بداية الفترة","نهاية الفترة فقط"],a:1,x:"قائمة الدخل فترية تعرض نتائج الأعمال خلال مدة"},
+    {q:"الميزانية العمومية تُظهر الوضع في:",o:["فترة زمنية","لحظة زمنية محددة","خلال السنة","عدة فترات"],a:1,x:"الميزانية لحظية كصورة فوتوغرافية في تاريخ محدد"},
+    {q:"قائمة التدفقات النقدية تنقسم إلى:",o:["قسمين","ثلاثة أقسام","أربعة أقسام","قسم واحد"],a:1,x:"تشغيلي + استثماري + تمويلي"},
+    {q:"تكلفة البضاعة المباعة = ؟",o:["مبيعات - مخزون","مخزون أول + مشتريات - مخزون آخر","مبيعات × تكلفة","مشتريات فقط"],a:1,x:"COGS = مخزون أول المدة + المشتريات - مخزون آخر المدة"},
+    {q:"الأرباح المُوزَّعة تُؤثر على:",o:["قائمة الدخل","الميزانية عبر الأرباح المحتجزة","قائمة التدفق","لا شيء"],a:1,x:"الأرباح الموزعة تُقلل الأرباح المحتجزة في حقوق الملكية"},
+    {q:"مصروف الإهلاك يظهر في:",o:["الميزانية فقط","قائمة الدخل فقط","كلاهما","التدفقات فقط"],a:2,x:"الإهلاك يظهر في قائمة الدخل (مصروف) وفي الميزانية (مجمّع الإهلاك)"},
+    {q:"الأرباح المحتجزة تُصنَّف ضمن:",o:["الخصوم","الأصول","حقوق الملكية","الإيرادات"],a:2,x:"الأرباح المحتجزة جزء من حقوق الملكية"},
+    {q:"صافي المبيعات = ؟",o:["مبيعات إجمالية + مردودات","مبيعات إجمالية - (مردودات + خصومات)","مبيعات - تكلفة","إيرادات كاملة"],a:1,x:"صافي المبيعات = المبيعات الإجمالية - المردودات - الخصومات"},
+    {q:"مجمل الربح = ؟",o:["صافي المبيعات - المصروفات","صافي المبيعات - تكلفة البضاعة المباعة","إيرادات - مصروفات","مبيعات فقط"],a:1,x:"مجمل الربح = صافي المبيعات - تكلفة البضاعة المباعة"},
+    {q:"الإفصاح المحاسبي يعني:",o:["إخفاء المعلومات","الإفراط في البيانات","الكشف عن المعلومات الجوهرية","تحديد الأرباح فقط"],a:2,x:"الإفصاح يعني تقديم المعلومات المهمة بوضوح وصدق"}
+  ],
+  // ─── 4. نسب مالية ───
+  [
+    {q:"نسبة التداول = ؟",o:["أصول ثابتة ÷ خصوم","أصول متداولة ÷ خصوم متداولة","إيرادات ÷ مصروفات","مبيعات ÷ أصول"],a:1,x:"نسبة التداول = الأصول المتداولة ÷ الخصوم المتداولة"},
+    {q:"نسبة التداول المثالية تقريباً:",o:["0.5 : 1","1 : 1","2 : 1","5 : 1"],a:2,x:"النسبة المثالية حوالي 2:1 للسيولة الكافية"},
+    {q:"نسبة السيولة السريعة تستثني:",o:["النقدية","الذمم المدينة","المخزون","الاستثمارات"],a:2,x:"تُستثنى البضاعة لأنها أصعب تحويلاً للنقد"},
+    {q:"ROE تقيس:",o:["كفاءة استخدام الأصول","العائد على حقوق الملكية","هامش الربح","نسبة الدين"],a:1,x:"ROE = صافي الربح ÷ حقوق الملكية × 100"},
+    {q:"دوران الأصول = ؟",o:["أصول ÷ مبيعات","مبيعات ÷ إجمالي الأصول","ربح ÷ أصول","أصول ÷ ربح"],a:1,x:"دوران الأصول = صافي المبيعات ÷ متوسط الأصول الكلية"},
+    {q:"هامش الربح الإجمالي يقيس:",o:["كفاءة السيولة","كفاءة التكاليف التشغيلية الأساسية","نسبة الدين","حجم المبيعات"],a:1,x:"هامش الربح الإجمالي = مجمل الربح ÷ صافي المبيعات × 100"},
+    {q:"نسبة الدين إلى الملكية المرتفعة تعني:",o:["المنشأة مربحة","المنشأة تعتمد على الديون أكثر","السيولة جيدة","الأصول كبيرة"],a:1,x:"نسبة دين/ملكية مرتفعة تشير إلى اعتماد أكبر على التمويل الخارجي"},
+    {q:"ROA = ؟",o:["ربح ÷ ملكية","مبيعات ÷ أصول","ربح صافٍ ÷ إجمالي الأصول × 100","خصوم ÷ أصول"],a:2,x:"ROA = صافي الربح ÷ متوسط إجمالي الأصول × 100"},
+    {q:"فترة تحصيل الذمم المدينة تقيس:",o:["مدة بيع المخزون","متوسط أيام التحصيل من العملاء","كفاءة الإنتاج","هامش الربح"],a:1,x:"فترة التحصيل = (ذمم مدينة ÷ مبيعات) × 365"},
+    {q:"نسبة التغطية الفائدة = ؟",o:["ربح قبل الفوائد والضرائب ÷ مصروف الفائدة","مبيعات ÷ فائدة","أصول ÷ ديون","ربح صافٍ ÷ أصول"],a:0,x:"تقيس قدرة الشركة على سداد الفوائد من الأرباح التشغيلية"}
+  ],
+  // ─── 5. مخزون وإهلاك ───
+  [
+    {q:"طريقة FIFO تعني:",o:["الأحدث يُباع أولاً","الأقدم يُباع أولاً","المتوسط المرجح","تكلفة محددة"],a:1,x:"FIFO = First In First Out — الأول دخولاً الأول خروجاً"},
+    {q:"في فترة ارتفاع الأسعار، FIFO تعطي:",o:["ربحاً أقل","ربحاً أعلى","نفس النتيجة","خسارة دائماً"],a:1,x:"FIFO في التضخم: مخزون آخر المدة مرتفع القيمة → تكلفة مباعة أقل → ربح أعلى"},
+    {q:"طريقة القسط الثابت تحسب الإهلاك كـ:",o:["نسبة ثابتة من القيمة الدفترية","مبلغ ثابت كل سنة","بحسب الإنتاج","يتناقص سنوياً"],a:1,x:"(التكلفة - القيمة التخريدية) ÷ العمر الإنتاجي"},
+    {q:"القيمة الدفترية للأصل = ؟",o:["التكلفة + الإهلاك","التكلفة - مجمّع الإهلاك","القيمة السوقية","التكلفة التاريخية"],a:1,x:"القيمة الدفترية = التكلفة الأصلية - مجمّع الإهلاك"},
+    {q:"طريقة LIFO تعني:",o:["الأقدم يُباع أولاً","الأحدث يُباع أولاً","المتوسط","تكلفة فعلية"],a:1,x:"LIFO = Last In First Out — الأخير دخولاً الأول خروجاً"},
+    {q:"الإهلاك المتناقص يُطبَّق على:",o:["المخزون","الأصول الثابتة الطويلة الأجل","النقدية","الذمم"],a:1,x:"الإهلاك المتناقص للأصول الثابتة فقط"},
+    {q:"مخزون آخر المدة يُؤثر على:",o:["قائمة الدخل فقط","الميزانية فقط","كليهما","لا شيء"],a:2,x:"يؤثر على تكلفة البضاعة المباعة (الدخل) وعلى الميزانية كأصل"},
+    {q:"القيمة التخريدية هي:",o:["قيمة الأصل الحالية","القيمة المتوقعة عند نهاية عمره","تكلفة الاستبدال","نسبة الإهلاك"],a:1,x:"القيمة التخريدية هي المبلغ المتوقع تحصيله عند التخلص من الأصل"},
+    {q:"المتوسط المرجح يُحسب بقسمة:",o:["عدد الوحدات على التكلفة","التكلفة الكلية على مجموع الوحدات","المبيعات على التكلفة","الإيراد على الوحدات"],a:1,x:"التكلفة المتوسطة = إجمالي التكلفة ÷ إجمالي الوحدات المتاحة"},
+    {q:"طريقة وحدات الإنتاج تناسب:",o:["الأصول العقارية","الآلات التي تُقاس بالتشغيل","كل الأصول","المخزون"],a:1,x:"وحدات الإنتاج مثالية للآلات لأن الإهلاك يرتبط بالاستخدام الفعلي"}
+  ],
+  // ─── 6. مفاهيم متقدمة ───
+  [
+    {q:"مبدأ الاستحقاق يعني:",o:["تسجيل عند الدفع النقدي","تسجيل عند تحقق الإيراد أو المصروف","تأجيل التسجيل","تسجيل مرة واحدة"],a:1,x:"الاستحقاق: يُسجَّل الإيراد عند تحققه والمصروف عند تكبّده بغض النظر عن الدفع"},
+    {q:"مبدأ الحيطة والحذر يعني:",o:["تسجيل الأرباح المؤكدة فقط والخسائر المتوقعة","تجنب تسجيل الخسائر","المبالغة في الأرباح","تأجيل الإيرادات دائماً"],a:0,x:"الحيطة: الاعتراف بالإيرادات عند التأكد وبالخسائر عند التوقع"},
+    {q:"خطاب التدقيق يصدر من:",o:["مجلس الإدارة","المدقق الخارجي","المحاسب الداخلي","الجهة الضريبية"],a:1,x:"تقرير المدقق الخارجي يؤكد عدالة القوائم المالية"},
+    {q:"القيمة الحالية الصافية NPV تُستخدم في:",o:["تسعير المنتجات","تقييم الاستثمارات","إعداد الميزانية","حساب الضريبة"],a:1,x:"NPV تقيس صافي القيمة الحالية للتدفقات النقدية المستقبلية"},
+    {q:"نقطة التعادل هي مستوى الإنتاج الذي:",o:["يحقق أقصى ربح","تتساوى فيه التكاليف والإيرادات","تتحقق فيه أقل خسارة","يتوقف فيه الإنتاج"],a:1,x:"نقطة التعادل = التكاليف الثابتة ÷ هامش المساهمة للوحدة"},
+    {q:"هامش المساهمة = ؟",o:["سعر البيع + التكلفة المتغيرة","سعر البيع - التكلفة المتغيرة","الإيراد - التكاليف الثابتة","ربح - مصروفات"],a:1,x:"هامش المساهمة = سعر البيع - التكلفة المتغيرة للوحدة"},
+    {q:"الرافعة المالية تعني:",o:["استخدام الديون لتمويل الأصول","زيادة رأس المال الذاتي","تخفيض التكاليف","بيع الأصول"],a:0,x:"الرافعة المالية: الاعتماد على الديون لتعظيم العائد على حقوق الملكية"},
+    {q:"التدفق النقدي الحر = ؟",o:["صافي الربح فقط","تدفق نقدي تشغيلي - النفقات الرأسمالية","إيرادات - مصروفات","مبيعات - تكاليف"],a:1,x:"Free Cash Flow = التدفق التشغيلي - CapEx"},
+    {q:"فرض الاستمرارية يفترض أن المنشأة:",o:["ستتوقف قريباً","ستستمر في العمل مستقبلاً","ستتحول لشركة أخرى","ستُحلّ"],a:1,x:"فرض الاستمرارية أساس لتسعير الأصول بالتكلفة التاريخية"},
+    {q:"مبدأ التحقق من الإيرادات يعني تسجيلها:",o:["عند استلام النقد","عند توقيع العقد","عند تسليم الخدمة أو السلعة","عند إصدار الفاتورة"],a:2,x:"الإيراد يُعترف به عند نقل السيطرة للعميل (IFRS 15)"}
+  ]
 ];
-let bk=B[0],cur=0,sc=0,done=false,hist=[];
-function loadBank(i,btn){bk=B[i];document.querySelectorAll('.quiz-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');cur=0;sc=0;hist=[];document.getElementById('quizMain').style.display='block';document.getElementById('scoreScr').style.display='none';load();}
-function load(){const q=bk[cur];document.getElementById('qCounter').textContent=`السؤال ${cur+1} من ${bk.length}`;document.getElementById('pFill').style.width=`${((cur+1)/bk.length)*100}%`;document.getElementById('qText').textContent=q.q;const c=document.getElementById('opts');c.innerHTML='';q.o.forEach((o,i)=>{const b=document.createElement('button');b.className='option-btn';b.textContent=o;b.onclick=()=>pick(i);c.appendChild(b);});document.getElementById('fb').className='feedback';document.getElementById('nextBtn').disabled=true;document.getElementById('nextBtn').innerHTML=cur===bk.length-1?'إنهاء ✔':'التالي <i class="fas fa-arrow-left"></i>';done=false;}
-function pick(i){if(done)return;done=true;const q=bk[cur];const bs=document.querySelectorAll('.option-btn');bs[i].classList.add(i===q.a?'correct':'wrong');if(i!==q.a)bs[q.a].classList.add('correct');if(i===q.a)sc++;hist.push({q:q.q,ok:i===q.a,x:q.x,ch:q.o[i],ri:q.o[q.a]});const fb=document.getElementById('fb');fb.className=`feedback ${i===q.a?'correct':'wrong'} show`;fb.textContent=i===q.a?'✅ صحيح! '+q.x:'❌ خطأ. الصواب: '+q.o[q.a]+'. '+q.x;document.getElementById('scoreDisp').textContent=`النقاط: ${sc}`;document.getElementById('nextBtn').disabled=false;}
-function nextQ(){cur++;if(cur>=bk.length){end();return;}load();}
-function end(){document.getElementById('quizMain').style.display='none';const ss=document.getElementById('scoreScr');ss.style.display='block';const p=Math.round(sc/bk.length*100);const c=document.getElementById('scoreCirc');c.textContent=p+'%';c.className='score-circle'+(p>=80?' gold':p>=60?' silver':'');document.getElementById('scoreMsg').textContent=p>=80?'🏆 ممتاز! أداء رائع':p>=60?'👍 جيد! واصل التحسين':'📚 راجع الدروس مجدداً';document.getElementById('scoreDet').textContent=`أجبت على ${sc} من ${bk.length} إجابة صحيحة`;let h='<h3 style="margin-bottom:1rem;color:var(--primary)">مراجعة الإجابات</h3>';hist.forEach((a,i)=>{h+=`<div class="review-item ${a.ok?'r-correct':'r-wrong'}"><strong>س${i+1}:</strong> ${a.q}<br>${a.ok?'✅':' ❌'} إجابتك: ${a.ch}${!a.ok?` | الصحيح: <strong>${a.ri}</strong>`:''}</div>`;});document.getElementById('review').innerHTML=h;}
-function restart(){cur=0;sc=0;hist=[];document.getElementById('quizMain').style.display='block';document.getElementById('scoreScr').style.display='none';load();}
-load();
+
+// دمج كل الأسئلة
+BANKS[0] = BANKS.slice(1).flat();
+
+let currentBank = [...BANKS[0]];
+let currentQ = 0;
+let score = 0;
+let wrong = 0;
+let answered = false;
+let selectedBank = 0;
+
+function shuffle(arr){ return [...arr].sort(()=>Math.random()-.5); }
+
+function loadBank(idx, btn){
+  document.querySelectorAll('.qf-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  selectedBank = idx;
+  currentBank = shuffle([...BANKS[idx]]);
+  currentQ = 0; score = 0; wrong = 0; answered = false;
+  document.getElementById('qs-total').textContent = currentBank.length;
+  document.getElementById('scoreScreen').style.display='none';
+  document.getElementById('quiz-main').style.display='block';
+  document.getElementById('btnPrev').style.display='none';
+  renderQ();
+}
+
+function renderQ(){
+  if(currentQ >= currentBank.length){ showScore(); return; }
+  const q = currentBank[currentQ];
+  answered = false;
+  document.getElementById('qCounter').textContent = `سؤال ${currentQ+1} من ${currentBank.length}`;
+  document.getElementById('qProgress').style.width = ((currentQ/currentBank.length)*100)+'%';
+  document.getElementById('qText').textContent = q.q;
+  document.getElementById('qFeedback').className='feedback';
+  document.getElementById('qFeedback').textContent='';
+  document.getElementById('btnNext').disabled=true;
+  document.getElementById('btnPrev').style.display = currentQ>0?'inline-flex':'none';
+  document.getElementById('qOptions').innerHTML = q.o.map((o,i)=>
+    `<button class="opt" onclick="answer(${i})">${o}</button>`
+  ).join('');
+}
+
+function answer(i){
+  if(answered) return;
+  answered = true;
+  const q = currentBank[currentQ];
+  const opts = document.querySelectorAll('.opt');
+  opts.forEach(b=>b.disabled=true);
+  opts[q.a].classList.add('correct');
+  const fb = document.getElementById('qFeedback');
+  if(i===q.a){
+    score++;
+    fb.className='feedback correct show';
+    fb.innerHTML='✅ إجابة صحيحة! ' + q.x;
+  } else {
+    wrong++;
+    opts[i].classList.add('wrong');
+    fb.className='feedback wrong show';
+    fb.innerHTML='❌ إجابة خاطئة. الصواب: <strong>' + q.o[q.a] + '</strong> — ' + q.x;
+  }
+  document.getElementById('btnNext').disabled=false;
+}
+
+function nextQ(){ currentQ++; renderQ(); }
+function prevQ(){ if(currentQ>0){ currentQ--; renderQ(); } }
+
+function showScore(){
+  document.getElementById('quiz-main').style.display='none';
+  const sc=document.getElementById('scoreScreen');
+  sc.style.display='block';
+  document.getElementById('scoreVal').textContent=score;
+  document.getElementById('scoreTotal').textContent=currentBank.length;
+  document.getElementById('scCorrect').textContent=score;
+  document.getElementById('scWrong').textContent=wrong;
+  const pct=Math.round(score/currentBank.length*100);
+  document.getElementById('scoreMsg').textContent=pct>=90?'🏆 ممتاز!':pct>=70?'👍 جيد جداً!':pct>=50?'📚 مقبول — راجع الدروس':'💪 تحتاج مراجعة';
+  document.getElementById('scoreDetail').textContent=`حصلت على ${score} من ${currentBank.length} (${pct}%)`;
+  // حفظ في localStorage
+  const saved=JSON.parse(localStorage.getItem('quizScores')||'[]');
+  saved.push({date:new Date().toLocaleDateString('ar'),score:pct,bank:selectedBank});
+  if(saved.length>20) saved.shift();
+  localStorage.setItem('quizScores',JSON.stringify(saved));
+}
+
+function restartQuiz(){
+  document.getElementById('scoreScreen').style.display='none';
+  document.getElementById('quiz-main').style.display='block';
+  currentBank=shuffle([...BANKS[selectedBank]]);
+  currentQ=0; score=0; wrong=0;
+  renderQ();
+}
+
+// تحميل أول مجموعة
+document.addEventListener('DOMContentLoaded',()=>{ loadBank(0, document.querySelector('.qf-btn')); });
 </script>
 </body>
 </html>
